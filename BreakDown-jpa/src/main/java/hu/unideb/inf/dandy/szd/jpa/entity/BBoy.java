@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,14 +12,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class User extends BaseName {
+public class BBoy extends BaseName {
 
 	private String password;
 	private List<Privileges> privileges;
-	
+	@OneToMany
 	private List<Competition> competitions;
+	private Gender gender;
 	
-	public User(){
+	public BBoy(){
 		privileges = new ArrayList<>();
 		privileges.add(Privileges.PARTICIPATE);
 	}

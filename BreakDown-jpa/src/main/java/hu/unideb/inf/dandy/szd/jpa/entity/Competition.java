@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +17,5 @@ public class Competition extends AbstractEvent {
 	private List<String> djs;
 	private List<Organizer> organizers;
 	private List<Event> events;
-	@ManyToOne
-	private List<User> competitor;
+	private int competitorNumber;
 }
