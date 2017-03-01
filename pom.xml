@@ -11,7 +11,7 @@
 		<module>BreakDown-services</module>
 		<module>BreakDown-ear</module>
 	</modules>
-	
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -46,6 +46,14 @@
 				<version>1.16.14</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+			<dependency>
+				<groupId>postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>9.1-901-1.jdbc4</version>
+			</dependency>
+
+
 		</dependencies>
 	</dependencyManagement>
 
