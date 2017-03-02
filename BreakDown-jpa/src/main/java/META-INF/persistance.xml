@@ -13,7 +13,7 @@
 		<class>hu.unideb.inf.dandy.szd.jpa.entity.Location</class>
 		<class>hu.unideb.inf.dandy.szd.jpa.entity.Organizer</class>
 		<class>hu.unideb.inf.dandy.szd.jpa.entity.Privileges</class>
-		<class>hu.unideb.inf.dandy.szd.jpa.entity.BBoy</class>
+		<class>hu.unideb.inf.dandy.szd.jpa.entity.Breaker</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.user" value="postgres" />

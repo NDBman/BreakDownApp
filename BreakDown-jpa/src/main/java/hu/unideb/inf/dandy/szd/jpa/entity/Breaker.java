@@ -1,5 +1,6 @@
 package hu.unideb.inf.dandy.szd.jpa.entity;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +13,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class BBoy extends BaseName {
+public class Breaker extends BaseName {
 
 	private String password;
 	private List<Privileges> privileges;
 	@OneToMany
 	private List<Competition> competitions;
 	private Gender gender;
+	private Timestamp birthday;
 	
-	public BBoy(){
+	public Breaker(){
 		privileges = new ArrayList<>();
 		privileges.add(Privileges.PARTICIPATE);
 	}
