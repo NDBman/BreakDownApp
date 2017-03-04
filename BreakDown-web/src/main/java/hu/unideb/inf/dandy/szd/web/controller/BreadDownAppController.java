@@ -15,4 +15,9 @@ public class BreadDownAppController {
         return "index";
     }
 	
+	@RequestMapping(value="greet", method = RequestMethod.POST)
+	public String greet(){
+		return "greet";
+	}
+	
 }
