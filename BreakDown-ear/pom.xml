@@ -8,26 +8,22 @@
   <artifactId>BreakDown-ear</artifactId>
   <packaging>ear</packaging>
   
-  <properties>
-  	<break.down.version>0.0.1-SNAPSHOT</break.down.version>
-  </properties>
-  
   <dependencies>
   	<dependency>
   		<groupId>hu.unideb.inf.dandy.szd</groupId>
   		<artifactId>BreakDown-jpa</artifactId>
-  		<version>${break.down.version}</version>
+  		<version>${app.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>hu.unideb.inf.dandy.szd</groupId>
   		<artifactId>BreakDown-web</artifactId>
-  		<version>${break.down.version}</version>
+  		<version>${app.version}</version>
   		<type>war</type>
   	</dependency>
   	<dependency>
   		<groupId>hu.unideb.inf.dandy.szd</groupId>
   		<artifactId>BreakDown-services</artifactId>
-  		<version>${break.down.version}</version>
+  		<version>${app.version}</version>
   	</dependency>
   </dependencies>
   

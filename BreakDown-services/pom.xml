@@ -6,4 +6,12 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>BreakDown-services</artifactId>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>hu.unideb.inf.dandy.szd</groupId>
+  		<artifactId>BreakDown-jpa</artifactId>
+  		<version>${app.version}</version>
+  	</dependency>
+  </dependencies>
 </project>
