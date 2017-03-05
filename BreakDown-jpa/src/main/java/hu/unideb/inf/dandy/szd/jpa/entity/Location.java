@@ -9,7 +9,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Location {
+public class Location extends BaseId{
 
 	@Column(length=4)
 	private int postalCode;

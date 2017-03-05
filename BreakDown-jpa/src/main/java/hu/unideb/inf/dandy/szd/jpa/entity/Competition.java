@@ -2,8 +2,8 @@ package hu.unideb.inf.dandy.szd.jpa.entity;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +13,10 @@ import lombok.Setter;
 @Setter
 public class Competition extends AbstractEvent {
 
-	@Column(length=500)
-	private List<String> djs;
-	private List<Organizer> organizers;
+	private String djs;
+	@OneToMany
+	private List<Breaker> organizers;
+	@OneToMany
 	private List<Event> events;
 	private int competitorNumber;
 }
