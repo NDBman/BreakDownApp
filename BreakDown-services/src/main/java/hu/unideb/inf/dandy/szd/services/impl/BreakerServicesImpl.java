@@ -1,4 +1,4 @@
-package hu.unideb.inf.dandy.szd.services;
+package hu.unideb.inf.dandy.szd.services.impl;
 
 import java.sql.Timestamp;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
 import hu.unideb.inf.dandy.szd.jpa.entity.Gender;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakerRepository;
+import hu.unideb.inf.dandy.szd.services.BreakerServices;
 
 @Service
 public class BreakerServicesImpl implements BreakerServices{
