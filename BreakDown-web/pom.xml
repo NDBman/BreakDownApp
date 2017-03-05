@@ -22,6 +22,16 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>hu.unideb.inf.dandy.szd</groupId>
+			<artifactId>BreakDown-services</artifactId>
+			<version>${app.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>hu.unideb.inf.dandy.szd</groupId>
+			<artifactId>BreakDown-jpa</artifactId>
+			<version>${app.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

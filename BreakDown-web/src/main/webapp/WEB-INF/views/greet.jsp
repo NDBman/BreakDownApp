@@ -7,6 +7,16 @@
 <title>BreakDownApp</title>
 </head>
 <body>
-	Hy
+	<form action="newBreaker" method="POST">
+		<label for="username">Név:</label>
+		<input id="username" type="text" name="username"> 
+		<label for="password">Jelszó:</label>
+		<input id="password" type="password" name="password"> 
+		<input type="submit" value="Küldés">
+	</form>
+	<br>
+	<form action="back" method="POST">
+		<button>Vissza</button>
+	</form>
 </body>
 </html>
