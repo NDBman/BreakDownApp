@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import hu.unideb.inf.dandy.szd.jpa.entity.Gender;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
@@ -36,7 +36,8 @@ public class BreadDownAppController {
 	}
 	
 	@RequestMapping(value="newBreaker", method= RequestMethod.POST)
-	public void newBreaker(@RequestAttribute(name= "username") String name, @RequestAttribute(name="password") String password){
+	public String newBreaker(@RequestParam(name= "username") String name, @RequestParam(name="password") String password){
 		breakerServices.createBreaker(name, password, new Timestamp(1L), Gender.MALE);
+		return "index";
 	}
 }
