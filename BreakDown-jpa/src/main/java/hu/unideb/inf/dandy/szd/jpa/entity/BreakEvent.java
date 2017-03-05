@@ -11,12 +11,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Competition extends AbstractEvent {
+public class BreakEvent extends AbstractEvent {
 
-	private String djs;
 	@OneToMany
-	private List<Breaker> organizers;
-	@OneToMany
-	private List<AbstractEvent> events;
-	private List<Breaker> competitors;
+	private List<Breaker> winners;
+	private Competition competition;
 }

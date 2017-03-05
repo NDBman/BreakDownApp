@@ -21,6 +21,8 @@ public class Breaker extends BaseName {
 	
 	@OneToMany
 	private List<Competition> competitions;
+	@OneToMany
+	private List<BreakEvent> winnedEvent;
 	private Gender gender;
 	private Timestamp birthday;
 	
