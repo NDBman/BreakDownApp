@@ -45,11 +45,11 @@ public class BreakDownJpaModulConfig {
 	}
 	
 	@Bean
-	public PlatformTransactionManager transActionManager(EntityManagerFactory emf){
-		JpaTransactionManager transActionManager = new JpaTransactionManager();
-		transActionManager.setEntityManagerFactory(emf);
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
 		
-		return transActionManager;
+		return transactionManager;
 	}
 	
 	private Properties setProperties(){
