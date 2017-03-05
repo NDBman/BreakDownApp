@@ -15,5 +15,4 @@ public class BreakEvent extends AbstractEvent {
 
 	@OneToMany
 	private List<Breaker> winners;
-	private Competition competition;
 }
