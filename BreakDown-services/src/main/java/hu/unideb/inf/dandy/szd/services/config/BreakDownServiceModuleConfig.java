@@ -8,7 +8,6 @@ import hu.unideb.inf.dandy.szd.jpa.config.BreakDownJpaModulConfig;
 
 @Configuration
 @ComponentScan(basePackages={"hu.unideb.inf.dandy.szd.services"})
-@Import(BreakDownJpaModulConfig.class)
 public class BreakDownServiceModuleConfig {
 
 }
