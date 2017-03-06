@@ -15,7 +15,8 @@ import lombok.Setter;
 @Setter
 public class Competition extends AbstractEvent {
 
-	private String djs;
+	@OneToMany
+	private List<DiskJockey> diskJockeys;
 	
 	@OneToMany
 	private List<Breaker> organizers;
