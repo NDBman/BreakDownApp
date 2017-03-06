@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Breaker extends BaseName {
 
+	private String bboyName;
 	private String password;
 	private Rank rank;
 	
