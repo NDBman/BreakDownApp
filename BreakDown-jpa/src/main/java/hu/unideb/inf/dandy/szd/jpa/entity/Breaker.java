@@ -31,5 +31,7 @@ public class Breaker extends BaseName {
 	private List<BreakEvent> winnedEvents;
 	private Gender gender;
 	private Timestamp birthday;
+	@OneToMany
+	private List<Location> interestedCities;
 	
 }
