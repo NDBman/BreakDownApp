@@ -1,10 +1,11 @@
 package hu.unideb.inf.dandy.szd.services;
 
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.util.List;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.Gender;
+import hu.unideb.inf.dandy.szd.services.feedback.FeedbackCodes;
 
 public interface BreakerServices {
 
-	public void createBreaker(String name, String password, Timestamp birthday, Gender gender);
+	public List<FeedbackCodes> createBreaker(String name, String bname, String password,String passwordAgain, String birthday, Long gender) throws ParseException;
 }

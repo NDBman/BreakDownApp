@@ -7,9 +7,8 @@
 <title>BreakDownApp</title>
 </head>
 <body>
-    Greeting : ${greeting}
-    <form method="POST" action="greet">
-    	<button>Hey</button>
+    <form method="GET" action=registration>
+    	<button>Regisztrálok</button>
     </form>
 </body>
 </html>

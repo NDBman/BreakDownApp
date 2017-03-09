@@ -1,6 +1,6 @@
 package hu.unideb.inf.dandy.szd.jpa.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class Breaker extends BaseName {
 	@ManyToMany
 	private List<BreakEvent> winnedEvents;
 	private Gender gender;
-	private Timestamp birthday;
+	private Date birthday;
 	@OneToMany
 	private List<Location> interestedCities;
 	
