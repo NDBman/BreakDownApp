@@ -30,8 +30,5 @@
 		<input type="submit" value="Küldés" />
 	</form>
 	<br>
-	<form action="back" method="POST">
-		<button>Vissza</button>
-	</form>
 </body>
 </html>
