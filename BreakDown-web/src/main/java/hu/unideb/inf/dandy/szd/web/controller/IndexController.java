@@ -17,4 +17,14 @@ public class IndexController {
 	public String gotoRegistration(){
 		return "registration";
 	}
+	
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public String gotoLogin(){
+		return "login";
+	}
+	
+	@RequestMapping(value="admin/secret", method=RequestMethod.GET)
+	public String gotoSecret(){
+		return "admin/secret";
+	}
 }
