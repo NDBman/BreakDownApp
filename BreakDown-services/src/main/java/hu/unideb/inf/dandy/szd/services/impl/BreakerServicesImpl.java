@@ -45,6 +45,7 @@ public class BreakerServicesImpl implements BreakerServices{
 			newBreaker.setRank(Rank.USER);
 			newBreaker.setBirthday(dateFormatter.parse(birthday, Locale.ENGLISH));
 			newBreaker.setGender(genderServices.getGender(gender));
+			newBreaker.setEnabled(true);
 			breakerRepository.save(newBreaker);
 			return Arrays.asList(FeedbackCodes.PASS);
 		} else {
