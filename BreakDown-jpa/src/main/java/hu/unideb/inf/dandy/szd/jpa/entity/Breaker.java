@@ -3,11 +3,13 @@ package hu.unideb.inf.dandy.szd.jpa.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +19,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
+@Table(name="users")
 public class Breaker extends BaseName {
 
+	@Column(name="username")
 	private String bboyName;
 	private String password;
+	private boolean enabled;
 	private Rank rank;
 	
 	@ManyToOne
