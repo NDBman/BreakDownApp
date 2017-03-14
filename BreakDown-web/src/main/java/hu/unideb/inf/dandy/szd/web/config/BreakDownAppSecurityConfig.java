@@ -1,5 +1,8 @@
 package hu.unideb.inf.dandy.szd.web.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,10 +13,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class BreakDownAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("dandy").password("199595").roles("SUPER");
+	@Autowired
+	private DataSource dataSource;
+
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+		auth.jdbcAuthentication().dataSource(dataSource)
+		.authoritiesByUsernameQuery("select username,password, enabled from users where username=?");
 	}
 	
 	@Override
@@ -25,6 +31,7 @@ public class BreakDownAppSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.formLogin()
 				.loginPage("/login")
+				.usernameParameter("bboyname").passwordParameter("password")
 				.permitAll()
 				.defaultSuccessUrl("/")
 				.and()
