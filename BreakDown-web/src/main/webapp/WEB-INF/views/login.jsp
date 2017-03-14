@@ -8,8 +8,8 @@
 </head>
 <body>
 	<form  action="login" method="post">
-	<label for="username">Felhasználónév(BBoy/Girl név):</label>
-	<input id="username" type="text" name="username"/>
+	<label for="bboyname">Felhasználónév(BBoy/Girl név):</label>
+	<input id="bboyname" type="text" name="bboyname"/>
 	<label for="password">Jelszó:</label>
 	<input id="password" type="password" name="password"/>
 	<input type="submit" value="Belépés">
