@@ -13,9 +13,10 @@ import lombok.Setter;
 public class Location extends BaseId{
 
 	@Column(length=4)
-	private int postalCode;
+	private Integer postalCode;
 	private String city;
 	private String street;
+	private Integer houseNumber;
 	
 	@OneToOne(mappedBy="location")
 	private Competition competition;
