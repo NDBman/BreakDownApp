@@ -31,11 +31,13 @@ public class BreakDownAppSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.formLogin()
 				.loginPage("/login")
-				.usernameParameter("bboyname").passwordParameter("password")
+				.usernameParameter("username").passwordParameter("password")
 				.permitAll()
 				.defaultSuccessUrl("/")
 				.and()
 			.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
 				.permitAll();
 	}
 }

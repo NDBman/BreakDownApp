@@ -38,9 +38,9 @@ public class IndexController {
 	public String gotoLogin(){
 		return "login";
 	}
-	
-	@RequestMapping(value="admin/secret", method=RequestMethod.GET)
-	public String gotoSecret(){
-		return "admin/secret";
+
+	@RequestMapping("logout")
+	public String logOut(){
+		return "logout";
 	}
 }

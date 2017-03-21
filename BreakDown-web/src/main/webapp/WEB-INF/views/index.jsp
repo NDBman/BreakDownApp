@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -15,11 +16,16 @@
   <nav class="light-green darken-2" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#reg_modal">Regisztráció</a></li>
-        <li><a href="#">Bejelentkezés</a></li>
+      	<sec:authorize access="isAnonymous()">
+      		<li><a href="#reg_modal">Regisztráció</a></li>
+        	<li><a href="#login_modal">Bejelentkezés</a></li>
+      	</sec:authorize>
         <li><a href="#">Versenyek</a></li>
         <li><a href="#">Keresés</a></li>
         <li><a href="#">GYIK</a></li>
+        <sec:authorize access="isAuthenticated()">
+        	<li><a href="logout">Kijelentkezés</a></li>
+        </sec:authorize>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -31,7 +37,7 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center green-text">Break Down</h1>
+      <h1 class="header center green-text">Break Down ${loggedIn}</h1>
       <div class="row center">
       	<h5 class="header col s12 light">Ahol ha break versenyt keresel, találni is fogsz!</h5>
       </div>
@@ -134,7 +140,7 @@
 	        	<div class="input-field col s12">
 	        		<i class="material-icons prefix">album</i>
 	          		<input id="breaker_name" type="text" class="validate" name="breaker_name">
-	          		<label for="name">Bboy/girl név</label>
+	          		<label for="breaker_name">Bboy/girl név</label>
 	        	</div>
 	        	<div class="input-field col s6">
 	        		<i class="material-icons prefix">vpn_key</i>
@@ -170,6 +176,31 @@
     </div>
   </div>
 
+<div id="login_modal" class="modal">
+    <div class="modal-content">
+      <h4>Regisztráció</h4>
+	  	<form action="login" method="POST">
+	    	<div class="row">
+	        	<div class="input-field col s12">
+	        		<i class="material-icons prefix">album</i>
+	          		<input id="username" type="text" class="validate" name="username">
+	          		<label for="username">Bboy/girl név</label>
+	        	</div>
+	        	<div class="input-field col s12">
+	        		<i class="material-icons prefix">vpn_key</i>
+	          		<input id="password" type="password" class="validate" name="password">
+	          		<label for="password">Jelszó</label>
+	        	</div>
+				<button class="btn waves-effect waves-light" type="submit" name="action">Bejelentkezés
+    				<i class="material-icons right">lock_open</i>
+  				</button>
+	        </div>
+	      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Mégse</a>
+    </div>
+  </div>
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
