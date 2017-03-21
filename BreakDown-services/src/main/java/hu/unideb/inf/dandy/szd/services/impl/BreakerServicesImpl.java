@@ -27,7 +27,7 @@ public class BreakerServicesImpl implements BreakerServices{
 	@Autowired
 	private GenderServices genderServices;
 	
-	private DateFormatter dateFormatter = new DateFormatter("yyyy-MM-dd");
+	private DateFormatter dateFormatter = new DateFormatter("yyyy/MM/dd");
 	
 	public List<FeedbackCodes> createBreaker(String name,String bname, String password, String passwordAgain, String birthday, Long gender) throws ParseException{
 		List<FeedbackCodes> feedback = new ArrayList<>();
