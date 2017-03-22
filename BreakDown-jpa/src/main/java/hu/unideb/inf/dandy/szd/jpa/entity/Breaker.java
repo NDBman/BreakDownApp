@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -26,7 +27,8 @@ public class Breaker extends BaseName {
 	private String bboyName;
 	private String password;
 	private boolean enabled;
-	private Rank rank;
+	@OneToOne
+	private Role role;
 	
 	@ManyToOne
 	@JoinColumn(name="currentCompetition", referencedColumnName="id")
