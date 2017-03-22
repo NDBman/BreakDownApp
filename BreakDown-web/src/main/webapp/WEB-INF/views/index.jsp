@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
   <title>Starter Template - Materialize</title>
@@ -19,6 +21,18 @@
       	<sec:authorize access="isAnonymous()">
       		<li><a href="#reg_modal">Regisztráció</a></li>
         	<li><a href="#login_modal">Bejelentkezés</a></li>
+      	</sec:authorize>
+      	<sec:authorize access="isAuthenticated()">
+      		<li>
+      			<a class="dropdown-button" data-activates="profile_dropdown">
+      				<i class="material-icons">account_circle</i>
+      			</a>
+      			<ul id="profile_dropdown" class="dropdown-content">
+      				<li><a href="#">Egy</a></li>
+      				<li><a href="#">Kettő</a></li>
+      				<li><a href="#">Három</a></li>
+      			</ul>
+      		</li>
       	</sec:authorize>
         <li><a href="#">Versenyek</a></li>
         <li><a href="#">Keresés</a></li>
@@ -128,20 +142,30 @@
   </footer>
   
   <div id="reg_modal" class="modal modal-fixed-footer">
+  <form action="reg" method="POST">
     <div class="modal-content">
       <h4>Regisztráció</h4>
-	  	<form action="reg" method="POST">
+	  	
 	    	<div class="row">
 	      		<div class="input-field col s12">
 	      			<i class="material-icons prefix">account_circle</i>
 	          		<input id="name" type="text" class="validate" name="name">
 	          		<label for="name">Név</label>
 	        	</div>
+	        	<c:if test="${param.name eq 'null'}">
+	    			<a class="red btn col s12">Adja meg a nevét!</a>
+	    		</c:if>
 	        	<div class="input-field col s12">
 	        		<i class="material-icons prefix">album</i>
 	          		<input id="breaker_name" type="text" class="validate" name="breaker_name">
 	          		<label for="breaker_name">Bboy/girl név</label>
 	        	</div>
+	        	<c:if test="${param.username eq 'exists'}">
+	    			<a class="red btn col s12">Ilyen bboy/girl név már létezik!</a>
+	    		</c:if>
+	    		<c:if test="${param.username eq 'null'}">
+	    			<a class="red btn col s12">Véletlenül üresen hagytad!!</a>
+	    		</c:if>
 	        	<div class="input-field col s6">
 	        		<i class="material-icons prefix">vpn_key</i>
 	          		<input id="password" type="password" class="validate" name="password">
@@ -151,35 +175,48 @@
 	          		<input id="password_a" type="password" class="validate" name="password_a">
 	          		<label for="password_a">Jelszó újra</label>
 	        	</div>
+	        	<c:if test="${param.password eq 'nomatch'}">
+	    			<a class="red btn col s12">A két jelszó nem egyezik!</a>
+	    		</c:if>
+	    		<c:if test="${param.password eq 'null'}">
+	    			<a class="red btn col s6 left">A jelszó hiányzik!</a>
+	    		</c:if>
+	    		<c:if test="${param.password_again eq 'null'}">
+	    			<a class="red btn col s6 right">Kétszer kell megadnia a jelszót!</a>
+	    		</c:if>
 	        	<div class="input-field col s12">
 	        		<i class="material-icons prefix">perm_contact_calendar</i>
 	        		<input placeholder="" type="date" class="datepicker" id="birthday" name="birthday">
 	        		<label class="active" for=birthday>Születési idő</label>
 	        	</div>
+	        	<c:if test="${param.birthday eq 'null'}">
+	    			<a class="red btn col s12">Adja meg, hogy mikor született!</a>
+	    		</c:if>
 	        	<div class="input-field col s12">
 	        		<i class="material-icons prefix">perm_identity</i>
 				    <select id="gender" name="gender">
-				      <option value="" disabled selected>Válasszon</option>
-				      <option value="1">Férfi</option>
+				      <option value="1" selected>Férfi</option>
 				      <option value="2">Nő</option>
 				    </select>
 				    <label>Nem</label>
 				</div>
-				<button class="btn waves-effect waves-light" type="submit" name="action">Regisztrálok
-    				<i class="material-icons right">send</i>
-  				</button>
 	        </div>
-	      </form>
+	      
     </div>
     <div class="modal-footer">
+    <button class="btn waves-effect waves-light col s3 left" type="submit" name="action">Regisztrálok
+    				<i class="material-icons right">send</i>
+  				</button>
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Mégse</a>
     </div>
+    </form>
   </div>
 
 <div id="login_modal" class="modal">
+	<form action="login" method="POST">
     <div class="modal-content">
       <h4>Regisztráció</h4>
-	  	<form action="login" method="POST">
+	  	
 	    	<div class="row">
 	        	<div class="input-field col s12">
 	        		<i class="material-icons prefix">album</i>
@@ -191,15 +228,19 @@
 	          		<input id="password" type="password" class="validate" name="password">
 	          		<label for="password">Jelszó</label>
 	        	</div>
-				<button class="btn waves-effect waves-light" type="submit" name="action">Bejelentkezés
-    				<i class="material-icons right">lock_open</i>
-  				</button>
+	        	<c:if test="${param.error ne null}">
+	        		<a class="red btn col s12">Rossz felhasználónév vagy jelszó</a>
+	        	</c:if>
 	        </div>
-	      </form>
+	      
     </div>
     <div class="modal-footer">
+    	<button class="btn waves-effect waves-light col s3 left" type="submit" name="action">Bejelentkezés
+    		<i class="material-icons right">lock_open</i>
+  		</button>
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Mégse</a>
     </div>
+    </form>
   </div>
 
   <!--  Scripts-->
