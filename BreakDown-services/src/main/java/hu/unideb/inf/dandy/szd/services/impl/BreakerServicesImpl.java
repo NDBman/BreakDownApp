@@ -11,8 +11,10 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
 
 import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
-import hu.unideb.inf.dandy.szd.jpa.entity.Rank;
+import hu.unideb.inf.dandy.szd.jpa.entity.Role;
+import hu.unideb.inf.dandy.szd.jpa.entity.RoleType;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakerRepository;
+import hu.unideb.inf.dandy.szd.jpa.repo.RoleRepository;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
 import hu.unideb.inf.dandy.szd.services.GenderServices;
 import hu.unideb.inf.dandy.szd.services.feedback.FeedbackCodes;
@@ -23,6 +25,9 @@ public class BreakerServicesImpl implements BreakerServices{
 
 	@Autowired
 	private BreakerRepository breakerRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 	
 	@Autowired
 	private GenderServices genderServices;
@@ -51,11 +56,14 @@ public class BreakerServicesImpl implements BreakerServices{
 		}
 		
 		if(feedback.isEmpty()){
+			Role role = new Role();
+			role.setRoleType(RoleType.USER);
+			roleRepository.save(role);
 			Breaker newBreaker = new Breaker();
 			newBreaker.setName(name);
 			newBreaker.setBboyName(bname);
 			newBreaker.setPassword(password);
-			newBreaker.setRank(Rank.USER);
+			newBreaker.setRole(role);
 			newBreaker.setBirthday(dateFormatter.parse(birthday, Locale.ENGLISH));
 			newBreaker.setGender(genderServices.getGender(gender));
 			newBreaker.setEnabled(true);
