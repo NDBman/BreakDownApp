@@ -34,6 +34,7 @@ public class BreakDownAppSecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("username").passwordParameter("password")
 				.permitAll()
 				.defaultSuccessUrl("/")
+				.failureUrl("/index?error")
 				.and()
 			.logout()
 				.logoutUrl("/logout")
