@@ -31,12 +31,25 @@ public class BreakerServicesImpl implements BreakerServices{
 	
 	public List<FeedbackCodes> createBreaker(String name,String bname, String password, String passwordAgain, String birthday, Long gender) throws ParseException{
 		List<FeedbackCodes> feedback = new ArrayList<>();
-		if(!password.equals(passwordAgain)){
+		if(name.isEmpty())
+			feedback.add(FeedbackCodes.NULL_NAME);
+		if(bname.isEmpty())
+			feedback.add(FeedbackCodes.NULL_BBOYNAME);
+		if(password.isEmpty())
+			feedback.add(FeedbackCodes.NULL_PASSWORD);
+		if(passwordAgain.isEmpty()){
+			feedback.add(FeedbackCodes.NULL_PASSWORD_AGAIN);
+		}
+		if(birthday.isEmpty()){
+			feedback.add(FeedbackCodes.NULL_BIRTHDAY);
+		}
+		if(!password.equals(passwordAgain) && !password.isEmpty() && !passwordAgain.isEmpty()){
 			feedback.add(FeedbackCodes.NOT_MATCHING_PASSWORDS);
 		}
 		if(breakerRepository.findByBboyName(bname) != null){
 			feedback.add(FeedbackCodes.USERNAME_ALREADY_EXIST);
 		}
+		
 		if(feedback.isEmpty()){
 			Breaker newBreaker = new Breaker();
 			newBreaker.setName(name);
