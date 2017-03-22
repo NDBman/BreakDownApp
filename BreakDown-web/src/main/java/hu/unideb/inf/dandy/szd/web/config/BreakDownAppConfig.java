@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 import hu.unideb.inf.dandy.szd.jpa.config.BreakDownJpaModulConfig;
 import hu.unideb.inf.dandy.szd.services.config.BreakDownServiceModuleConfig;
@@ -23,6 +24,7 @@ public class BreakDownAppConfig extends WebMvcConfigurerAdapter{
 	public InternalResourceViewResolver viewResolver(){
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setPrefix("/WEB-INF/views/");
+		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
