@@ -29,6 +29,7 @@ public class Breaker extends BaseName {
 	private boolean enabled;
 	@OneToOne
 	private Role role;
+	private String email;
 	
 	@ManyToOne
 	@JoinColumn(name="currentCompetition", referencedColumnName="id")
