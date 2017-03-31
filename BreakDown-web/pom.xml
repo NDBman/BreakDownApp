@@ -36,6 +36,10 @@
 			<artifactId>BreakDown-jpa</artifactId>
 			<version>${app.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angularjs</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
