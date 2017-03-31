@@ -1,0 +1,62 @@
+<div layout="column">
+	<h1 class="md-display-1" layout-margin>Regisztráció</h1>
+	<form name="reg" data-ng-controller="regController">
+		<div layout="column" layout-align="center stretch" layout-margin>
+			<md-input-container>
+				<label>Név</label>
+				<input type="text" data-ng-model="name" name="name" required>
+				<div data-ng-messages="reg.name.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+				</div>
+			</md-input-container>	
+			<md-input-container>
+				<label>BBoy/Girl név</label>
+				<input type="text" data-ng-model="username" name="username" required>
+				<div data-ng-messages="reg.username.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Email cím</label>
+				<input type="email" data-ng-model="email" name="email" required data-ng-pattern="/^.+@.+\..+$/">
+				<div data-ng-messages="reg.email.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+					<div data-ng-message="pattern">Igazi e-mail címet adjon meg!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Jelszó</label>
+				<input type="password" data-ng-model="password" name="password" required minlength="6">
+				<div data-ng-messages="reg.password.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+					<div data-ng-message="minlength">Legalább 6 karakter hosszú jelszót kell megadni!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Jelszó újra</label>
+				<input type="password" data-ng-model="confirmPassword" required name="confirmPassword">
+				<div data-ng-messages="reg.confirmPassword.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Születésnap</label>
+				<md-datepicker data-ng-model="birthday" name="birthday" required></md-datepicker>
+				<div data-ng-messages="reg.birthday.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Nem</label>
+				<md-select data-ng-model="gender" name="gender" required>
+					<md-option value="1">Férfi</md-option>
+					<md-option value="2">Nő</md-option>
+				</md-select>
+				<div data-ng-messages="reg.gender.$error">
+					<div data-ng-message="required">Kötelező megadni!</div>
+				</div>
+			</md-input-container>
+			<md-button class="md-primary" type="submit">Regisztrálok</md-button>
+		</div>
+	</form>
+</div>
