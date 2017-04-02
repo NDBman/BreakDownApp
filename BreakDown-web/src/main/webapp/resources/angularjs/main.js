@@ -1,4 +1,4 @@
-var breakDownApp = angular.module("BreakDownApp", ["ngMaterial", "ngMessages", "ngRoute"]);
+var breakDownApp = angular.module("BreakDownApp", ["ngMaterial", "ngMessages", "ngRoute", "ngResource"]);
 breakDownApp.config(function($routeProvider, $mdThemingProvider){
 	route = $routeProvider
 		.when("/",{
@@ -8,6 +8,9 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		.when("/reg",{
 			templateUrl : "pages/reg.html",
 			controller : "regController",
+		})
+		.when("/regsuccess",{
+			templateUrl : "pages/regsuccess.html",
 		});
 	
 	$mdThemingProvider.theme("default")
@@ -19,11 +22,14 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 });
 
 breakDownApp.controller("mainController", function($scope){
+	$scope.currentNavItem = "index";
 });
 
-breakDownApp.controller("regController", function($scope){
-	  
+breakDownApp
+.controller("regController", function($scope, $http, $location){
+	$scope.submittedForm = false;
 	$scope.birthday = new Date();
+	$scope.emailExits = false;
 	
 	$scope.passwordCheck = function(){
 		if($scope.password == $scope.confirmPassword){
@@ -33,6 +39,32 @@ breakDownApp.controller("regController", function($scope){
 		}
 		
 	};
+	$scope.submit = function (form){
+		if(form.$invalid)
+			return;
+		
+		$http({
+			method: "POST",
+			url: "reg",
+			params: {
+				name: form.name.$modelValue,
+				username: form.username.$modelValue,
+				email: form.email.$modelValue,
+				password: form.password.$modelValue,
+				birthday: form.birthday.$modelValue,
+				gender: form.gender.$modelValue
+			}
+		})
+		.success(function(){
+			$location.path("regsuccess");
+		})
+		.error(function(){
+			$scope.emailExits = true;
+		});
+	}
+	
+	
+	
 });
 
 
