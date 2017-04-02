@@ -41,9 +41,7 @@ public class RegistrationController {
 						.birthday(dateFormatter.parse(birthday, Locale.US))
 						.gender(genderServices.getGender(gender))
 						.build();
-		System.out.println("na");
 		if(breakerServices.matchingEmails(breaker)){
-			System.out.println(breaker.getEmail());
 			return new ResponseEntity<Breaker>(breaker, HttpStatus.NOT_ACCEPTABLE);
 		}
 		return new ResponseEntity<Breaker>(breakerServices.createBreaker(breaker),HttpStatus.OK);
