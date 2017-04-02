@@ -1,18 +1,14 @@
-breakDownApp.directive("selectInit", [function(){
-	return {
-		restrict: "A",
-		link: function($scope){
-			$('select').material_select();
-		}
-	}
-}])
-
 breakDownApp.directive("compareTo", [function(){
 	return {
 		require: "ngModel",
+		scope: {
+			otherValue: "=compareTo"
+		},
 		restrict: "A",
-		link: function($scope,element,attributes, ngModel){
-			
+		link: function(scope,element, attributes, ngModel){
+			ngModel.$validators.compareTo = function(modelValue){
+				return modelValue == scope.otherValue.$modelValue;
+			}
 		} 
 	}
 }])
