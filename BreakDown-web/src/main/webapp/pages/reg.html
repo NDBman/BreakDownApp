@@ -1,6 +1,6 @@
-<div layout="column">
-	<h1 class="md-display-1" layout-margin>Regisztráció</h1>
-	<form name="reg" data-ng-controller="regController">
+<div layout="column" layout-margin>
+	<h1 class="md-display-1">Regisztráció</h1>
+	<form name="reg" data-ng-controller="regController" data-ng-submit="submit(reg)">
 		<div layout="column" layout-align="center stretch" layout-margin>
 			<md-input-container>
 				<label>Név</label>
@@ -34,9 +34,10 @@
 			</md-input-container>
 			<md-input-container>
 				<label>Jelszó újra</label>
-				<input type="password" data-ng-model="confirmPassword" required name="confirmPassword">
+				<input type="password" data-ng-model="confirmPassword" required name="confirmPassword" compare-to="reg.password">
 				<div data-ng-messages="reg.confirmPassword.$error">
 					<div data-ng-message="required">Kötelező megadni!</div>
+					<div data-ng-message="compareTo">A két jelszó nem egyezik.</div>
 				</div>
 			</md-input-container>
 			<md-input-container>
@@ -56,6 +57,7 @@
 					<div data-ng-message="required">Kötelező megadni!</div>
 				</div>
 			</md-input-container>
+			<div md-colors="{color: 'warn'}"  data-ng-show="emailExits">Ilyen e-mail címmel már regisztráltak!</div>
 			<md-button class="md-primary" type="submit">Regisztrálok</md-button>
 		</div>
 	</form>

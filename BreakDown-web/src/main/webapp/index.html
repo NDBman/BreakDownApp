@@ -16,6 +16,9 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+	
+	<!-- Angular Resources -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-resource.js"></script>
 
 	<!-- Angular Route -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
@@ -23,15 +26,17 @@
 	<!-- Angular Material Library -->
 	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
   
+  	
 	<script src="resources/angularjs/main.js"></script>
 	<script src="resources/angularjs/directives.js"></script>
+	
 
 </head>
 <body data-ng-app="BreakDownApp" data-ng-controller="mainController">
 	<div data-ng-cloak layout="column" layout-fill>
 			<header>
-				<md-nav-bar class="md-primary" nav-bar-aria-label="navigáció" hide-xs>
-					<md-button href="#/">BreakDown</md-button>
+				<md-nav-bar class="md-primary" nav-bar-aria-label="navigáció" md-selected-nav-item="currentNavItem" hide-xs>
+					<md-nav-item name="index" md-nav-href="#/">BreakDown</md-nav-item>
 					<md-nav-item name="reg" md-nav-href="#reg">
 						Regisztráció
 					</md-nav-item>
