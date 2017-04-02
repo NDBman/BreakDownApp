@@ -1,11 +1,10 @@
 package hu.unideb.inf.dandy.szd.services;
 
-import java.text.ParseException;
-import java.util.List;
-
-import hu.unideb.inf.dandy.szd.services.feedback.FeedbackCodes;
+import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
 
 public interface BreakerServices {
 
-	public List<FeedbackCodes> createBreaker(String name, String bname, String password,String passwordAgain, String birthday, Long gender) throws ParseException;
+	public Breaker createBreaker(Breaker breaker);
+	
+	public boolean matchingEmails(Breaker breaker);
 }
