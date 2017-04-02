@@ -11,4 +11,5 @@ import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
 public interface BreakerRepository extends JpaRepository<Breaker, Long>{
 
 	public Breaker findByBboyName(String bname);
+	public Breaker findByEmail(String email);
 }
