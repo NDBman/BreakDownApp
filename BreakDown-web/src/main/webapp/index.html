@@ -28,6 +28,9 @@
   
   	
 	<script src="resources/angularjs/main.js"></script>
+	<script src="resources/angularjs/controllers/mainController.js"></script>
+	<script src="resources/angularjs/controllers/regController.js"></script>
+	<script src="resources/angularjs/controllers/loginController.js"></script>
 	<script src="resources/angularjs/directives.js"></script>
 	
 
@@ -37,10 +40,10 @@
 			<header>
 				<md-nav-bar class="md-primary" nav-bar-aria-label="navigáció" md-selected-nav-item="currentNavItem" hide-xs>
 					<md-nav-item name="index" md-nav-href="#/">BreakDown</md-nav-item>
-					<md-nav-item name="reg" md-nav-href="#reg">
+					<md-nav-item name="reg" md-nav-href="#reg" ng-hide="authenticated">
 						Regisztráció
 					</md-nav-item>
-					<md-nav-item md-nav-click="goto('page2')" name="page2">
+					<md-nav-item md-nav-href="#login" name="login" ng-hide="authenticated">
 						Bejelentkezés
 					</md-nav-item>
 					<md-nav-item md-nav-click="goto('page3')" name="page3">
