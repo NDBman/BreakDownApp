@@ -12,8 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name= "roles")
-public class Role extends BaseId{
+public class RoleEntity extends BaseId{
 
 	@Enumerated(EnumType.STRING)
-	private RoleType roleType;
+	private RoleTypeEntity roleType;
 }

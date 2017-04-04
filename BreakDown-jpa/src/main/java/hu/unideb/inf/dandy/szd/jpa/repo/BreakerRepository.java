@@ -4,12 +4,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 
 @Repository
 @Transactional
-public interface BreakerRepository extends JpaRepository<Breaker, Long>{
+public interface BreakerRepository extends JpaRepository<BreakerEntity, Long>{
 
-	public Breaker findByBboyName(String bname);
-	public Breaker findByEmail(String email);
+	public BreakerEntity findByUsername(String bname);
+	public BreakerEntity findByEmail(String email);
+	public BreakerEntity findByPassword(String password);
 }

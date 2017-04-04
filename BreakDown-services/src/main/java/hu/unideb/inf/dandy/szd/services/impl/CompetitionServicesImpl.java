@@ -1,24 +1,24 @@
 package hu.unideb.inf.dandy.szd.services.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.BreakEvent;
-import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
-import hu.unideb.inf.dandy.szd.jpa.entity.Competition;
-import hu.unideb.inf.dandy.szd.jpa.entity.DiskJockey;
-import hu.unideb.inf.dandy.szd.jpa.entity.Location;
-import hu.unideb.inf.dandy.szd.jpa.entity.SimpleEvent;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakEventEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.CompetitionEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.DiskJockeyEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.LocationEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.SimpleEventEntity;
 import hu.unideb.inf.dandy.szd.services.CompetitionServices;
 
 @Service
 public class CompetitionServicesImpl implements CompetitionServices{
 
 	@Override
-	public void createCompetition(List<Breaker> organizers, List<DiskJockey> diskJockeys, List<BreakEvent> breakEvents,
-			List<SimpleEvent> simpleEvents, Location location) {
-		Competition newCompetition = new Competition();
+	public void createCompetition(Set<BreakerEntity> organizers, Set<DiskJockeyEntity> diskJockeys, Set<BreakEventEntity> breakEvents,
+			Set<SimpleEventEntity> simpleEvents, LocationEntity location) {
+		CompetitionEntity newCompetition = new CompetitionEntity();
 		newCompetition.setOrganizers(organizers);
 		newCompetition.setDiskJockeys(diskJockeys);
 		newCompetition.setBreakEvents(breakEvents);

@@ -10,7 +10,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class AbstractEvent extends BaseName{
+public abstract class AbstractEventEntity extends BaseName{
 
 	private Timestamp startTime;
 	private Timestamp endTime;

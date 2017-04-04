@@ -1,15 +1,15 @@
 package hu.unideb.inf.dandy.szd.services;
 
-import java.util.List;
+import java.util.Set;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.BreakEvent;
-import hu.unideb.inf.dandy.szd.jpa.entity.Breaker;
-import hu.unideb.inf.dandy.szd.jpa.entity.DiskJockey;
-import hu.unideb.inf.dandy.szd.jpa.entity.Location;
-import hu.unideb.inf.dandy.szd.jpa.entity.SimpleEvent;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakEventEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.DiskJockeyEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.LocationEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.SimpleEventEntity;
 
 public interface CompetitionServices {
 
-	public void createCompetition(List<Breaker> organizers, List<DiskJockey> diskJockeys, List<BreakEvent> breakEvents,
-			List<SimpleEvent> simpleEvents, Location location);
+	public void createCompetition(Set<BreakerEntity> organizers, Set<DiskJockeyEntity> diskJockeys, Set<BreakEventEntity> breakEvents,
+			Set<SimpleEventEntity> simpleEvents, LocationEntity location);
 }

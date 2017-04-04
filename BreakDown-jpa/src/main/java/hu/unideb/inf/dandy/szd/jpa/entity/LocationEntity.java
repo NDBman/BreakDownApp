@@ -10,7 +10,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Location extends BaseId{
+public class LocationEntity extends BaseId{
 
 	@Column(length=4)
 	private Integer postalCode;
@@ -19,5 +19,5 @@ public class Location extends BaseId{
 	private Integer houseNumber;
 	
 	@OneToOne(mappedBy="location")
-	private Competition competition;
+	private CompetitionEntity competition;
 }

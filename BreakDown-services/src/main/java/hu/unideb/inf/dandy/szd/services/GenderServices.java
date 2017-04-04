@@ -1,8 +1,8 @@
 package hu.unideb.inf.dandy.szd.services;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.Gender;
+import hu.unideb.inf.dandy.szd.jpa.entity.GenderEntity;
 
 public interface GenderServices {
 
-	public Gender getGender(Long id);
+	public GenderEntity getGender(Long id);
 }

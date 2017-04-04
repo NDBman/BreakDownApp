@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.BreakEvent;
-import hu.unideb.inf.dandy.szd.jpa.entity.Competition;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakEventEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.CompetitionEntity;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakEventRepository;
 import hu.unideb.inf.dandy.szd.services.BreakEventServices;
 
@@ -20,8 +20,8 @@ public class BreakEventServicesImpl implements BreakEventServices {
 	
 	@Override
 	public void createBreakEvent(String name, Timestamp startTime, Timestamp endTime, String description,
-			Competition competition) {
-		BreakEvent newBreakEvent = new BreakEvent();
+			CompetitionEntity competition) {
+		BreakEventEntity newBreakEvent = new BreakEventEntity();
 		
 		newBreakEvent.setName(name);
 		newBreakEvent.setStartTime(startTime);
