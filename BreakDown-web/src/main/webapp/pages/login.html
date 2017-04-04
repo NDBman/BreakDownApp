@@ -1,0 +1,22 @@
+<div layout="column" layout-margin>
+	<h1 class="md-display-1">Bejelentkezés</h1>
+	<form name="login" data-ng-controller="loginController" data-ng-submit="submit(login)">
+		<div layout="column" layout-align="center stretch">
+			<md-input-container>
+				<label>BBoy/Girl név</label>
+				<input type="text" data-ng-model="username" name="username" required>
+				<div data-ng-messages="login.username.$error">
+					<div data-ng-message="required">Adja meg a BBoy/Girl nevét!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Jelszó</label>
+				<input type="password" data-ng-model="password" name="password" required>
+				<div data-ng-messages="login.password.$error">
+					<div data-ng-message="required">Adja meg a jelszavát!</div>
+				</div>
+			</md-input-container>
+			<md-button class="md-primary" type="submit">Bejelentkezés</md-button>
+		</div>
+	</form>
+</div>
