@@ -1,0 +1,128 @@
+<div layout="column" layout-margin>
+	<div layout="column">
+		<div layout-gt-sm="row">
+			<form name="newComp" flex-gt-sm="70" layout-margin>
+				<h2>Új verseny létrehozása</h2>
+				<md-input-container class="md-block">
+					<label>Verseny neve</label>
+					<input type="text" data-ng-model="name" name="name" required>
+					<div data-ng-messages="newComp.name.$error">
+						<div data-ng-message="required">Verseny nevének megadása kötelező!</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Időpont</label>
+					<md-datepicker data-ng-model="compdate" name="compdate" required></md-datepicker>
+					<div data-ng-messages="newComp.compdate.$error">
+						<div data-ng-message="required">Kötelező megadni!</div>
+					</div>
+				</md-input-container>
+				<div layout-gt-sm="row" layout-sm="column" layout-xs="column">
+					<md-input-container>
+						<label>Irányítószám</label>
+						<input type="text" data-ng-model="postalcode" name="postalcode" ng-pattern="/^[0-9]{4}$/" md-maxlength="4" required>
+					</md-input-container>
+					<md-input-container>
+						<label>Város</label>
+						<input type="text" data-ng-model="city" name="city" required>
+					</md-input-container>
+					<md-input-container>
+						<label>Utca</label>
+						<input type="text" data-ng-model="street" name="street" required>
+					</md-input-container>
+					<md-input-container>
+						<label>Házszám</label>
+						<input type="number" data-ng-model="housenumber" name="housenumber" min="1" required>
+					</md-input-container>
+				</div>
+				<md-input-container class="md-block">
+					<label>Rövid leírás</label>
+					<textarea data-ng-model="description" md-maxlength="300" rows="5" name="description"></textarea>
+					<div data-ng-messages="newComp.description.$error">
+						<div data-ng-message="md-maxlength">Maximum 300 karakter hoszzú leírást adhat meg!</div>
+					</div>
+				</md-input-container>
+				<md-chips data-ng-model="diskjockeys" name="diskjockeys" placeholder="Adja meg a DJ-ket..">
+					<md-chip-template>
+						<strong>{{$chip}}</strong>
+					</md-chip-template>
+				</md-chips>
+			</form>
+			<div layout="column" flex-gt-sm="30">
+				<h2>Események hozzáadása</h2>
+				<form name="event" layout="column">
+					<md-input-container class="md-block">
+						<label>Esemény név</label>
+						<input type="text" required>
+					</md-input-container>
+					<div layout="column">
+						<div layout="row">
+							<h4 flex="33">Kezdés:</h4>
+							<md-input-container flex="33">
+								<label>Óra</label>
+								<input type="number" max="23">
+							</md-input-container>
+							<h4>:</h4>
+							<md-input-container flex="33">
+								<label>Perc</label>
+								<input type="number" max="59">
+							</md-input-container>
+						</div>
+						<div layout="row">
+							<h4 flex="33">Befejezés:</h4>
+							<md-input-container flex="33">
+								<label>Óra</label>
+								<input type="number" max="23">
+							</md-input-container>
+							<h4>:</h4>
+							<md-input-container flex=33>
+								<label>Perc</label>
+								<input type="number" max="59">
+							</md-input-container>
+						</div>
+					</div>
+					<md-input-container class="md-block">
+						<label>Rövid leírás</label>
+						<textarea data-ng-model="subeventd" md-maxlength="100" rows="3" name="subeventd"></textarea>
+					</md-input-container>
+					<md-input-container>
+						<md-checkbox class="md-primary" data-ng-model="breakevent">Verseny esemény (lesz nyertese is)</md-checkbox>
+					</md-input-container>
+					<md-button class="md-primary" type="submit">Esemény hozzáadása +</md-button>
+				</form>
+			</div>
+		</div>
+		<md-list layout-align="start stretch">
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					Események
+				</div>
+			</md-toolbar>
+			<md-list-item class="md-3-line">
+				<div class="md-list-item-text" layout="column">
+	            	<h3>cím</h3>
+	            	<h4>címke</h4>
+	            	<p>note</p>
+	         	</div>
+	         	<md-button class="md-secondary md-warn">Törlés</md-button>
+	         	<md-divider></md-divider>
+			</md-list-item>
+			<md-list-item class="md-3-line">
+				<div class="md-list-item-text" layout="column">
+	            	<h3>cím</h3>
+	            	<h4>címke</h4>
+	           		<p>note</p>
+	        	</div>
+	        	<md-divider></md-divider>
+			</md-list-item>
+			<md-list-item class="md-3-line">
+				<div class="md-list-item-text" layout="column">
+	           		<h3>cím</h3>
+	           		<h4>címke</h4>
+	  				<p>note</p>
+	         	</div>
+			</md-list-item>
+		</md-list>
+		<md-button class="md-primary" type="submit">Verseny létrehozása</md-button>
+	</div>
+</div>

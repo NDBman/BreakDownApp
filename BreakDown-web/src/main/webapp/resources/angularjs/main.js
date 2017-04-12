@@ -15,6 +15,14 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		})
 		.when("/regsuccess",{
 			templateUrl : "pages/regsuccess.html",
+		})
+		.when("/comps",{
+			templateUrl : "pages/competitions.html",
+			controller : "compsController"
+		})
+		.when("/newcomp",{
+			templateUrl : "pages/newcompetition.html",
+			controller : "newCompController"
 		});
 	
 	$mdThemingProvider.theme("default")

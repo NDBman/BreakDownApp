@@ -1,0 +1,26 @@
+<div layout="column" layout-margin data-ng-controller="compsController" flex>
+	<h1 class="md-display-1">Versneyek</h1>
+	<md-button class="md-accent" type="submit" href="#newcomp">
+		Új verseny
+	</md-button>
+	<md-content layout="row">
+		<div ng-repeat="x in cards">
+			<md-card md-theme="default" md-theme-watch>
+	        <md-card-title>
+	          <md-card-title-text>
+	            <span class="md-headline">{{x.title}}</span>
+	            <span class="md-subhead">{{x.titlke}}</span>
+	          </md-card-title-text>
+	          <md-card-title-media>
+	            <div class="md-media-lg card-media">
+	            </div>
+	          </md-card-title-media>
+	        </md-card-title>
+	        <md-card-actions layout="row" layout-align="end center">
+	          <md-button>Action 1</md-button>
+	          <md-button>Action 2</md-button>
+	        </md-card-actions>
+	      </md-card>
+		</div>
+	</md-content>
+</div>

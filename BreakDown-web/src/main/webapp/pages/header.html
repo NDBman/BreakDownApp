@@ -1,0 +1,35 @@
+<header>
+	<md-nav-bar class="md-primary" nav-bar-aria-label="navigáció" md-selected-nav-item="currentNavItem" hide-xs>
+		<md-nav-item md-nav-href="#/" name="index">BreakDown</md-nav-item>
+		<md-nav-item md-nav-href="#reg" ng-hide="authenticated">
+			Regisztráció
+		</md-nav-item>
+		<md-nav-item md-nav-href="#login" ng-hide="authenticated">
+			Bejelentkezés
+		</md-nav-item>
+		<md-nav-item md-nav-href="#comps">
+			Versenyek
+		</md-nav-item>
+		<md-nav-item md-nav-click="goto('page4')" name="page4">
+			Keresés
+		</md-nav-item>
+		<md-nav-item md-nav-click="goto('page5')" name="page5">
+			GYIK
+		</md-nav-item>
+	</md-nav-bar>
+	<div id="header" hide-gt-xs data-ng-controller="sideNavController">
+		<md-button class="md-icon-button" aria-label="Settings" data-ng-click="toggleNav()">
+          <md-icon md-svg-icon="resources/svg/menu.svg"></md-icon>
+        </md-button>	
+	</div>
+	<md-sidenav class="md-sidenav-lefft" md-component-id="left" md-whiteframe="4">
+				<md-menu-item layout="column">
+					<md-button data-ng-href="#/">BreakDown</md-button>
+					<md-button data-ng-href="#reg" data-ng-hide="authenticated">Regsiztráció</md-button>
+					<md-button data-ng-href="#login" data-ng-hide="authenticated">Bejelentkezés</md-button>
+					<md-button data-ng-href="#comps">Versenyek</md-button>
+					<md-button>Keresés</md-button>
+					<md-button>GYIK</md-button>
+				</md-menu-item>
+	</md-sidenav>
+</header>

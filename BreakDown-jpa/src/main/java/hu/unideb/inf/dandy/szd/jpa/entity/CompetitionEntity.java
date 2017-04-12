@@ -30,6 +30,8 @@ public class CompetitionEntity extends AbstractEventEntity {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="currentCompetition")
 	private Set<BreakerEntity> competitors;
 	
+	private String description;
+	
 	@OneToOne
 	private LocationEntity location;
 }

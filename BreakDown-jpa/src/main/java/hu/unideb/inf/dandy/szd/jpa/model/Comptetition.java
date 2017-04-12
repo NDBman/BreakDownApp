@@ -20,5 +20,6 @@ public class Comptetition extends AbstractEvent{
 	private Set<BreakEvent> breakEvents;
 	private Set<SimpleEvent> simpleEvents;
 	private Set<Breaker> competitors;
+	private String description;
 	private Location location;
 }

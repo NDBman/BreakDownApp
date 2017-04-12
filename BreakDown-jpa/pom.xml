@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>hu.unideb.inf.dandy.szd</groupId>
-		<artifactId>BreakDown</artifactId>
+		<artifactId>breakdown</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>BreakDown-jpa</artifactId>
