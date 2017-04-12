@@ -1,13 +1,12 @@
 package hu.unideb.inf.dandy.szd.services;
 
-import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
-import hu.unideb.inf.dandy.szd.jpa.model.Breaker;
+import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 
 public interface BreakerServices {
 
-	public BreakerEntity createBreaker(BreakerEntity breaker);
+	public Breaker createBreaker(Breaker breaker);
 	
-	public boolean matchingEmails(BreakerEntity breaker);
+	public boolean matchingEmails(Breaker breaker);
 	
 	public Breaker legitAccount(String username, String password);
 }

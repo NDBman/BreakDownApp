@@ -1,4 +1,4 @@
-package hu.unideb.inf.dandy.szd.jpa.model;
+package hu.unideb.inf.dandy.szd.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +13,5 @@ import lombok.Setter;
 @Builder
 public class DiskJockey {
 
-	private Long id;
 	private String name;
 }

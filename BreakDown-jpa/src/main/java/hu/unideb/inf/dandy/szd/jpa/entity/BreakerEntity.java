@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -30,9 +29,7 @@ public class BreakerEntity extends BaseId {
 	private String name;
 	private String username;
 	private String password;
-	private boolean enabled;
-	@OneToOne
-	private RoleEntity role;
+	private Long role;
 	private String email;
 	
 	@ManyToOne
@@ -42,7 +39,7 @@ public class BreakerEntity extends BaseId {
 	private Set<CompetitionEntity> pastCompetitions;
 	@ManyToMany(fetch=FetchType.EAGER)
 	private Set<BreakEventEntity> winnedEvents;
-	private GenderEntity gender;
+	private Long gender;
 	private Date birthday;
 	@OneToMany
 	private Set<LocationEntity> interestedCities;

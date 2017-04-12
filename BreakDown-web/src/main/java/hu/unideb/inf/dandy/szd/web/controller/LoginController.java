@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import hu.unideb.inf.dandy.szd.jpa.model.Breaker;
-import hu.unideb.inf.dandy.szd.jpa.model.LoginBreaker;
+import hu.unideb.inf.dandy.szd.service.dto.Breaker;
+import hu.unideb.inf.dandy.szd.service.dto.LoginBreaker;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
 
 @Controller

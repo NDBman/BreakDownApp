@@ -1,4 +1,4 @@
-package hu.unideb.inf.dandy.szd.jpa.model;
+package hu.unideb.inf.dandy.szd.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,6 @@ import lombok.Setter;
 @Builder
 public class Location {
 
-	private Long id;
 	private Integer postalCode;
 	private String city;
 	private String street;

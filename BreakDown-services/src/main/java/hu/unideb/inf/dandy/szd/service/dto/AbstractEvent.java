@@ -1,4 +1,4 @@
-package hu.unideb.inf.dandy.szd.jpa.model;
+package hu.unideb.inf.dandy.szd.service.dto;
 
 import java.security.Timestamp;
 
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public abstract class AbstractEvent {
 
-	private Long id;
 	private String name;
 	private Timestamp startTime;
 	private Timestamp endTime;

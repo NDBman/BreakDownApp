@@ -1,4 +1,4 @@
-package hu.unideb.inf.dandy.szd.jpa.model;
+package hu.unideb.inf.dandy.szd.service.dto;
 
 import java.util.Set;
 
