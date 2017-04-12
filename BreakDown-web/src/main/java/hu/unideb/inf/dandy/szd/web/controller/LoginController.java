@@ -1,8 +1,6 @@
 package hu.unideb.inf.dandy.szd.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +19,8 @@ public class LoginController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Breaker> login(@RequestBody LoginBreaker breaker){
-		Breaker foundBreaker = breakerServices.legitAccount(breaker.getUsername(), breaker.getPassword());
-		if(foundBreaker != null){
-			return new ResponseEntity<Breaker>(foundBreaker, HttpStatus.OK);
-		}
-		return new ResponseEntity<Breaker>(foundBreaker,HttpStatus.NOT_ACCEPTABLE);
+	public Breaker login(@RequestBody LoginBreaker breaker){
+		return breakerServices.legitAccount(breaker.getEmail(), breaker.getPassword());
+		
 	}
 }

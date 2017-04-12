@@ -3,9 +3,9 @@
 	<form name="login" data-ng-controller="loginController" data-ng-submit="submit(login)">
 		<div layout="column" layout-align="center stretch">
 			<md-input-container>
-				<label>BBoy/Girl név</label>
-				<input type="text" data-ng-model="username" name="username" required>
-				<div data-ng-messages="login.username.$error">
+				<label>E-mail cím</label>
+				<input type="text" data-ng-model="email" name="email" required>
+				<div data-ng-messages="login.email.$error">
 					<div data-ng-message="required">Adja meg a BBoy/Girl nevét!</div>
 				</div>
 			</md-input-container>
@@ -16,6 +16,7 @@
 					<div data-ng-message="required">Adja meg a jelszavát!</div>
 				</div>
 			</md-input-container>
+			<div md-colors="{color: 'warn'}"  data-ng-show="badData">Rossz email cím vagy jelszó!</div>
 			<md-button class="md-primary" type="submit">Bejelentkezés</md-button>
 		</div>
 	</form>

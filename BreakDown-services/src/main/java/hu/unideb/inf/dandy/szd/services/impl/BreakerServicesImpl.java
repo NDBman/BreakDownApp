@@ -34,8 +34,8 @@ public class BreakerServicesImpl implements BreakerServices{
 
 	@Override
 	@Transactional
-	public Breaker legitAccount(String username, String password) {
-		Long id = breakerRepository.findByUsername(username).getId();
+	public Breaker legitAccount(String email, String password) {
+		Long id = breakerRepository.findByEmail(email).getId();
 		if(id == breakerRepository.findByPassword(password).getId()) {
 			return modelMapper.map(breakerRepository.findOne(id), Breaker.class);
 		}

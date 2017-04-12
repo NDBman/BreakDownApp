@@ -1,19 +1,20 @@
 breakDownApp.controller("loginController",function($scope, $rootScope, $http, $location){
+	$scope.badData = false;
 	$scope.submit = function(form){
 		$http({
 			method : "POST",
 			url: "login",
 			data : {
-					username: form.username.$modelValue,
+					email: form.email.$modelValue,
 					password: form.password.$modelValue
 			},
 		}).success(function(response){
 			$rootScope.authenticated = true;
 			$rootScope.id = response.id;
-			$rootScope.role = response.role.roleType;
+			$rootScope.role = response.role;
 			$location.path("/")
 		}).error(function(){
-			console.error("error");
+			$scope.badData = true;
 		});
 	}
 });
