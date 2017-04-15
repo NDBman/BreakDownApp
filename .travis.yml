@@ -6,4 +6,4 @@ env:
     - secure: "CpMdeUn8bK28NE2h3fTIQgNTdI9FDQaWzaOZmZfKqihIFLomuhtbb7UEPkxiyclYWnOcWDWK8WtzAE7IDqvnkfgzgeFmREUzK6CWjr6STRQHwKwodBzsJ4ogXLzNV19GMvQVNmdLTAZ6jluxf3ouxPwZf1HUDMpVwWiZcCbBrfplwLyCxdtaWV/gLV9j5hOrbHYq0tYv7QQS1I+Vvue3ns/T/i21NNCwFtm2HErBbzpaNoWKhW7QmHg7+3Lb7E03cZyNtLYyQPdeesgfbDFBPLjrDdvjojqyGMOGViz91jA+nny/uYQlKrlnmEsTCdhkT1wY7BGaWy4bTHCvD6trBe1GUfTatXkkQptinZWzWQlt+rc5myZLetJQI2Qun71vgWh1IkSxYIvOf1Jq/gfJo4qoSOn/9LOVfiC6XcG17HIdXBv3ZQVJPOPn8IBKaGMmtQONtb1lGrFDWMdqZJ4rkYN9FnWjBi9u34zwbn3m4IbSm1m04aE3umkxJWkagFzVGC7EoJ5cZ4McqVCgcGfBDKeeHCWZPsnqwCROpDKK+DogYLAALfxVeheuCnp3n/J/K6uYXqSUsTNFj+KnM/JgaemqOYmoZICwNJmuT8X/LP0yLgAVKgSbI4flY9EWmDw59hAQSozuf+IwszJYBX8SYCy3D1zQcK+mjo7PI2Wr2E0="
     
 after_success:
-    "curl -T BreakDown-ear/target/BreakDownApp.ear -u $FTP_USER:$FTP_PASSWORD ftp://46.101.150.66/deployments/upload"
+    "curl -T BreakDown-ear/target/BreakDownApp.ear -u $FTP_USER:$FTP_PASSWORD ftp://46.101.150.66/deployments/"
