@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.LoginBreaker;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
+import hu.unideb.inf.dandy.szd.web.response.UserDoesntExistsException;
 
 @Controller
 public class LoginController {
@@ -19,8 +20,12 @@ public class LoginController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-	public Breaker login(@RequestBody LoginBreaker breaker){
-		return breakerServices.legitAccount(breaker.getEmail(), breaker.getPassword());
+	public Breaker login(@RequestBody LoginBreaker loginBreaker){
+		Breaker  breaker = breakerServices.legitAccount(loginBreaker.getEmail(), loginBreaker.getPassword());
+		if(breaker == null){
+			throw new UserDoesntExistsException();
+		}
+		return breaker;
 		
 	}
 }

@@ -1,7 +1,7 @@
 <div layout="column" layout-margin>
 	<div layout="column">
 		<div layout-gt-sm="row">
-			<form name="newComp" flex-gt-sm="70" layout-margin>
+			<form id="newComp" name="newComp" flex-gt-sm="70" layout-margin data-ng-submit="createComp(newComp)">
 				<h2>Új verseny létrehozása</h2>
 				<md-input-container class="md-block">
 					<label>Verseny neve</label>
@@ -20,19 +20,32 @@
 				<div layout-gt-sm="row" layout-sm="column" layout-xs="column">
 					<md-input-container>
 						<label>Irányítószám</label>
-						<input type="text" data-ng-model="postalcode" name="postalcode" ng-pattern="/^[0-9]{4}$/" md-maxlength="4" required>
+						<input type="text" data-ng-model="postalcode" name="postalcode" ng-pattern="/^[0-9]{4}$/" required>
+						<div data-ng-messages="newComp.postalcode.$error">
+							<div data-ng-message="required">Irányítószám megadása kötelező!</div>
+							<div data-ng-message="pattern">4 jegyű számjegyből kell állnia!</div>
+						</div>
 					</md-input-container>
 					<md-input-container>
 						<label>Város</label>
 						<input type="text" data-ng-model="city" name="city" required>
+						<div data-ng-messages="newComp.city.$error">
+							<div data-ng-message="required">Város megadása kötelező!</div>
+						</div>
 					</md-input-container>
 					<md-input-container>
 						<label>Utca</label>
 						<input type="text" data-ng-model="street" name="street" required>
+						<div data-ng-messages="newComp.street.$error">
+							<div data-ng-message="required">Utcanév megadása kötelező!</div>
+						</div>
 					</md-input-container>
 					<md-input-container>
 						<label>Házszám</label>
-						<input type="number" data-ng-model="housenumber" name="housenumber" min="1" required>
+						<input type="text" data-ng-model="housenumber" name="housenumber" data-ng-pattern="/^[0-9]+[a-zA-Z]?(-[0-9]+[a-zA-Z]?)*$/" required>
+						<div data-ng-messages="newComp.housenumber.$error">
+							<div data-ng-message="pattern">Helytelen formátum!</div>
+						</div>
 					</md-input-container>
 				</div>
 				<md-input-container class="md-block">
@@ -50,44 +63,67 @@
 			</form>
 			<div layout="column" flex-gt-sm="30">
 				<h2>Események hozzáadása</h2>
-				<form name="event" layout="column">
+				<form name="event" layout="column" data-ng-submit="submit(event)">
 					<md-input-container class="md-block">
 						<label>Esemény név</label>
-						<input type="text" required>
+						<input type="text" required name="eventname" data-ng-model="eventname">
+						<div data-ng-messages="event.eventname.$error">
+							<div data-ng-message="required">Kötelező megadni!</div>
+						</div>
 					</md-input-container>
 					<div layout="column">
 						<div layout="row">
 							<h4 flex="33">Kezdés:</h4>
 							<md-input-container flex="33">
 								<label>Óra</label>
-								<input type="number" max="23">
+								<input type="number" max="23" min="0" name="startTimeHour" data-ng-model="startTimeHour" required>
+								<div data-ng-messages="event.startTimeHour.$error">
+									<div data-ng-message="required">Kötelező megadni!</div>
+									<div data-ng-message="min max">0-23!</div>
+								</div>
 							</md-input-container>
 							<h4>:</h4>
 							<md-input-container flex="33">
 								<label>Perc</label>
-								<input type="number" max="59">
+								<input type="number" max="59" min="0" name="startTimeMinute" data-ng-model="startTimeMinute">
+								<div data-ng-messages="event.startTimeMinute.$error">
+									<div data-ng-message="required">Kötelező megadni!</div>
+									<div data-ng-message="min max">0-59!</div>
+								</div>
 							</md-input-container>
 						</div>
 						<div layout="row">
 							<h4 flex="33">Befejezés:</h4>
 							<md-input-container flex="33">
 								<label>Óra</label>
-								<input type="number" max="23">
+								<input type="number" max="23" min="0" name="endTimeHour" data-ng-model="endTimeHour">
+								<div data-ng-messages="event.endTimeHour.$error">
+									<div data-ng-message="required">Kötelező megadni!</div>
+									<div data-ng-message="min max">0-23!</div>
+								</div>
 							</md-input-container>
 							<h4>:</h4>
 							<md-input-container flex=33>
 								<label>Perc</label>
-								<input type="number" max="59">
+								<input type="number" max="59" min="0" name="endTimeMinute" data-ng-model="endTimeMinute">
+								<div data-ng-messages="event.endTimeMinute.$error">
+									<div data-ng-message="required">Kötelező megadni!</div>
+									<div data-ng-message="min max">0-59!</div>
+								</div>
 							</md-input-container>
 						</div>
 					</div>
 					<md-input-container class="md-block">
 						<label>Rövid leírás</label>
-						<textarea data-ng-model="subeventd" md-maxlength="100" rows="3" name="subeventd"></textarea>
+						<textarea data-ng-model="subeventd" md-maxlength="50" rows="3" name="subeventd" data-ng-model="subeventd"></textarea>
+						<div data-ng-messages="event.subeventd.$error">
+							<div data-ng-message="md-maxlength">Maximum 50 karakternyi leírást adhat meg!</div>
+						</div>
 					</md-input-container>
 					<md-input-container>
-						<md-checkbox class="md-primary" data-ng-model="breakevent">Verseny esemény (lesz nyertese is)</md-checkbox>
+						<md-checkbox class="md-primary" data-ng-model="isbreak" name="isbreak">Verseny esemény (lesz nyertese is)</md-checkbox>
 					</md-input-container>
+					<div md-colors="{color: 'warn'}" data-ng-show="badTime">Egy esemény nem végződhet azelőtt hogy elkezdődne!</div>
 					<md-button class="md-primary" type="submit">Esemény hozzáadása +</md-button>
 				</form>
 			</div>
@@ -98,31 +134,17 @@
 					Események
 				</div>
 			</md-toolbar>
-			<md-list-item class="md-3-line">
+			<md-list-item class="md-3-line" data-ng-repeat="x in events | orderBy : 'startTime'">
 				<div class="md-list-item-text" layout="column">
-	            	<h3>cím</h3>
-	            	<h4>címke</h4>
-	            	<p>note</p>
+	            	<h3>{{x.title}}</h3>
+	            	<h4>{{x.startTime | date:'H:mm'}} - {{x.endTime | date : 'H:mm'}}</h4>
+	            	<p>{{x.description}}</p>
 	         	</div>
-	         	<md-button class="md-secondary md-warn">Törlés</md-button>
+	         	<md-button class="md-secondary md-warn" data-ng-click="deleteEvent(x)">Törlés</md-button>
 	         	<md-divider></md-divider>
 			</md-list-item>
-			<md-list-item class="md-3-line">
-				<div class="md-list-item-text" layout="column">
-	            	<h3>cím</h3>
-	            	<h4>címke</h4>
-	           		<p>note</p>
-	        	</div>
-	        	<md-divider></md-divider>
-			</md-list-item>
-			<md-list-item class="md-3-line">
-				<div class="md-list-item-text" layout="column">
-	           		<h3>cím</h3>
-	           		<h4>címke</h4>
-	  				<p>note</p>
-	         	</div>
-			</md-list-item>
+			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
-		<md-button class="md-primary" type="submit">Verseny létrehozása</md-button>
+		<md-button class="md-primary" type="submit" form="newComp" >Verseny létrehozása</md-button>
 	</div>
 </div>

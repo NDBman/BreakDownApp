@@ -15,6 +15,7 @@ import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.Role;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
 import hu.unideb.inf.dandy.szd.services.GenderServices;
+import hu.unideb.inf.dandy.szd.web.response.EmailAlreadyExistsException;
 
 @Controller
 public class RegistrationController {
@@ -42,7 +43,7 @@ public class RegistrationController {
 						.role(Role.USER)
 						.build();
 		if(breakerServices.matchingEmails(breaker)){
-			return null;
+			throw new EmailAlreadyExistsException();
 		}
 		return breakerServices.createBreaker(breaker);
 		

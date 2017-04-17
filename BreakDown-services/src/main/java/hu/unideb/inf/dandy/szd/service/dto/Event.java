@@ -7,11 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class AbstractEvent {
+public class Event {
 
-	private String name;
+	private String title;
 	private Timestamp startTime;
 	private Timestamp endTime;
 	private String description;
+	private boolean breakevent;
 	
 }

@@ -3,7 +3,6 @@ package hu.unideb.inf.dandy.szd.services.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakerRepository;
@@ -33,11 +32,12 @@ public class BreakerServicesImpl implements BreakerServices{
 	}
 
 	@Override
-	@Transactional
 	public Breaker legitAccount(String email, String password) {
-		Long id = breakerRepository.findByEmail(email).getId();
-		if(id == breakerRepository.findByPassword(password).getId()) {
-			return modelMapper.map(breakerRepository.findOne(id), Breaker.class);
+		Long id;
+		if(breakerRepository.findByEmail(email) != null & breakerRepository.findByPassword(password) != null){
+			if((id = breakerRepository.findByEmail(email).getId()) == breakerRepository.findByPassword(password).getId()){
+				return modelMapper.map(breakerRepository.findOne(id), Breaker.class);
+			}
 		}
 		return null;
 	}
