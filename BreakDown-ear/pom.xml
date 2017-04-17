@@ -17,14 +17,14 @@
 		</dependency>
 		<dependency>
 			<groupId>hu.unideb.inf.dandy.szd</groupId>
-			<artifactId>BreakDown-web</artifactId>
+			<artifactId>BreakDown-services</artifactId>
 			<version>${app.version}</version>
-			<type>war</type>
 		</dependency>
 		<dependency>
 			<groupId>hu.unideb.inf.dandy.szd</groupId>
-			<artifactId>BreakDown-services</artifactId>
+			<artifactId>BreakDown-web</artifactId>
 			<version>${app.version}</version>
+			<type>war</type>
 		</dependency>
 	</dependencies>
 
@@ -35,16 +35,15 @@
 				<artifactId>maven-ear-plugin</artifactId>
 				<configuration>
 					<finalName>BreakDownApp</finalName>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.wildfly.plugins</groupId>
-				<artifactId>wildfly-maven-plugin</artifactId>
-				<configuration>
-					<hostname>http://46.101.150.66</hostname>
-					<port>8080</port>
-					<name>postgres</name>
-					<password>dandy</password>
+					<earSourceDirectory>${basedir}/src/main/application</earSourceDirectory>
+					<earSourceIncludes>META-INF/**</earSourceIncludes>
+					<modules>
+						<webModule>
+							<groupId>hu.unideb.inf.dandy.szd</groupId>
+							<artifactId>BreakDown-web</artifactId>
+							<contextRoot>/breakdown</contextRoot>
+						</webModule>
+					</modules>
 				</configuration>
 			</plugin>
 		</plugins>
