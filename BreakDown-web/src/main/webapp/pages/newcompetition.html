@@ -12,9 +12,10 @@
 				</md-input-container>
 				<md-input-container>
 					<label>Időpont</label>
-					<md-datepicker data-ng-model="compdate" name="compdate" required></md-datepicker>
+					<md-datepicker data-ng-model="compdate" md-min-date="today" name="compdate" required></md-datepicker>
 					<div data-ng-messages="newComp.compdate.$error">
 						<div data-ng-message="required">Kötelező megadni!</div>
+						<div data-ng-message="mindate">Mai napnál korábbi dátumot nem lehet megadni!</div>
 					</div>
 				</md-input-container>
 				<div layout-gt-sm="row" layout-sm="column" layout-xs="column">
@@ -145,6 +146,9 @@
 			</md-list-item>
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
+		<div md-colors="{color: 'warn'}" data-ng-show="badDate">
+			Mai napnál korábbi dátumot nem lehet megadni!
+		</div>
 		<md-button class="md-primary" type="submit" form="newComp" >Verseny létrehozása</md-button>
 	</div>
 </div>

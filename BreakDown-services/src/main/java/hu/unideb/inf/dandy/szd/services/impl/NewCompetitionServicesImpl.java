@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -76,6 +77,10 @@ public class NewCompetitionServicesImpl implements NewCompetitionServices {
 	@Transactional(propagation=Propagation.REQUIRED)
 	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
 			String houseNumber, String description, List<String> diskjockeys, String events) throws IOException, ParseException{
+		System.out.println(dateFormatter.parseObject(compdate));
+		if(dateFormatter.parse(compdate).before(new Date())){
+			return null;
+		}
 		String[] eventArray = events.split("},");
 		List<Event> eventList = new ArrayList<>();
 		for(int i = 0;i < eventArray.length-1;i++){

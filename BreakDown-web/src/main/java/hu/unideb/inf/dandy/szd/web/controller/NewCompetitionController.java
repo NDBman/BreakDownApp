@@ -14,6 +14,7 @@ import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.Event;
 import hu.unideb.inf.dandy.szd.services.NewCompetitionServices;
 import hu.unideb.inf.dandy.szd.web.response.TimeIntervalIsNegativeException;
+import hu.unideb.inf.dandy.szd.web.response.TooEarlyDateExcpetion;
 
 @RestController
 @RequestMapping("/newcomp")
@@ -42,7 +43,10 @@ public class NewCompetitionController {
 			@RequestParam(required = true) String city, @RequestParam(required = true) String street,
 			@RequestParam(required = true) String housenumber, @RequestParam String description,
 			@RequestParam List<String> diskjockeys, @RequestParam(required=true) String events) throws IOException, ParseException {
-		
-		return newCompetitionServices.createCompetition(name, compdate, postalcode, city, street, housenumber, description, diskjockeys, events);
+		Competition competition = newCompetitionServices.createCompetition(name, compdate, postalcode, city, street, housenumber, description, diskjockeys, events);
+		if(competition == null){
+			throw new TooEarlyDateExcpetion();
+		}
+		return competition;
 	}
 }

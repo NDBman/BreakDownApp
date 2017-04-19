@@ -4,6 +4,8 @@ breakDownApp.controller("newCompController", function($scope, $http, $location){
 	$scope.events = [];
 	$scope.isbreak = false;
 	$scope.badTime= false;
+	$scope.today = new Date();
+	$scope.badDate = false;
 	$scope.submit = function(form){
 		if(form.$invalid){
 			return;
@@ -59,6 +61,7 @@ breakDownApp.controller("newCompController", function($scope, $http, $location){
 		}).success(function(){
 			$location.path("compsuccess");
 		}).error(function(){
+			$scope.badDate = true;
 		})
 	}
 	$scope.deleteEvent = function(event){
