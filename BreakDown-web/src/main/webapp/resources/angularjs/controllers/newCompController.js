@@ -1,4 +1,4 @@
-breakDownApp.controller("newCompController", function($scope, $http){
+breakDownApp.controller("newCompController", function($scope, $http, $location){
 	djNames = [];
 	$scope.diskjockeys = angular.copy(djNames);
 	$scope.events = [];
@@ -29,8 +29,6 @@ breakDownApp.controller("newCompController", function($scope, $http){
 				description: response.description,
 				breakevent: response.breakevent
 			});
-			console.log(response.isBreakEvent);
-			console.log($scope.events);
 			$scope.eventname = "";
 			$scope.startTimeHour = "";
 			$scope.startTimeMinute = "";
@@ -59,13 +57,11 @@ breakDownApp.controller("newCompController", function($scope, $http){
 				events: $scope.events
 			}
 		}).success(function(){
-			console.log("hej!");
+			$location.path("compsuccess");
 		}).error(function(){
-			console.error("nah");
 		})
 	}
 	$scope.deleteEvent = function(event){
-		console.log(event);
 		var index = $scope.events.indexOf(event);
 		$scope.events.splice(index, 1);
 	}

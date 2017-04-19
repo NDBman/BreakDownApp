@@ -1,6 +1,7 @@
 package hu.unideb.inf.dandy.szd.service.dto;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -22,9 +23,9 @@ public class Breaker {
 	private Role role;
 	private String email;
 	
-	private Comptetition currentCompetition;
-	private Set<Comptetition> pastCompetitions;
-	private Set<BreakEvent> winnedEvents;
+	private Competition currentCompetition;
+	private List<Competition> pastCompetitions;
+	private List<BreakEvent> winnedEvents;
 	private Gender gender;
 	private Date birthday;
 	private Set<Location> interedtesCities;

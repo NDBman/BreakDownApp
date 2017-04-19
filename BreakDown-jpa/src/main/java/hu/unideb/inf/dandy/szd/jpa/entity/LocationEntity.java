@@ -1,5 +1,6 @@
 package hu.unideb.inf.dandy.szd.jpa.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -16,8 +17,8 @@ public class LocationEntity extends BaseId{
 	private Integer postalCode;
 	private String city;
 	private String street;
-	private Integer houseNumber;
+	private String houseNumber;
 	
-	@OneToOne(mappedBy="location")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="location")
 	private CompetitionEntity competition;
 }

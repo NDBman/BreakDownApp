@@ -1,5 +1,6 @@
 package hu.unideb.inf.dandy.szd.jpa.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class SimpleEventEntity extends AbstractEventEntity {
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="competition", referencedColumnName="id")
 	private CompetitionEntity competition;
 }

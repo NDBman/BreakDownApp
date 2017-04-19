@@ -1,15 +1,15 @@
 package hu.unideb.inf.dandy.szd.jpa.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="users")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,15 +29,16 @@ public class BreakerEntity extends BaseId {
 	private String username;
 	private String password;
 	private Long role;
+	@Column(unique=true)
 	private String email;
 	
 	@ManyToOne
 	@JoinColumn(name="currentCompetition", referencedColumnName="id")
 	private CompetitionEntity currentCompetition;
-	@OneToMany(fetch=FetchType.EAGER)
-	private Set<CompetitionEntity> pastCompetitions;
-	@ManyToMany(fetch=FetchType.EAGER)
-	private Set<BreakEventEntity> winnedEvents;
+	@OneToMany
+	private List<CompetitionEntity> pastCompetitions;
+	@ManyToMany
+	private List<BreakEventEntity> winnedEvents;
 	private Long gender;
 	private Date birthday;
 	@OneToMany

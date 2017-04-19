@@ -2,6 +2,7 @@ package hu.unideb.inf.dandy.szd.jpa.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -17,7 +18,7 @@ public class BreakEventEntity extends AbstractEventEntity {
 
 	@ManyToMany(mappedBy="winnedEvents")
 	private Set<BreakerEntity> winners;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="competition", referencedColumnName="id")
 	private CompetitionEntity competition;
 }

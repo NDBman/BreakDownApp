@@ -1,6 +1,6 @@
 package hu.unideb.inf.dandy.szd.jpa.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,23 +15,22 @@ import lombok.Setter;
 @Setter
 public class CompetitionEntity extends AbstractEventEntity {
 
-	@OneToMany
-	private Set<DiskJockeyEntity> diskJockeys;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
+	private List<DiskJockeyEntity> diskJockeys;
 	
-	@OneToMany
-	private Set<BreakerEntity> organizers;
+	private String organizer;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
-	private Set<BreakEventEntity> breakEvents;
+	private List<BreakEventEntity> breakEvents;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
-	private Set<SimpleEventEntity> simpleEvents;
+	private List<SimpleEventEntity> simpleEvents;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="currentCompetition")
-	private Set<BreakerEntity> competitors;
+	private List<BreakerEntity> competitors;
 	
 	private String description;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private LocationEntity location;
 }

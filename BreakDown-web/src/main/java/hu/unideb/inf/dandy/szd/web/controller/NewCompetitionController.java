@@ -1,6 +1,7 @@
 package hu.unideb.inf.dandy.szd.web.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.unideb.inf.dandy.szd.service.dto.Comptetition;
+import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.Event;
 import hu.unideb.inf.dandy.szd.services.NewCompetitionServices;
 import hu.unideb.inf.dandy.szd.web.response.TimeIntervalIsNegativeException;
@@ -36,11 +37,11 @@ public class NewCompetitionController {
 	}
 
 	@RequestMapping(value= "/createcomp", method = RequestMethod.POST)
-	public Comptetition createCompetition(@RequestParam(required = true) String name,
+	public Competition createCompetition(@RequestParam(required = true) String name,
 			@RequestParam(required = true) String compdate, @RequestParam(required = true) Integer postalcode,
 			@RequestParam(required = true) String city, @RequestParam(required = true) String street,
-			@RequestParam(required = true) Integer housenumber, @RequestParam String description,
-			@RequestParam List<String> diskjockeys, @RequestParam(required=true) List<String> events) throws IOException {
+			@RequestParam(required = true) String housenumber, @RequestParam String description,
+			@RequestParam List<String> diskjockeys, @RequestParam(required=true) String events) throws IOException, ParseException {
 		
 		return newCompetitionServices.createCompetition(name, compdate, postalcode, city, street, housenumber, description, diskjockeys, events);
 	}
