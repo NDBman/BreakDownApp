@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -35,9 +36,9 @@ public class BreakerEntity extends BaseId {
 	@ManyToOne
 	@JoinColumn(name="currentCompetition", referencedColumnName="id")
 	private CompetitionEntity currentCompetition;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<CompetitionEntity> pastCompetitions;
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<BreakEventEntity> winnedEvents;
 	private Long gender;
 	private Date birthday;

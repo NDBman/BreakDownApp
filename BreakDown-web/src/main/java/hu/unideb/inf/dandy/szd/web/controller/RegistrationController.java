@@ -40,7 +40,7 @@ public class RegistrationController {
 						.password(password)
 						.birthday(dateFormatter.parse(birthday, Locale.US))
 						.gender(genderServices.getGender(gender))
-						.role(Role.USER)
+						.role(Role.ORGANIZER)
 						.build();
 		if(breakerServices.matchingEmails(breaker)){
 			throw new EmailAlreadyExistsException();

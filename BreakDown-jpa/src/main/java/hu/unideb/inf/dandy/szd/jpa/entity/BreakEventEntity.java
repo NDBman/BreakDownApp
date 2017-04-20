@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 public class BreakEventEntity extends AbstractEventEntity {
 
-	@ManyToMany(mappedBy="winnedEvents")
+	@ManyToMany(mappedBy="winnedEvents", cascade=CascadeType.ALL)
 	private Set<BreakerEntity> winners;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="competition", referencedColumnName="id")

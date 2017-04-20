@@ -19,7 +19,7 @@ public class Competition extends AbstractEvent{
 
 	@JsonIgnore
 	private List<DiskJockey> diskJockeys;
-	private String organizers;
+	private String organizer;
 	@JsonIgnore
 	private List<BreakEvent> breakEvents;
 	@JsonIgnore

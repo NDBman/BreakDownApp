@@ -1,12 +1,9 @@
-breakDownApp.controller("compsController",function($scope){
-	$scope.cards = [
-			{
-				title : "Verseny1",
-				titlke : "versenyke1"
-			},
-			{
-				title: "verseny2",
-				titlke : "versenyke2"
-			}
-	]
+breakDownApp.controller("compsController",function($scope, $http){
+	$scope.cards = [];
+	$http({
+		method: "GET",
+		url: "comps",
+	}).success(function(response){
+		$scope.cards = response;
+	})
 });

@@ -9,11 +9,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,10 +30,10 @@ import hu.unideb.inf.dandy.szd.jpa.repo.LocationRepository;
 import hu.unideb.inf.dandy.szd.jpa.repo.SimpleEventRepository;
 import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.Event;
-import hu.unideb.inf.dandy.szd.services.NewCompetitionServices;
+import hu.unideb.inf.dandy.szd.services.CompetitionServices;
 
 @Service
-public class NewCompetitionServicesImpl implements NewCompetitionServices {
+public class CompetitionServicesImpl implements CompetitionServices {
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -74,7 +74,7 @@ public class NewCompetitionServicesImpl implements NewCompetitionServices {
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED)
+	@Transactional
 	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
 			String houseNumber, String description, List<String> diskjockeys, String events) throws IOException, ParseException{
 		System.out.println(dateFormatter.parseObject(compdate));
@@ -154,6 +154,17 @@ public class NewCompetitionServicesImpl implements NewCompetitionServices {
 		competitionRepository.save(newCompetitionEntity);
 		
 		return modelMapper.map(newCompetitionEntity, Competition.class);
+	}
+
+	@Override
+	@Transactional
+	public List<Competition> getAllCompetitions() {
+		List<CompetitionEntity> compEntites = competitionRepository.findAll();
+		List<Competition> competitons = new ArrayList<>();
+		for(CompetitionEntity compEntity : compEntites){
+			competitons.add(modelMapper.map(compEntity, Competition.class));
+		}
+		return competitons;
 	}
 
 }

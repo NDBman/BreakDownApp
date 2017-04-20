@@ -19,6 +19,7 @@ public class ModelMapperConfig {
 		modelMapper.getConfiguration().addValueReader(new JsonNodeValueReader());
 		modelMapper.createTypeMap(Role.class, Long.class).setConverter(new RoleConverter());
 		modelMapper.createTypeMap(Gender.class, Long.class).setConverter(new GenderConverter());
+		modelMapper.createTypeMap(Long.class, Role.class).setConverter(new RoleBackConverter());
 		return modelMapper;
 	}
 }

@@ -1,5 +1,7 @@
 package hu.unideb.inf.dandy.szd.services.impl;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,9 @@ public class BreakerServicesImpl implements BreakerServices{
 	
 	@Override
 	public Breaker createBreaker(Breaker breaker) {
+		System.out.println(breaker.getRole());
 		breakerRepository.save(modelMapper.map(breaker, BreakerEntity.class));
+		System.out.println(modelMapper.map(breaker, BreakerEntity.class).getRole());
 		return breaker;
 	}
 
@@ -32,6 +36,7 @@ public class BreakerServicesImpl implements BreakerServices{
 	}
 
 	@Override
+	@Transactional
 	public Breaker legitAccount(String email, String password) {
 		Long id;
 		if(breakerRepository.findByEmail(email) != null & breakerRepository.findByPassword(password) != null){

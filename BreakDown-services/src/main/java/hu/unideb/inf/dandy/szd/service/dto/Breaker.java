@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,7 +26,9 @@ public class Breaker {
 	private String email;
 	
 	private Competition currentCompetition;
+	@JsonIgnore
 	private List<Competition> pastCompetitions;
+	@JsonIgnore
 	private List<BreakEvent> winnedEvents;
 	private Gender gender;
 	private Date birthday;

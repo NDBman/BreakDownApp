@@ -1,6 +1,9 @@
 breakDownApp.controller("loginController",function($scope, $rootScope, $http, $location){
 	$scope.badData = false;
 	$scope.submit = function(form){
+		if(form.$invalid){
+			return;
+		}
 		$http({
 			method : "POST",
 			url: "login",
@@ -9,9 +12,8 @@ breakDownApp.controller("loginController",function($scope, $rootScope, $http, $l
 					password: form.password.$modelValue
 			},
 		}).success(function(response){
-			$rootScope.authenticated = true;
-			$rootScope.id = response.id;
-			$rootScope.role = response.role;
+			$rootScope.user = response;
+			console.log($rootScope.user);
 			$location.path("/")
 		}).error(function(){
 			$scope.badData = true;

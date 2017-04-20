@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,7 +24,7 @@ public class CompetitionEntity extends AbstractEventEntity {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
 	private List<BreakEventEntity> breakEvents;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition", fetch=FetchType.EAGER)
 	private List<SimpleEventEntity> simpleEvents;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="currentCompetition")

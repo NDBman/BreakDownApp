@@ -1,4 +1,4 @@
-<div layout="column" layout-margin>
+<div layout="column" layout-margin data-ng-show="user.role=='ORGANIZER' || user.role=='ADMIN'">
 	<div layout="column">
 		<div layout-gt-sm="row">
 			<form id="newComp" name="newComp" flex-gt-sm="70" layout-margin data-ng-submit="createComp(newComp)">
@@ -151,4 +151,7 @@
 		</div>
 		<md-button class="md-primary" type="submit" form="newComp" >Verseny létrehozása</md-button>
 	</div>
+</div>
+<div data-ng-show="user.role!='ADMIN' || user.role!='ORGANIZER'">
+	Ön nem rendelkezik Szervezői jogosultsággal!
 </div>
