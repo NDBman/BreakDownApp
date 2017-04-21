@@ -26,7 +26,6 @@ public class BreakerServicesImpl implements BreakerServices{
 	public Breaker createBreaker(Breaker breaker) {
 		System.out.println(breaker.getRole());
 		breakerRepository.save(modelMapper.map(breaker, BreakerEntity.class));
-		System.out.println(modelMapper.map(breaker, BreakerEntity.class).getRole());
 		return breaker;
 	}
 

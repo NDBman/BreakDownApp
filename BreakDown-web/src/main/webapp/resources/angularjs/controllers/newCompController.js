@@ -49,7 +49,7 @@ breakDownApp.controller("newCompController", function($scope, $http, $location){
 			url:"newcomp/createcomp",
 			params: {
 				name : comp.name.$modelValue,
-				compdate : comp.compdate.$modelValue,
+				compdate : moment(comp.compdate.$modelValue).format('L'),
 				postalcode : comp.postalcode.$modelValue,
 				city : comp.city.$modelValue,
 				street : comp.street.$modelValue,

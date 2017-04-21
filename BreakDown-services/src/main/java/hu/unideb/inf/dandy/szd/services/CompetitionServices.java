@@ -16,4 +16,6 @@ public interface CompetitionServices {
 			String houseNumber, String description, List<String> diskjockeys, String events) throws IOException, ParseException;
 	
 	public List<Competition> getAllCompetitions();
+	
+	public Competition getCompetitionById(Long id);
 }

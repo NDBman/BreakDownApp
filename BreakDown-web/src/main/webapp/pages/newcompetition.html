@@ -51,9 +51,9 @@
 				</div>
 				<md-input-container class="md-block">
 					<label>Rövid leírás</label>
-					<textarea data-ng-model="description" md-maxlength="300" rows="5" name="description"></textarea>
+					<textarea data-ng-model="description" md-maxlength="255" rows="5" name="description"></textarea>
 					<div data-ng-messages="newComp.description.$error">
-						<div data-ng-message="md-maxlength">Maximum 300 karakter hoszzú leírást adhat meg!</div>
+						<div data-ng-message="md-maxlength">Maximum 255 karakter hoszzú leírást adhat meg!</div>
 					</div>
 				</md-input-container>
 				<md-chips data-ng-model="diskjockeys" name="diskjockeys" placeholder="Adja meg a DJ-ket..">

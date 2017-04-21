@@ -5,11 +5,10 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.datetime.DateFormatter;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.Role;
@@ -17,7 +16,7 @@ import hu.unideb.inf.dandy.szd.services.BreakerServices;
 import hu.unideb.inf.dandy.szd.services.GenderServices;
 import hu.unideb.inf.dandy.szd.web.response.EmailAlreadyExistsException;
 
-@Controller
+@RestController
 public class RegistrationController {
 	
 	@Autowired
@@ -29,7 +28,6 @@ public class RegistrationController {
 	private DateFormatter dateFormatter = new DateFormatter("yyyy-MM-dd");
 
 	@RequestMapping(value="/reg", method=RequestMethod.POST)
-	@ResponseBody
 	public Breaker registrateBreaker(@RequestParam(required = true) String name, @RequestParam(required = true) String username,
 									@RequestParam(required = true) String email, @RequestParam(required = true) String password,
 									@RequestParam(required = true) String birthday, @RequestParam(required = true) Long gender) throws ParseException{

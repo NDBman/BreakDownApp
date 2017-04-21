@@ -53,7 +53,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 	@Autowired
 	private DiskJockeyRepository diskJockeyRepository;
 	
-	private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyy-MM-dd");
+	private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 	
 	@Override
 	public Event createEvent(String eventname, Integer startTimeHour, Integer startTimeMinute, Integer endTimeHour,
@@ -77,7 +77,6 @@ public class CompetitionServicesImpl implements CompetitionServices {
 	@Transactional
 	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
 			String houseNumber, String description, List<String> diskjockeys, String events) throws IOException, ParseException{
-		System.out.println(dateFormatter.parseObject(compdate));
 		if(dateFormatter.parse(compdate).before(new Date())){
 			return null;
 		}
@@ -110,6 +109,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 				simpleEventEntity.setStartTime(new Timestamp(event.getStartTime()));
 				simpleEventEntity.setEndTime(new Timestamp(event.getEndTime()));
 				simpleEventEntity.setDescription(event.getDescription());
+				simpleEventEntity.setCompetition(newCompetitionEntity);
 				simpleEventRepository.save(simpleEventEntity);
 				simpleEvents.add(simpleEventEntity);
 			}
@@ -118,6 +118,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 		for(String diskjockeyName : diskjockeys){
 			DiskJockeyEntity diskjockeyEntity = new DiskJockeyEntity();
 			diskjockeyEntity.setName(diskjockeyName);
+			diskjockeyEntity.setCompetition(newCompetitionEntity);
 			diskJockeyRepository.save(diskjockeyEntity);
 			diskjockeyList.add(diskjockeyEntity);
 		}
@@ -165,6 +166,12 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			competitons.add(modelMapper.map(compEntity, Competition.class));
 		}
 		return competitons;
+	}
+
+	@Override
+	@Transactional
+	public Competition getCompetitionById(Long id) {
+		return modelMapper.map(competitionRepository.findOne(id),Competition.class);
 	}
 
 }

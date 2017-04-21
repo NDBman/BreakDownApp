@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,11 +49,17 @@ public class CompetitionController {
 		if(competition == null){
 			throw new TooEarlyDateExcpetion();
 		}
+		
 		return competition;
 	}
 	
 	@GetMapping(value="comps")
 	public List<Competition> getAllCompetitions(){
 		return competitionServices.getAllCompetitions();
+	}
+	
+	@GetMapping(value="comp/{id}")
+	public Competition getComp(@PathVariable("id") Long id){
+		return competitionServices.getCompetitionById(id);
 	}
 }
