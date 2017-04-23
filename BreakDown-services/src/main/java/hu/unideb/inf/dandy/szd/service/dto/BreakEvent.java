@@ -1,6 +1,6 @@
 package hu.unideb.inf.dandy.szd.service.dto;
 
-import java.util.Set;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,5 +15,6 @@ import lombok.Setter;
 @Builder
 public class BreakEvent extends AbstractEvent {
 	
-	private Set<Breaker> winners;
+	private List<Breaker> winners;
+	
 }

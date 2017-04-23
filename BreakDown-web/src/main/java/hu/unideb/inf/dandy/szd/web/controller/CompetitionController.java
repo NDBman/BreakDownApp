@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.Event;
 import hu.unideb.inf.dandy.szd.services.CompetitionServices;
@@ -62,4 +64,15 @@ public class CompetitionController {
 	public Competition getComp(@PathVariable("id") Long id){
 		return competitionServices.getCompetitionById(id);
 	}
+	
+	@GetMapping("comp/{id}/events")
+	public List<Event> getCompEvents(@PathVariable("id") Long id){
+		return competitionServices.getAllEvents(id);
+	}
+	
+	@PostMapping("comp/{id}/signup")
+	public Breaker signUpOrDownUserForCompetition(@PathVariable("id") Long id, @RequestParam(required = true) String email){
+		return competitionServices.signUpOrDownUserForCompetition(id, email);
+	}
+	
 }

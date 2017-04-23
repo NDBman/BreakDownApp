@@ -13,7 +13,6 @@ breakDownApp.controller("loginController",function($scope, $rootScope, $http, $l
 			},
 		}).success(function(response){
 			$rootScope.user = response;
-			console.log($rootScope.user);
 			$location.path("/")
 		}).error(function(){
 			$scope.badData = true;

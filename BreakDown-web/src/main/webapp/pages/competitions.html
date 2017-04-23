@@ -4,14 +4,14 @@
 		Új verseny + {{user.role}}
 	</md-button>
 	<md-content layout="row" layout-wrap>
-		<div ng-repeat="x in cards" flex-gt-md=25 flex-md=30 flex-sm=50>
+		<div ng-repeat="comp in cards" flex-gt-md=25 flex-md=30 flex-sm=50>
 			<md-card md-theme="default" md-theme-watch>
 	        <md-card-title>
 	          <md-card-title-text>
-	            <span class="md-headline">{{x.name}}</span>
-	            <span class="md-subhead">Dátum: {{x.startTime | date : 'yyyy:MM:dd'}}</span>
-	            <span class="md-subhead">Város: {{x.location.city}}</span>
-	            <span class="md-subhead">Leírás: {{x.description}}</span>
+	            <span class="md-headline">{{comp.name}}</span>
+	            <span class="md-subhead">Dátum: {{comp.startTime | date : 'yyyy:MM:dd'}}</span>
+	            <span class="md-subhead">Város: {{comp.location.city}}</span>
+	            <span class="md-subhead">Leírás: {{comp.description}}</span>
 	          </md-card-title-text>
 	          <md-card-title-media>
 	            <div class="md-media-lg card-media">
@@ -19,8 +19,8 @@
 	          </md-card-title-media>
 	        </md-card-title>
 	        <md-card-actions layout="row" layout-align="end center">
-	          <md-button data-ng-click="seeComp(x.id)">További infók</md-button>
-	          <md-button data-ng-show="user != null">Jelentkezek</md-button>
+	          <md-button data-ng-click="seeComp(comp.id)">További infók</md-button>
+	          <md-button data-ng-hide="user == null" data-ng-click="signUpDown(comp.id)">{{signUpToggle}}</md-button>
 	        </md-card-actions>
 	      </md-card>
 		</div>

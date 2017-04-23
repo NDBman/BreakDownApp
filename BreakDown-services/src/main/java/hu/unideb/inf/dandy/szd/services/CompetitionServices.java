@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
+import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.Event;
 
@@ -18,4 +19,8 @@ public interface CompetitionServices {
 	public List<Competition> getAllCompetitions();
 	
 	public Competition getCompetitionById(Long id);
+	public List<Event> getAllEvents(Long competitionId);
+	
+	public Breaker signUpOrDownUserForCompetition(Long compId, String email);
+	
 }

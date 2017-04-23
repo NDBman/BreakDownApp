@@ -16,11 +16,11 @@ import lombok.Setter;
 public class Competition extends AbstractEvent{
 
 	private Long id;
-	private List<DiskJockey> diskJockeys;
+	private List<String> diskJockeys;
 	private String organizer;
 	private List<BreakEvent> breakEvents;
 	private List<SimpleEvent> simpleEvents;
-	private List<Breaker> competitors;
+	private List<Long> competitorIds;
 	private String description;
 	private Location location;
 }

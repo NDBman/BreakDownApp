@@ -6,8 +6,11 @@ import org.modelmapper.jackson.JsonNodeValueReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import hu.unideb.inf.dandy.szd.service.dto.BreakEvent;
+import hu.unideb.inf.dandy.szd.service.dto.Event;
 import hu.unideb.inf.dandy.szd.service.dto.Gender;
 import hu.unideb.inf.dandy.szd.service.dto.Role;
+import hu.unideb.inf.dandy.szd.service.dto.SimpleEvent;
 
 @Configuration
 public class ModelMapperConfig {
@@ -20,6 +23,8 @@ public class ModelMapperConfig {
 		modelMapper.createTypeMap(Role.class, Long.class).setConverter(new RoleConverter());
 		modelMapper.createTypeMap(Gender.class, Long.class).setConverter(new GenderConverter());
 		modelMapper.createTypeMap(Long.class, Role.class).setConverter(new RoleBackConverter());
+		modelMapper.createTypeMap(BreakEvent.class, Event.class).setConverter(new BreakEventToEventConverter());
+		modelMapper.createTypeMap(SimpleEvent.class, Event.class).setConverter(new SimpleEventToEventConverter());
 		return modelMapper;
 	}
 }

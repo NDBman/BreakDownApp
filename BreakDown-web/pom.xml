@@ -15,25 +15,12 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>hu.unideb.inf.dandy.szd</groupId>
 			<artifactId>BreakDown-services</artifactId>
-			<version>${app.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>hu.unideb.inf.dandy.szd</groupId>
-			<artifactId>BreakDown-jpa</artifactId>
 			<version>${app.version}</version>
 		</dependency>
 		<dependency>
@@ -50,10 +37,6 @@
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

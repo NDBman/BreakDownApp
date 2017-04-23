@@ -2,9 +2,6 @@ package hu.unideb.inf.dandy.szd.service.dto;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,12 +22,9 @@ public class Breaker {
 	private Role role;
 	private String email;
 	
-	private Competition currentCompetition;
-	@JsonIgnore
-	private List<Competition> pastCompetitions;
-	@JsonIgnore
+	private List<Competition> competitions;
 	private List<BreakEvent> winnedEvents;
 	private Gender gender;
 	private Date birthday;
-	private Set<Location> interedtesCities;
+	private List<String> interedtesCities;
 }

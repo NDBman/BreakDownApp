@@ -1,3 +1,46 @@
-<div data-ng-controller="compsController">
-	{{comp}} asd {{user}}
+<div data-ng-controller="singleCompController" layout="row">
+	<div layout="column" layout-padding flex=50>
+		<h1>
+			{{comp.name | uppercase}}
+			<md-button class="md-accent" data-ng-hide="user == null" data-ng-click="signUpDown()">{{signUpToggle}}</md-button>
+		</h1>
+		<div>
+			<h3>Helyszín:</h3>
+			<span>{{comp.location.postalCode}}</span>
+			<span>{{comp.location.city}}</span>
+			<span>{{comp.location.street}}</span>
+			<span>{{comp.location.houseNumber}}</span>
+		</div>
+		<div>
+			<h3>Dátum:</h3>
+			<span>{{comp.startTime | date : 'yyyy.MM.dd'}}</span>
+		</div>
+		<div>
+			<h3>DJ:</h3>
+			<span data-ng-repeat="dj in comp.diskJockeys">{{dj}}, </span>
+		</div>
+		<div>
+			<h3>Verseny Leírás</h3>
+			<span>{{comp.description}}</span>
+		</div>
+	</div>
+	<div layout="column" layout-padding flex=50>
+		<md-list layout-align="start stretch">
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					Események (időbeosztás)
+				</div>
+			</md-toolbar>
+			<md-list-item class="md-3-line" data-ng-repeat="event in events | orderBy : 'startTime'">
+				<div class="md-list-item-text" layout="column">
+	            	<h3>{{event.title}}</h3>
+	            	<h4>{{event.startTime | date:'H:mm'}} - {{event.endTime | date : 'H:mm'}}</h4>
+	            	<p>{{event.description}}</p>
+	         	</div>
+	         	<md-divider></md-divider>
+			</md-list-item>
+			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
+		</md-list>
+	</div>
+	
 </div>

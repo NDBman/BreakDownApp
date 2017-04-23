@@ -19,20 +19,24 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakEventEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.CompetitionEntity;
-import hu.unideb.inf.dandy.szd.jpa.entity.DiskJockeyEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.LocationEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.SimpleEventEntity;
-import hu.unideb.inf.dandy.szd.jpa.repo.BreakEventRepository;
 import hu.unideb.inf.dandy.szd.jpa.repo.CompetitionRepository;
-import hu.unideb.inf.dandy.szd.jpa.repo.DiskJockeyRepository;
-import hu.unideb.inf.dandy.szd.jpa.repo.LocationRepository;
-import hu.unideb.inf.dandy.szd.jpa.repo.SimpleEventRepository;
+import hu.unideb.inf.dandy.szd.service.dto.BreakEvent;
+import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.Event;
+import hu.unideb.inf.dandy.szd.service.dto.SimpleEvent;
+import hu.unideb.inf.dandy.szd.services.BreakEventServices;
+import hu.unideb.inf.dandy.szd.services.BreakerServices;
 import hu.unideb.inf.dandy.szd.services.CompetitionServices;
+import hu.unideb.inf.dandy.szd.services.LocationServices;
+import hu.unideb.inf.dandy.szd.services.SimpleEventServices;
 
 @Service
+@Transactional
 public class CompetitionServicesImpl implements CompetitionServices {
 
 	@Autowired
@@ -40,21 +44,21 @@ public class CompetitionServicesImpl implements CompetitionServices {
 
 	@Autowired
 	private CompetitionRepository competitionRepository;
-	
+
 	@Autowired
-	private SimpleEventRepository simpleEventRepository;
-	
+	private BreakEventServices breakEventServices;
+
 	@Autowired
-	private BreakEventRepository breakEventRepository;
-	
+	private SimpleEventServices simpleEventServices;
+
 	@Autowired
-	private LocationRepository locationRepository;
-	
+	private LocationServices locationServices;
+
 	@Autowired
-	private DiskJockeyRepository diskJockeyRepository;
-	
+	private BreakerServices breakerServices;
+
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
-	
+
 	@Override
 	public Event createEvent(String eventname, Integer startTimeHour, Integer startTimeMinute, Integer endTimeHour,
 			Integer endTimeMinute, String description, boolean isbreakevent) {
@@ -74,87 +78,68 @@ public class CompetitionServicesImpl implements CompetitionServices {
 	}
 
 	@Override
-	@Transactional
 	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
-			String houseNumber, String description, List<String> diskjockeys, String events) throws IOException, ParseException{
-		if(dateFormatter.parse(compdate).before(new Date())){
+			String houseNumber, String description, List<String> diskjockeys, String events)
+			throws IOException, ParseException {
+		if (dateFormatter.parse(compdate).before(new Date())) {
 			return null;
 		}
 		String[] eventArray = events.split("},");
 		List<Event> eventList = new ArrayList<>();
-		for(int i = 0;i < eventArray.length-1;i++){
+		for (int i = 0; i < eventArray.length - 1; i++) {
 			eventArray[i] += "}";
 		}
-		for(String event : eventArray){
+		for (String event : eventArray) {
 			JsonNode eventNode = new ObjectMapper().readTree(event);
 			eventList.add(modelMapper.map(eventNode, Event.class));
 		}
-		CompetitionEntity newCompetitionEntity = new CompetitionEntity();
+		CompetitionEntity newCompetition = new CompetitionEntity();
 		List<BreakEventEntity> breakEvents = new ArrayList<>();
 		List<SimpleEventEntity> simpleEvents = new ArrayList<>();
-		for(Event event : eventList){
-			if(event.isBreakevent()){
-				BreakEventEntity breakEventEntity = new BreakEventEntity();
-				breakEventEntity.setName(event.getTitle());
-				breakEventEntity.setStartTime(new Timestamp(event.getStartTime()));
-				breakEventEntity.setEndTime(new Timestamp(event.getEndTime()));
-				breakEventEntity.setDescription(event.getDescription());
-				breakEventEntity.setCompetition(newCompetitionEntity);
-				breakEventRepository.save(breakEventEntity);
-				breakEvents.add(breakEventEntity);
-				
-			}else{
-				SimpleEventEntity simpleEventEntity = new SimpleEventEntity();
-				simpleEventEntity.setName(event.getTitle());
-				simpleEventEntity.setStartTime(new Timestamp(event.getStartTime()));
-				simpleEventEntity.setEndTime(new Timestamp(event.getEndTime()));
-				simpleEventEntity.setDescription(event.getDescription());
-				simpleEventEntity.setCompetition(newCompetitionEntity);
-				simpleEventRepository.save(simpleEventEntity);
-				simpleEvents.add(simpleEventEntity);
+		for (Event event : eventList) {
+			if (event.isBreakevent()) {
+				BreakEventEntity breakEvent = breakEventServices.createBreakEvent(event.getTitle(),
+						event.getStartTime(), event.getEndTime(), event.getDescription(), newCompetition);
+				breakEvents.add(breakEvent);
+
+			} else {
+				SimpleEventEntity simpleEvent = simpleEventServices.createSimpleEvent(event.getTitle(),
+						event.getStartTime(), event.getEndTime(), event.getDescription(), newCompetition);
+				simpleEvents.add(simpleEvent);
 			}
 		}
-		List<DiskJockeyEntity> diskjockeyList = new ArrayList<>();
-		for(String diskjockeyName : diskjockeys){
-			DiskJockeyEntity diskjockeyEntity = new DiskJockeyEntity();
-			diskjockeyEntity.setName(diskjockeyName);
-			diskjockeyEntity.setCompetition(newCompetitionEntity);
-			diskJockeyRepository.save(diskjockeyEntity);
-			diskjockeyList.add(diskjockeyEntity);
+		List<String> diskjockeyList = new ArrayList<>();
+		for (String diskjockeyName : diskjockeys) {
+			diskjockeyList.add(diskjockeyName);
 		}
-		
-		newCompetitionEntity.setName(name);
-		newCompetitionEntity.setBreakEvents(breakEvents);
-		newCompetitionEntity.setSimpleEvents(simpleEvents);
-		newCompetitionEntity.setDescription(description);
-		newCompetitionEntity.setDiskJockeys(diskjockeyList);
-		newCompetitionEntity.setOrganizer("ADMIN");
-		LocationEntity locationEntity = new LocationEntity();
-		locationEntity.setCompetition(newCompetitionEntity);
-		locationEntity.setPostalCode(postalcode);
-		locationEntity.setCity(city);
-		locationEntity.setStreet(street);
-		locationEntity.setHouseNumber(houseNumber);
-		newCompetitionEntity.setLocation(locationEntity);
-		locationRepository.save(locationEntity);
-		
-		newCompetitionEntity.setStartTime(new Timestamp(dateFormatter.parse(compdate).getTime()));
+
+		newCompetition.setName(name);
+		newCompetition.setBreakEvents(breakEvents);
+		newCompetition.setSimpleEvents(simpleEvents);
+		newCompetition.setDiskJockeys(diskjockeyList);
+		newCompetition.setDescription(description);
+		newCompetition.setOrganizer("ADMIN");
+
+		LocationEntity location = locationServices.createLocation(postalcode, city, street, houseNumber,
+				newCompetition);
+		newCompetition.setLocation(location);
+
+		newCompetition.setStartTime(new Timestamp(dateFormatter.parse(compdate).getTime()));
 		Long realEndTime = 0L;
-		for(SimpleEventEntity se : simpleEvents){
-			if(se.getEndTime().getTime() > realEndTime){
+		for (SimpleEventEntity se : simpleEvents) {
+			if (se.getEndTime().getTime() > realEndTime) {
 				realEndTime = se.getEndTime().getTime();
 			}
 		}
 
-		for(BreakEventEntity be : breakEvents){
-			if(be.getEndTime().getTime() > realEndTime){
+		for (BreakEventEntity be : breakEvents) {
+			if (be.getEndTime().getTime() > realEndTime) {
 				realEndTime = be.getEndTime().getTime();
 			}
 		}
-		newCompetitionEntity.setEndTime(new Timestamp(realEndTime));
-		competitionRepository.save(newCompetitionEntity);
-		
-		return modelMapper.map(newCompetitionEntity, Competition.class);
+		newCompetition.setEndTime(new Timestamp(realEndTime));
+
+		return modelMapper.map(competitionRepository.save(newCompetition), Competition.class);
 	}
 
 	@Override
@@ -162,7 +147,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 	public List<Competition> getAllCompetitions() {
 		List<CompetitionEntity> compEntites = competitionRepository.findAll();
 		List<Competition> competitons = new ArrayList<>();
-		for(CompetitionEntity compEntity : compEntites){
+		for (CompetitionEntity compEntity : compEntites) {
 			competitons.add(modelMapper.map(compEntity, Competition.class));
 		}
 		return competitons;
@@ -171,7 +156,41 @@ public class CompetitionServicesImpl implements CompetitionServices {
 	@Override
 	@Transactional
 	public Competition getCompetitionById(Long id) {
-		return modelMapper.map(competitionRepository.findOne(id),Competition.class);
+		return modelMapper.map(competitionRepository.findOne(id), Competition.class);
+	}
+
+	@Override
+	public List<Event> getAllEvents(Long competitionId) {
+		Competition competition = modelMapper.map(competitionRepository.findOne(competitionId), Competition.class);
+		List<Event> eventList = new ArrayList<>();
+		for (BreakEvent be : competition.getBreakEvents()) {
+			eventList.add(modelMapper.map(be, Event.class));
+		}
+		for (SimpleEvent se : competition.getSimpleEvents()) {
+			eventList.add(modelMapper.map(se, Event.class));
+		}
+		return eventList;
+	}
+
+	@Override
+	public Breaker signUpOrDownUserForCompetition(Long compId, String email) {
+		if (compId == null) {
+			return null;
+		}
+		CompetitionEntity competitionEntity = competitionRepository.findOne(compId);
+		BreakerEntity breakerEntity = breakerServices.findByEmail(email);
+		if (competitionEntity.getCompetitorIds().contains(breakerEntity.getId())) {
+			competitionEntity.getCompetitorIds().remove(breakerEntity.getId());
+			breakerEntity.getCompetitions().remove(competitionEntity);
+			competitionRepository.save(competitionEntity);
+			breakerServices.save(breakerEntity);
+			return modelMapper.map(breakerEntity, Breaker.class);
+		}
+		breakerEntity.getCompetitions().add(competitionEntity);
+		competitionEntity.getCompetitorIds().add(breakerEntity.getId());
+		breakerServices.save(breakerEntity);
+		competitionRepository.save(competitionEntity);
+		return modelMapper.map(breakerEntity, Breaker.class);
 	}
 
 }

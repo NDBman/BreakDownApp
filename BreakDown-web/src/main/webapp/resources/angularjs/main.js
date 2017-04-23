@@ -27,8 +27,9 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		.when("/compsuccess",{
 			templateUrl: "pages/compsuccess.html"
 		})
-		.when("/comp",{
-			templateUrl : "pages/singlecomp.html"
+		.when("/comp/:id",{
+			templateUrl : "pages/singlecomp.html",
+			controller: 'singleCompController'
 		});
 	
 	$mdThemingProvider.theme("default")

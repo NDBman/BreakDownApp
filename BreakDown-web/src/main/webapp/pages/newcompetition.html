@@ -152,6 +152,6 @@
 		<md-button class="md-primary" type="submit" form="newComp" >Verseny létrehozása</md-button>
 	</div>
 </div>
-<div data-ng-show="user.role!='ADMIN' || user.role!='ORGANIZER'">
+<div data-ng-show="user.role== 'USER' || user==null">
 	Ön nem rendelkezik Szervezői jogosultsággal!
 </div>

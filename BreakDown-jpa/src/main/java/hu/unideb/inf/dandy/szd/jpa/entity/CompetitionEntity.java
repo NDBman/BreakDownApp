@@ -3,6 +3,7 @@ package hu.unideb.inf.dandy.szd.jpa.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -16,8 +17,8 @@ import lombok.Setter;
 @Setter
 public class CompetitionEntity extends AbstractEventEntity {
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
-	private List<DiskJockeyEntity> diskJockeys;
+	@ElementCollection
+	private List<String> diskJockeys;
 	
 	private String organizer;
 	
@@ -27,8 +28,8 @@ public class CompetitionEntity extends AbstractEventEntity {
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition", fetch=FetchType.EAGER)
 	private List<SimpleEventEntity> simpleEvents;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="currentCompetition")
-	private List<BreakerEntity> competitors;
+	@ElementCollection
+	private List<Long> competitorIds;
 	
 	private String description;
 	

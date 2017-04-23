@@ -2,6 +2,7 @@ package hu.unideb.inf.dandy.szd.services.impl;
 
 import java.sql.Timestamp;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakEventEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.CompetitionEntity;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakEventRepository;
+import hu.unideb.inf.dandy.szd.service.dto.BreakEvent;
 import hu.unideb.inf.dandy.szd.services.BreakEventServices;
 
 @Service
@@ -17,19 +19,27 @@ public class BreakEventServicesImpl implements BreakEventServices {
 
 	@Autowired
 	private BreakEventRepository breakEventRepository;
-	
+
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@Override
-	public void createBreakEvent(String name, Timestamp startTime, Timestamp endTime, String description,
+	public BreakEventEntity createBreakEvent(String name, Long startTime, Long endTime, String description,
 			CompetitionEntity competition) {
 		BreakEventEntity newBreakEvent = new BreakEventEntity();
-		
+
 		newBreakEvent.setName(name);
-		newBreakEvent.setStartTime(startTime);
-		newBreakEvent.setEndTime(endTime);
+		newBreakEvent.setStartTime(new Timestamp(startTime));
+		newBreakEvent.setEndTime(new Timestamp(endTime));
 		newBreakEvent.setDescription(description);
 		newBreakEvent.setCompetition(competition);
-		
-		breakEventRepository.save(newBreakEvent);
+
+		return breakEventRepository.save(newBreakEvent);
+	}
+
+	@Override
+	public BreakEventEntity save(BreakEvent breakEvent) {
+		return breakEventRepository.save(modelMapper.map(breakEvent, BreakEventEntity.class));
 	}
 
 }
