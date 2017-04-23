@@ -64,11 +64,11 @@
 			</form>
 			<div layout="column" flex-gt-sm="30">
 				<h2>Események hozzáadása</h2>
-				<form name="event" layout="column" data-ng-submit="submit(event)">
+				<form name="eventForm" layout="column" data-ng-submit="submit(eventForm)">
 					<md-input-container class="md-block">
 						<label>Esemény név</label>
 						<input type="text" required name="eventname" data-ng-model="eventname">
-						<div data-ng-messages="event.eventname.$error">
+						<div data-ng-messages="eventForm.eventname.$error">
 							<div data-ng-message="required">Kötelező megadni!</div>
 						</div>
 					</md-input-container>
@@ -78,7 +78,7 @@
 							<md-input-container flex="33">
 								<label>Óra</label>
 								<input type="number" max="23" min="0" name="startTimeHour" data-ng-model="startTimeHour" required>
-								<div data-ng-messages="event.startTimeHour.$error">
+								<div data-ng-messages="eventForm.startTimeHour.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-23!</div>
 								</div>
@@ -87,7 +87,7 @@
 							<md-input-container flex="33">
 								<label>Perc</label>
 								<input type="number" max="59" min="0" name="startTimeMinute" data-ng-model="startTimeMinute">
-								<div data-ng-messages="event.startTimeMinute.$error">
+								<div data-ng-messages="eventForm.startTimeMinute.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-59!</div>
 								</div>
@@ -98,7 +98,7 @@
 							<md-input-container flex="33">
 								<label>Óra</label>
 								<input type="number" max="23" min="0" name="endTimeHour" data-ng-model="endTimeHour">
-								<div data-ng-messages="event.endTimeHour.$error">
+								<div data-ng-messages="eventForm.endTimeHour.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-23!</div>
 								</div>
@@ -107,7 +107,7 @@
 							<md-input-container flex=33>
 								<label>Perc</label>
 								<input type="number" max="59" min="0" name="endTimeMinute" data-ng-model="endTimeMinute">
-								<div data-ng-messages="event.endTimeMinute.$error">
+								<div data-ng-messages="eventForm.endTimeMinute.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-59!</div>
 								</div>
@@ -117,7 +117,7 @@
 					<md-input-container class="md-block">
 						<label>Rövid leírás</label>
 						<textarea data-ng-model="subeventd" md-maxlength="50" rows="3" name="subeventd" data-ng-model="subeventd"></textarea>
-						<div data-ng-messages="event.subeventd.$error">
+						<div data-ng-messages="eventForm.subeventd.$error">
 							<div data-ng-message="md-maxlength">Maximum 50 karakternyi leírást adhat meg!</div>
 						</div>
 					</md-input-container>
@@ -125,7 +125,7 @@
 						<md-checkbox class="md-primary" data-ng-model="isbreak" name="isbreak">Verseny esemény (lesz nyertese is)</md-checkbox>
 					</md-input-container>
 					<div md-colors="{color: 'warn'}" data-ng-show="badTime">Egy esemény nem végződhet azelőtt hogy elkezdődne!</div>
-					<md-button class="md-primary" type="submit">Esemény hozzáadása +</md-button>
+					<md-button class="md-accent" type="submit">Esemény hozzáadása +</md-button>
 				</form>
 			</div>
 		</div>

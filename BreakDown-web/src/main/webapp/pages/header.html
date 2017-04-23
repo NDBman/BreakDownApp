@@ -1,10 +1,11 @@
 <header>
 	<md-nav-bar class="md-primary" nav-bar-aria-label="navigáció" md-selected-nav-item="currentNavItem" hide-xs md-no-ink-bar="true">
-		<md-nav-item md-nav-href="#/" name="index">BreakDown</md-nav-item>
-		<md-nav-item md-nav-href="#reg" ng-hide="authenticated">
+		<md-nav-item md-nav-href="#/" name="index">BreakDownn</md-nav-item>
+		<md-nav-item md-nav-href="#profil" data-ng-hide="user==null">Profil</md-nav-item>
+		<md-nav-item md-nav-href="#reg" ng-show="user==null">
 			Regisztráció
 		</md-nav-item>
-		<md-nav-item md-nav-href="#login" ng-hide="authenticated">
+		<md-nav-item md-nav-href="#login" ng-show="user==null">
 			Bejelentkezés
 		</md-nav-item>
 		<md-nav-item md-nav-href="#comps">

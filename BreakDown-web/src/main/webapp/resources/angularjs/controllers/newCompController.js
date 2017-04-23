@@ -25,6 +25,7 @@ breakDownApp.controller("newCompController", function($scope, $http, $location){
 			}
 			
 		}).success(function(response){
+			
 			$scope.events.push({
 				title: response.title,
 				startTime: response.startTime,

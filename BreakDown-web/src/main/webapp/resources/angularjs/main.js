@@ -30,6 +30,9 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		.when("/comp/:id",{
 			templateUrl : "pages/singlecomp.html",
 			controller: 'singleCompController'
+		}).when("/profil",{
+			templateUrl : 'pages/profil.html',
+			controller : 'profilController'
 		});
 	
 	$mdThemingProvider.theme("default")

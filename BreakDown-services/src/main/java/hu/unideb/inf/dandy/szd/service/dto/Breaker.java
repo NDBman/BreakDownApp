@@ -26,5 +26,5 @@ public class Breaker {
 	private List<BreakEvent> winnedEvents;
 	private Gender gender;
 	private Date birthday;
-	private List<String> interedtesCities;
+	private List<String> interestedCities;
 }

@@ -1,1 +1,1 @@
-INSERT INTO public.breakerentity(id, birthday,email,gender,name,password,role,username) VALUES(0,'1995-08-31 00:00:00','sz.nandor.a@gmail.com',0,'Szabó Nándor', 'adminPassword',2,'dandy');
+INSERT INTO public.breakerentity(birthday,email,gender,name,password,role,username) VALUES('1995-08-31 00:00:00','sz.nandor.a@gmail.com',0,'Szabó Nándor', 'adminPassword',2,'dandy');

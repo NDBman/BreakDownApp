@@ -1,5 +1,7 @@
 package hu.unideb.inf.dandy.szd.services.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -61,6 +63,17 @@ public class BreakerServicesImpl implements BreakerServices{
 	@Override
 	public BreakerEntity findOne(Long id) {
 		return breakerRepository.findOne(id);
+	}
+
+	@Override
+	public Breaker modifyData(Long id, String name, String username, String password, List<String> cities) {
+		BreakerEntity breakerEntity = breakerRepository.findOne(id);
+		breakerEntity.setUsername(username);
+		breakerEntity.setName(name);
+		breakerEntity.setPassword(password);
+		breakerEntity.setInterestedCities(cities);
+		breakerRepository.save(breakerEntity);
+		return modelMapper.map(breakerEntity, Breaker.class);
 	}
 
 }

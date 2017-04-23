@@ -38,7 +38,7 @@ public class RegistrationController {
 						.password(password)
 						.birthday(dateFormatter.parse(birthday, Locale.US))
 						.gender(genderServices.getGender(gender))
-						.role(Role.ORGANIZER)
+						.role(Role.USER)
 						.build();
 		if(breakerServices.matchingEmails(breaker)){
 			throw new EmailAlreadyExistsException();

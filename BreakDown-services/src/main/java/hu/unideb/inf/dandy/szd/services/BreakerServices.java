@@ -1,5 +1,7 @@
 package hu.unideb.inf.dandy.szd.services;
 
+import java.util.List;
+
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 
@@ -16,4 +18,6 @@ public interface BreakerServices {
 	public BreakerEntity save(BreakerEntity breakerEntity);
 	
 	public BreakerEntity findOne(Long id);
+	
+	public Breaker modifyData(Long id, String name, String username, String password, List<String> cities);
 }

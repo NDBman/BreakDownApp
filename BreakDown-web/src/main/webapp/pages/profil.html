@@ -1,0 +1,59 @@
+<h1 layout-padding>Profil</h1>
+<div layout="row" data-ng-controller="profilController" layout-padding>
+	
+	<md-card md-theme="default" md-theme-watch flex=50>
+	        <md-card-title>
+	          <md-card-title-text>
+	            <span class="md-headline">{{user.name}} ({{user.username}})</span>
+	            <span class="md-subhead">Email-cím: {{user.email}}</span>
+	            <span class="md-subhead">Születési év: {{user.birthday | date : 'yyyy.MM.dd'}}</span>
+	            <span class="md-subhead">Érdekelt városok (max. 5): {{user.interestedCities}}</span>
+	          </md-card-title-text>
+	        </md-card-title>
+	        <md-card-actions layout="row" layout-align="end center">
+	          <md-button data-ng-click="openSettings()">Adatok Módosítása</md-button>
+	        </md-card-actions>
+	</md-card>
+	<div ng-show="modify" flex = 50>
+		<form name="modifyData" id="modifyData" layout="column">
+			<md-input-container>
+				<label>Név:</label>
+				<input type="text" data-ng-model="name" required name="name">
+				<div data-ng-messages="modifyData.name.$error">
+					<div data-ng-message="required">Nem hagyhatja üresen!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>BBoy/Gril név:</label>
+				<input type="text" data-ng-model="username" required name="username">
+				<div data-ng-messages="modifyData.username.$error">
+					<div data-ng-message="required">Nem hagyhatja üresen!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Jelszó:</label>
+				<input type="password" data-ng-model="newPassword" required name="password" minlength="6">
+				<div data-ng-messages="modifyData.password.$error">
+					<div data-ng-message="required">Nem hagyhatja üresen!</div>
+					<div data-ng-message="minlength">Legalább 6 karakter hoszzú legyen  a jelszó!</div>
+				</div>
+			</md-input-container>
+			<md-input-container>
+				<label>Jelszó újra:</label>
+				<input type="password" data-ng-model="newPasswordConf" required name="passwordConf" compare-to="modifyData.password">
+				<div data-ng-messages="modifyData.passwordConf.$error">
+					<div data-ng-message="required">Nem hagyhatja üresen!</div>
+					<div data-ng-message="compareTo">A két jelszónak meg kell egyeznie!</div>
+				</div>
+			</md-input-container>
+			<md-input-conationer>
+				<md-chips data-ng-model="cities" name="cities" placeholder="Érdekelt városok (enter)" md-max-chips="5">
+						<md-chip-template>
+							<strong>{{$chip}}</strong>
+						</md-chip-template>
+				</md-chips>
+			</md-input-conationer>
+			<md-button class="md-primary" data-ng-click="saveChanges(modifyData)">Módosítás</md-button>
+		</form>
+	</div>
+</div>

@@ -16,7 +16,10 @@ breakDownApp
 	$scope.submit = function (form){
 		if(form.$invalid)
 			return;
-		
+		if(form.password.$modelValue != form.confirmPassword.$modelValue){
+			$scope.reg.confirmPassword.$setValidity("compareTo", false);
+			return;
+		}
 		$http({
 			method: "POST",
 			url: "reg",

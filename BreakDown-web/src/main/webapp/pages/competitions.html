@@ -1,7 +1,7 @@
 <div layout="column" layout-margin data-ng-controller="compsController" flex>
 	<h1 class="md-display-1">Versenyek</h1>
-	<md-button class="md-accent" type="submit" href="#newcomp" data-ng-show="user.role=='ORGANIZER' || user.role=='ADMIN'">
-		Új verseny + {{user.role}}
+	<md-button class="md-accent" type="submit" href="#newcomp" data-ng-hide="user.role=='USER' || user==null">
+		Új verseny létrehozása +
 	</md-button>
 	<md-content layout="row" layout-wrap>
 		<div ng-repeat="comp in cards" flex-gt-md=25 flex-md=30 flex-sm=50>
