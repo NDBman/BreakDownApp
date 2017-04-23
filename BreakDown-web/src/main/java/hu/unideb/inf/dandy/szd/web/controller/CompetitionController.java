@@ -75,4 +75,8 @@ public class CompetitionController {
 		return competitionServices.signUpOrDownUserForCompetition(id, email);
 	}
 	
+	@GetMapping("comps/{city}")
+	public List<Competition> getCompetitionsInCity(@PathVariable("city") String city){
+		return competitionServices.getAllCompetitionsInCity(city);
+	}
 }

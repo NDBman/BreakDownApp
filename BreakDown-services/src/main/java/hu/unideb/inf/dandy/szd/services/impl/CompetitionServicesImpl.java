@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -191,6 +192,17 @@ public class CompetitionServicesImpl implements CompetitionServices {
 		breakerServices.save(breakerEntity);
 		competitionRepository.save(competitionEntity);
 		return modelMapper.map(breakerEntity, Breaker.class);
+	}
+
+	@Override
+	public List<Competition> getAllCompetitionsInCity(String city) {
+		List<CompetitionEntity> competitionEntities = competitionRepository.findAll().stream()
+				.filter(c -> c.getLocation().getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+		List<Competition> competitions = new ArrayList<>();
+		for(CompetitionEntity ce : competitionEntities){
+			competitions.add(modelMapper.map(ce, Competition.class));
+		}
+		return competitions;
 	}
 
 }

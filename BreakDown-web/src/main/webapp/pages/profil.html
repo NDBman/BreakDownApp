@@ -7,7 +7,7 @@
 	            <span class="md-headline">{{user.name}} ({{user.username}})</span>
 	            <span class="md-subhead">Email-cím: {{user.email}}</span>
 	            <span class="md-subhead">Születési év: {{user.birthday | date : 'yyyy.MM.dd'}}</span>
-	            <span class="md-subhead">Érdekelt városok (max. 5): {{user.interestedCities}}</span>
+	            <span class="md-subhead">Érdekelt városok (max. 5): <span data-ng-repeat="city in user.interestedCities">{{city}}, </span></span>
 	          </md-card-title-text>
 	        </md-card-title>
 	        <md-card-actions layout="row" layout-align="end center">

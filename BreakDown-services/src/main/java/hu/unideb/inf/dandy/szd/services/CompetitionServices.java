@@ -23,4 +23,6 @@ public interface CompetitionServices {
 	
 	public Breaker signUpOrDownUserForCompetition(Long compId, String email);
 	
+	public List<Competition> getAllCompetitionsInCity(String city);
+	
 }
