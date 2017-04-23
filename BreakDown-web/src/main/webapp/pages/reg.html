@@ -42,9 +42,10 @@
 			</md-input-container>
 			<md-input-container>
 				<label>Születésnap</label>
-				<md-datepicker data-ng-model="birthday" name="birthday" required></md-datepicker>
+				<md-datepicker data-ng-model="birthday" name="birthday" required md-max-date="maxDate"></md-datepicker>
 				<div data-ng-messages="reg.birthday.$error">
 					<div data-ng-message="required">Kötelező megadni!</div>
+					<div data-ng-message="maxdate">Legalább 10 évesnek kell lennie a regisztrációhoz!</div>
 				</div>
 			</md-input-container>
 			<md-input-container>

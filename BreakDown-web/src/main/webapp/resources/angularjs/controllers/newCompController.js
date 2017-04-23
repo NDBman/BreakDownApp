@@ -5,6 +5,7 @@ breakDownApp.controller("newCompController", function($scope, $http, $location){
 	$scope.isbreak = false;
 	$scope.badTime= false;
 	$scope.today = new Date();
+	$scope.compdate = new Date();
 	$scope.badDate = false;
 	$scope.submit = function(form){
 		if(form.$invalid){

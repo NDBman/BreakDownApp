@@ -1,9 +1,10 @@
 breakDownApp
 .controller("regController", function($scope, $http, $location){
 	$scope.submittedForm = false;
-	$scope.birthday = new Date();
 	$scope.emailExits = false;
-	
+	$scope.now = new Date();
+	$scope.maxDate = new Date($scope.now.getFullYear()-10,$scope.now.getMonth(),$scope.now.getDate());
+	$scope.birthday = $scope.maxDate;
 	$scope.passwordCheck = function(){
 		if($scope.password == $scope.confirmPassword){
 			$scope.dontMatch = false;
