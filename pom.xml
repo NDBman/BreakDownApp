@@ -33,8 +33,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>5.2.9.Final</version>
-				<scope>provided</scope>
+				<version>5.2.10.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projectlombok</groupId>
