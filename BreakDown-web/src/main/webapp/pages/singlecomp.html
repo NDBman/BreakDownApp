@@ -37,7 +37,7 @@
 	            	<h4>{{event.startTime | date:'H:mm'}} - {{event.endTime | date : 'H:mm'}}</h4>
 	            	<p>{{event.description}}</p>
 	         	</div>
-	         	<md-divider></md-divider>
+	         	<md-divider data-ng-if="!$last"></md-divider>
 			</md-list-item>
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>

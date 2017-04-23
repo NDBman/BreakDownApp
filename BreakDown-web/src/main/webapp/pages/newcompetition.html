@@ -142,7 +142,7 @@
 	            	<p>{{x.description}}</p>
 	         	</div>
 	         	<md-button class="md-secondary md-warn" data-ng-click="deleteEvent(x)">Törlés</md-button>
-	         	<md-divider></md-divider>
+	         	<md-divider data-ng-if="!$last"></md-divider>
 			</md-list-item>
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
