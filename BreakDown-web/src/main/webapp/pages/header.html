@@ -23,11 +23,11 @@
 	<md-sidenav class="md-sidenav-lefft" md-component-id="left" md-whiteframe="4">
 				<md-menu-item layout="column">
 					<md-button data-ng-href="#/">BreakDown</md-button>
+					<md-button data-ng-href="#profil" data-ng-if="user!=null">Profil</md-button>
 					<md-button data-ng-href="#reg" data-ng-if="user==null">Regsiztráció</md-button>
 					<md-button data-ng-href="#login" data-ng-if="user==null">Bejelentkezés</md-button>
 					<md-button data-ng-href="#comps">Versenyek</md-button>
-					<md-button>Keresés</md-button>
-					<md-button>GYIK</md-button>
+					<md-button data-ng-href="#logout" data-ng-if="user!=null">Kijelentkezés</md-button>
 				</md-menu-item>
 	</md-sidenav>
 </header>
