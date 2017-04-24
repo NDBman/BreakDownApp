@@ -31,7 +31,7 @@
 			<h3>Verseny Leírás</h3>
 			<span>{{comp.description}}</span>
 		</div>
-		<div data-ng-if="comp.organizerId == user.id" layout="column">
+		<div data-ng-if="comp.organizerId == user.id || user.role=='ADMIN'" layout="column">
 			<h2>Szervezői lehetőségek</h2>
 			<md-button class="md-primare md-raised" data-ng-click="getCompetitors($event)">Jelentkezők listázása</md-button>
 			<md-button class="md-warn md-raised" data-ng-click="showConfirm($event)">Esemény törlése</md-button>
