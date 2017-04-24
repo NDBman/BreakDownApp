@@ -35,6 +35,8 @@ import hu.unideb.inf.dandy.szd.services.BreakerServices;
 import hu.unideb.inf.dandy.szd.services.CompetitionServices;
 import hu.unideb.inf.dandy.szd.services.LocationServices;
 import hu.unideb.inf.dandy.szd.services.SimpleEventServices;
+import hu.unideb.inf.dandy.szd.web.response.NoEventsException;
+import hu.unideb.inf.dandy.szd.web.response.TooEarlyDateExcpetion;
 
 @Service
 @Transactional
@@ -83,7 +85,10 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			String houseNumber, String description, List<String> diskjockeys, String events, Long organizerId)
 			throws IOException, ParseException {
 		if (dateFormatter.parse(compdate).before(new Date())) {
-			return null;
+			throw new TooEarlyDateExcpetion();
+		}
+		if (events == null) {
+			throw new NoEventsException();
 		}
 		String[] eventArray = events.split("},");
 		List<Event> eventList = new ArrayList<>();
@@ -109,15 +114,17 @@ public class CompetitionServicesImpl implements CompetitionServices {
 				simpleEvents.add(simpleEvent);
 			}
 		}
-		List<String> diskjockeyList = new ArrayList<>();
-		for (String diskjockeyName : diskjockeys) {
-			diskjockeyList.add(diskjockeyName);
+		if (diskjockeys != null) {
+			List<String> diskjockeyList = new ArrayList<>();
+			for (String diskjockeyName : diskjockeys) {
+				diskjockeyList.add(diskjockeyName);
+			}
+			newCompetition.setDiskJockeys(diskjockeyList);
 		}
-
 		newCompetition.setName(name);
 		newCompetition.setBreakEvents(breakEvents);
 		newCompetition.setSimpleEvents(simpleEvents);
-		newCompetition.setDiskJockeys(diskjockeyList);
+
 		newCompetition.setDescription(description);
 		newCompetition.setOrganizerId(organizerId);
 
@@ -187,7 +194,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			breakerServices.save(breakerEntity);
 			return modelMapper.map(breakerEntity, Breaker.class);
 		}
-		
+
 		breakerEntity.getCompetitions().add(competitionEntity);
 		competitionEntity.getCompetitorIds().add(breakerEntity.getId());
 		breakerServices.save(breakerEntity);
@@ -200,7 +207,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 		List<CompetitionEntity> competitionEntities = competitionRepository.findAll().stream()
 				.filter(c -> c.getLocation().getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
 		List<Competition> competitions = new ArrayList<>();
-		for(CompetitionEntity ce : competitionEntities){
+		for (CompetitionEntity ce : competitionEntities) {
 			competitions.add(modelMapper.map(ce, Competition.class));
 		}
 		return competitions;
@@ -208,6 +215,10 @@ public class CompetitionServicesImpl implements CompetitionServices {
 
 	@Override
 	public void deleteComp(Long id) {
+		List<Long> breakerIds = competitionRepository.findOne(id).getCompetitorIds();
+		for(Long cId : breakerIds){
+			breakerServices.findOne(cId).getCompetitions().remove(competitionRepository.findOne(id));
+		}
 		competitionRepository.delete(id);
 	}
 
@@ -215,7 +226,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 	public List<String> getAllCompetitorNames(Long id) {
 		List<Long> breakerEntityIds = competitionRepository.findOne(id).getCompetitorIds();
 		List<String> breakerNames = new ArrayList<>();
-		for(Long beId : breakerEntityIds){
+		for (Long beId : breakerEntityIds) {
 			breakerNames.add(breakerServices.findOne(beId).getUsername());
 		}
 		return breakerNames;

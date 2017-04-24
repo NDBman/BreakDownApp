@@ -33,6 +33,9 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		}).when("/profil",{
 			templateUrl : 'pages/profil.html',
 			controller : 'profilController'
+		}).when('/logout',{
+			templateUrl : 'pages/logout.html',
+			controller : 'logoutController'
 		});
 	
 	$mdThemingProvider.theme("default")

@@ -11,6 +11,7 @@ breakDownApp.controller("newCompController", function($scope, $http, $location, 
 	var now = new Date();
 	$scope.compdate = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
 	$scope.badDate = false;
+	$scope.noEvents = false;
 	$scope.submit = function(form){
 		if(form.$invalid){
 			return;
@@ -50,6 +51,8 @@ breakDownApp.controller("newCompController", function($scope, $http, $location, 
 		});
 	}
 	$scope.createComp = function(comp){
+		$scope.badTime = false;
+		$scope.noEvents = false;
 		$http({
 			method: "POST",
 			url:"newcomp/createcomp",
@@ -65,10 +68,16 @@ breakDownApp.controller("newCompController", function($scope, $http, $location, 
 				diskjockeys: comp.diskjockeys.$modelValue,
 				events: $scope.events
 			}
-		}).success(function(){
+		}).success(function(response){
+			
 			$location.path("compsuccess");
-		}).error(function(){
-			$scope.badDate = true;
+		}).error(function(error, status){
+			if(status == 403){
+				$scope.noEvents = true;
+			}
+			if(status == 400){
+				$scope.badTime = true;
+			}
 		})
 	}
 	$scope.deleteEvent = function(event){

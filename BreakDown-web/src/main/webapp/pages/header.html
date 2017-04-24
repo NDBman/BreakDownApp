@@ -1,21 +1,18 @@
 <header>
 	<md-nav-bar class="md-primary" nav-bar-aria-label="navigáció" md-selected-nav-item="currentNavItem" hide-xs md-no-ink-bar="true">
 		<md-nav-item md-nav-href="#/" name="index">BreakDownn</md-nav-item>
-		<md-nav-item md-nav-href="#profil" data-ng-hide="user==null">Profil</md-nav-item>
-		<md-nav-item md-nav-href="#reg" ng-show="user==null">
+		<md-nav-item md-nav-href="#profil" data-ng-if="user!=null">Profil</md-nav-item>
+		<md-nav-item md-nav-href="#reg" ng-if="user==null">
 			Regisztráció
 		</md-nav-item>
-		<md-nav-item md-nav-href="#login" ng-show="user==null">
+		<md-nav-item md-nav-href="#login" ng-if="user==null">
 			Bejelentkezés
 		</md-nav-item>
 		<md-nav-item md-nav-href="#comps">
 			Versenyek
 		</md-nav-item>
-		<md-nav-item md-nav-click="goto('page4')" name="page4">
-			Keresés
-		</md-nav-item>
-		<md-nav-item md-nav-click="goto('page5')" name="page5">
-			GYIK
+		<md-nav-item md-nav-href="#logout" data-ng-if="user!=null">
+			Kijelentkezés
 		</md-nav-item>
 	</md-nav-bar>
 	<div id="header" hide-gt-xs data-ng-controller="sideNavController">
@@ -26,8 +23,8 @@
 	<md-sidenav class="md-sidenav-lefft" md-component-id="left" md-whiteframe="4">
 				<md-menu-item layout="column">
 					<md-button data-ng-href="#/">BreakDown</md-button>
-					<md-button data-ng-href="#reg" data-ng-hide="authenticated">Regsiztráció</md-button>
-					<md-button data-ng-href="#login" data-ng-hide="authenticated">Bejelentkezés</md-button>
+					<md-button data-ng-href="#reg" data-ng-if="user==null">Regsiztráció</md-button>
+					<md-button data-ng-href="#login" data-ng-if="user==null">Bejelentkezés</md-button>
 					<md-button data-ng-href="#comps">Versenyek</md-button>
 					<md-button>Keresés</md-button>
 					<md-button>GYIK</md-button>

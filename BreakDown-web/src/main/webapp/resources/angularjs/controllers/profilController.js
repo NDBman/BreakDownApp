@@ -10,7 +10,6 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http, 
 			url : 'getallusers'
 		}).success(function(response){
 			$scope.users = response;
-			console.log($scope.users);
 		})
 	
 	$scope.openSettings = function(){
@@ -51,7 +50,6 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http, 
 				email : $rootScope.user.email
 			}
 		}).success(function(){
-			console.log("na");
 		})
 	}
 });

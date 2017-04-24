@@ -9,4 +9,6 @@ public interface LocationServices {
 	public LocationEntity createLocation(Integer postalCode, String city, String street, String houseNumber, CompetitionEntity competition);
 	
 	public LocationEntity save(Location location);
+	
+	public void delete(Long id);
 }

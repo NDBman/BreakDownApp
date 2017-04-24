@@ -40,4 +40,9 @@ public class LocationServicesImpl implements LocationServices {
 		return locationRepository.save(modelMapper.map(location, LocationEntity.class));
 	}
 
+	@Override
+	public void delete(Long id) {
+		locationRepository.delete(id);
+	}
+
 }
