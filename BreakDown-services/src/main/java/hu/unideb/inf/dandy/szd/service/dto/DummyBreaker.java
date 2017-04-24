@@ -11,5 +11,6 @@ public class DummyBreaker {
 	private String name;
 	private String username;
 	private Role role;
+	private String email;
 	private boolean isOrganizer;
 }

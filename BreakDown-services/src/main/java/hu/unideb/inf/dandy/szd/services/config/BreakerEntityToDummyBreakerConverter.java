@@ -15,6 +15,7 @@ public class BreakerEntityToDummyBreakerConverter implements Converter<BreakerEn
 		dummy.setName(context.getSource().getName());
 		dummy.setUsername(context.getSource().getUsername());
 		dummy.setId(context.getSource().getId());
+		dummy.setEmail(context.getSource().getEmail());
 		switch(context.getSource().getRole().intValue()){
 		case 0: dummy.setRole(Role.USER); break;
 		case 1: dummy.setRole(Role.ORGANIZER); break;
