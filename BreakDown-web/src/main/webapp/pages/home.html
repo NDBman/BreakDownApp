@@ -1,7 +1,7 @@
 <div layout="column" layout-align="center stretch">
 	<div layout="column" layout-align="center center">
 		<h1 class="md-display-4">Break Down</h1>
-		<h3 class="md-display-1">Ne a keresés miatt törd a fejed.</h3>
+		<h3 class="md-display-1">Ne a keresés miatt törje a fejét.</h3>
 		<br><br>
 	</div>
 	<div data-ng-controller="homeController"  data-ng-if="user!=null">
@@ -24,6 +24,6 @@
 			<md-divider ng-if="!$last"></md-divider>
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
-		<div data-ng-if="compsInCities.length==0">Nincs olyan verseny amely érdekelné önt!</div>
+		<div data-ng-if="compsInCities.length==0" layout-margin layout-padding>Nincs olyan verseny amely érdekelné önt!</div>
 	</div>
 </div>
