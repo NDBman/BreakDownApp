@@ -1,7 +1,7 @@
 <h1 layout-padding>Profil</h1>
-<div layout="row" data-ng-controller="profilController" layout-padding>
+<div layout-gt-sx="row" layout-xs="column" data-ng-controller="profilController" layout-padding>
 	
-	<md-card md-theme="default" md-theme-watch flex=50>
+	<md-card md-theme="default" md-theme-watch flex-gt-xs=50>
 	        <md-card-title>
 	          <md-card-title-text>
 	            <span class="md-headline">{{user.name}} ({{user.username}})</span>
@@ -14,7 +14,7 @@
 	          <md-button data-ng-click="openSettings()">Adatok Módosítása</md-button>
 	        </md-card-actions>
 	</md-card>
-	<div ng-show="modify" flex = 50>
+	<div ng-show="modify" flex-gt-xs = 50>
 		<form name="modifyData" id="modifyData" layout="column">
 			<md-input-container>
 				<label>Név:</label>
