@@ -42,6 +42,8 @@ breakDownApp.controller('singleCompController', function($scope, $location, $htt
 		}).success(function(response){
 			$scope.competitors = response;
 		});
+	}).error(function(){
+		$location.path("/");
 	});
 	
 	$scope.showConfirm = function(ev){

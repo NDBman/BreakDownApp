@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +30,7 @@ public class BreakerEntity extends BaseId {
 	@Column(unique=true)
 	private String email;
 	
-	@OneToMany
+	@ManyToMany
 	private List<CompetitionEntity> competitions;
 	@ManyToMany(cascade=CascadeType.ALL)
 	private List<BreakEventEntity> winnedEvents;

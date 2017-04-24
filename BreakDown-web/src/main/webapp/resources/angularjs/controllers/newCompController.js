@@ -1,11 +1,15 @@
 breakDownApp.controller("newCompController", function($scope, $http, $location, $rootScope){
+	if($rootScope.user == null){
+		$location.path("/");
+	}
 	djNames = [];
 	$scope.diskjockeys = angular.copy(djNames);
 	$scope.events = [];
 	$scope.isbreak = false;
 	$scope.badTime= false;
 	$scope.today = new Date();
-	$scope.compdate = new Date();
+	var now = new Date();
+	$scope.compdate = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
 	$scope.badDate = false;
 	$scope.submit = function(form){
 		if(form.$invalid){

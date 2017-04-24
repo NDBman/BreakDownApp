@@ -1,8 +1,9 @@
-breakDownApp.controller('profilController', function($scope, $rootScope, $http){
-	cityNames = [];
-	if($rootScope.user != null){
-		cityNames = $rootScope.user.interestedCities; 
+breakDownApp.controller('profilController', function($scope, $rootScope, $http, $location){
+	if($rootScope.user == null){
+		$location.path("/");
 	}
+	cityNames = [];
+	cityNames = $rootScope.user.interestedCities; 
 	$scope.users;
 		$http({
 			method : 'GET',

@@ -1,5 +1,8 @@
 breakDownApp
-.controller("regController", function($scope, $http, $location){
+.controller("regController", function($scope, $http, $location, $rootScope){
+	if($rootScope.user != null){
+		$location.path("/");
+	}
 	$scope.submittedForm = false;
 	$scope.emailExits = false;
 	$scope.now = new Date();

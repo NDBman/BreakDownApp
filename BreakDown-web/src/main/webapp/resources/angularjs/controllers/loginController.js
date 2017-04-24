@@ -1,4 +1,7 @@
 breakDownApp.controller("loginController",function($scope, $rootScope, $http, $location){
+	if($rootScope.user != null){
+		$location.path("/");
+	}
 	$scope.badData = false;
 	$scope.submit = function(form){
 		if(form.$invalid){

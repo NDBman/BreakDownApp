@@ -187,6 +187,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			breakerServices.save(breakerEntity);
 			return modelMapper.map(breakerEntity, Breaker.class);
 		}
+		
 		breakerEntity.getCompetitions().add(competitionEntity);
 		competitionEntity.getCompetitorIds().add(breakerEntity.getId());
 		breakerServices.save(breakerEntity);
