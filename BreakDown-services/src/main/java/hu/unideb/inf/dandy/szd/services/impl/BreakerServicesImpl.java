@@ -1,5 +1,6 @@
 package hu.unideb.inf.dandy.szd.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakerRepository;
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
+import hu.unideb.inf.dandy.szd.service.dto.DummyBreaker;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
 
 @Service
@@ -79,6 +81,34 @@ public class BreakerServicesImpl implements BreakerServices{
 	@Override
 	public String getBreakerUsername(Long id) {
 		return breakerRepository.findOne(id).getUsername();
+	}
+
+	@Override
+	public List<DummyBreaker> getAllDummyBreakers() {
+		List<BreakerEntity> breakerEntites = breakerRepository.findAll();
+		List<DummyBreaker> dummyBreakers = new ArrayList<>();
+		for(BreakerEntity be : breakerEntites){
+			dummyBreakers.add(modelMapper.map(be, DummyBreaker.class));
+		}
+		return dummyBreakers;
+	}
+
+	@Override
+	public DummyBreaker setRoleForBreaker(Long breakerId, boolean organizer, String email, String password) {
+		Long id;
+		if((id = breakerRepository.findByEmail(email).getId()) != null){
+			if(breakerRepository.findOne(id).getPassword().equals(password)){
+				BreakerEntity breakerEntity = breakerRepository.findOne(breakerId);
+				if(organizer){
+					breakerEntity.setRole(1L);
+				}else{
+					breakerEntity.setRole(0L);
+				}
+				breakerEntity = breakerRepository.save(breakerEntity);
+				return modelMapper.map(breakerEntity, DummyBreaker.class);
+			}
+		}
+		return null;
 	}
 
 }

@@ -4,12 +4,12 @@
 		<h3 class="md-display-1">Ne a keresés miatt törd a fejed.</h3>
 		<br><br>
 	</div>
-	<div data-ng-controller="homeController" ng-if="user!=null" >
-	<md-toolbar class="md-accent">
+	<div data-ng-controller="homeController"  data-ng-if="user!=null">
+		<md-toolbar class="md-accent">
 				<div class="md-toolbar-tools">
 					Érdekelt városokban megrendezett versenyek
 				</div>
-			</md-toolbar>
+		</md-toolbar>
 		<md-list data-ng-repeat="comps in compsInCities" layout-align="start stretch">
 			<md-subheader>{{comps.city}}</md-subheader>
 			<md-list-item class="md-3-line" data-ng-repeat="competition in comps.comp">
@@ -24,5 +24,6 @@
 			<md-divider ng-if="!$last"></md-divider>
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
+		<div data-ng-if="compsInCities.length==0">Nincs olyan verseny amely érdekelné önt!</div>
 	</div>
 </div>

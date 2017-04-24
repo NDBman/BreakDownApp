@@ -57,3 +57,11 @@
 		</form>
 	</div>
 </div>
+<div layout-padding data-ng-if="user.role=='ADMIN'">
+	<h1>Admin</h1>
+	<div data-ng-repeat="breaker in users">
+		<span>Név: {{breaker.name}} ({{breaker.username}}) <span data-ng-if="breaker.role=='ADMIN'">ADMIN</span></span>
+		<md-checkbox data-ng-model="breaker.organizer" data-ng-if="breaker.role!='ADMIN'" data-ng-click="setOrg(breaker.organizer, breaker.id)">Szervező</md-checkbox>
+	</div>
+</div>
+

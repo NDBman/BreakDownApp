@@ -3,6 +3,14 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http){
 	if($rootScope.user != null){
 		cityNames = $rootScope.user.interestedCities; 
 	}
+	$scope.users;
+		$http({
+			method : 'GET',
+			url : 'getallusers'
+		}).success(function(response){
+			$scope.users = response;
+			console.log($scope.users);
+		})
 	
 	$scope.openSettings = function(){
 		$scope.modify = true;
@@ -10,7 +18,7 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http){
 		$scope.username = $rootScope.user.username;
 		$scope.newPassword = $rootScope.user.password;
 		$scope.cities = angular.copy(cityNames);
-	}
+	};
 	$scope.saveChanges = function(form){
 		if(form.$invalid){
 			return;
@@ -22,7 +30,7 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http){
 			method: 'POST',
 			url : 'profil/modify',
 			params : {
-				userId : '1',
+				userId : $rootScope.user.id,
 				name : form.name.$modelValue,
 				username : form.username.$modelValue,
 				password : form.password.$modelValue,
@@ -32,5 +40,17 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http){
 			$rootScope.user = response;
 		});
 	}
-	
+	$scope.setOrg = function(isOrg, id){
+		$http({
+			method : 'POST',
+			url : 'breaker/' + id + "/setrole",
+			params : {
+				org : isOrg,
+				password : $rootScope.user.password,
+				email : $rootScope.user.email
+			}
+		}).success(function(){
+			console.log("na");
+		})
+	}
 });
