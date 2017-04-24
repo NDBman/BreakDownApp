@@ -17,7 +17,7 @@ public class Competition extends AbstractEvent{
 
 	private Long id;
 	private List<String> diskJockeys;
-	private String organizer;
+	private String organizerId;
 	private List<BreakEvent> breakEvents;
 	private List<SimpleEvent> simpleEvents;
 	private List<Long> competitorIds;

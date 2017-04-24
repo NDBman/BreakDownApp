@@ -76,4 +76,9 @@ public class BreakerServicesImpl implements BreakerServices{
 		return modelMapper.map(breakerEntity, Breaker.class);
 	}
 
+	@Override
+	public String getBreakerUsername(Long id) {
+		return breakerRepository.findOne(id).getUsername();
+	}
+
 }

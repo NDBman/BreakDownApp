@@ -1,9 +1,17 @@
-<div data-ng-controller="singleCompController" layout="row">
+<div data-ng-controller="singleCompController" layout="row" id="singlecomp" >
 	<div layout="column" layout-padding flex=50>
 		<h1>
 			{{comp.name | uppercase}}
-			<md-button class="md-accent" data-ng-hide="user == null" data-ng-click="signUpDown()">{{signUpToggle}}</md-button>
+			<md-button class="md-accent" data-ng-if="user != null" data-ng-click="signUpDown()">{{signUpToggle}}</md-button>
 		</h1>
+		<div>
+			<h3>Szervező:</h3>
+			<span>{{organizer}}</span>
+		</div>
+		<div>
+			<h3>Versenyzők száma:</h3>
+			<span>{{comp.competitorIds.length}}</span>
+		</div>
 		<div>
 			<h3>Helyszín:</h3>
 			<span>{{comp.location.postalCode}}</span>
@@ -23,6 +31,12 @@
 			<h3>Verseny Leírás</h3>
 			<span>{{comp.description}}</span>
 		</div>
+		<div data-ng-if="comp.organizerId == user.id" layout="column">
+			<h2>Szervezői lehetőségek</h2>
+			<md-button class="md-primare md-raised" data-ng-click="getCompetitors($event)">Jelentkezők listázása</md-button>
+			<md-button class="md-warn md-raised" data-ng-click="showConfirm($event)">Esemény törlése</md-button>
+		</div>
+		
 	</div>
 	<div layout="column" layout-padding flex=50>
 		<md-list layout-align="start stretch">
@@ -42,5 +56,4 @@
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
 	</div>
-	
 </div>

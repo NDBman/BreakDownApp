@@ -80,7 +80,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 
 	@Override
 	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
-			String houseNumber, String description, List<String> diskjockeys, String events)
+			String houseNumber, String description, List<String> diskjockeys, String events, Long organizerId)
 			throws IOException, ParseException {
 		if (dateFormatter.parse(compdate).before(new Date())) {
 			return null;
@@ -119,7 +119,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 		newCompetition.setSimpleEvents(simpleEvents);
 		newCompetition.setDiskJockeys(diskjockeyList);
 		newCompetition.setDescription(description);
-		newCompetition.setOrganizer("ADMIN");
+		newCompetition.setOrganizerId(organizerId);
 
 		LocationEntity location = locationServices.createLocation(postalcode, city, street, houseNumber,
 				newCompetition);
@@ -203,6 +203,21 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			competitions.add(modelMapper.map(ce, Competition.class));
 		}
 		return competitions;
+	}
+
+	@Override
+	public void deleteComp(Long id) {
+		competitionRepository.delete(id);
+	}
+
+	@Override
+	public List<String> getAllCompetitorNames(Long id) {
+		List<Long> breakerEntityIds = competitionRepository.findOne(id).getCompetitorIds();
+		List<String> breakerNames = new ArrayList<>();
+		for(Long beId : breakerEntityIds){
+			breakerNames.add(breakerServices.findOne(beId).getUsername());
+		}
+		return breakerNames;
 	}
 
 }

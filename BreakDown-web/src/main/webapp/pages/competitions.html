@@ -12,6 +12,7 @@
 	            <span class="md-subhead">Dátum: {{comp.startTime | date : 'yyyy:MM:dd'}}</span>
 	            <span class="md-subhead">Város: {{comp.location.city}}</span>
 	            <span class="md-subhead">Leírás: {{comp.description}}</span>
+	            <span class="md-subhead">Jelentkezők száma: {{comp.competitorIds.length}}</span>
 	          </md-card-title-text>
 	          <md-card-title-media>
 	            <div class="md-media-lg card-media">
@@ -20,7 +21,6 @@
 	        </md-card-title>
 	        <md-card-actions layout="row" layout-align="end center">
 	          <md-button data-ng-click="seeComp(comp.id)">További infók</md-button>
-	          <md-button data-ng-hide="user == null" data-ng-click="signUpDown(comp.id)">{{signUpToggle}}</md-button>
 	        </md-card-actions>
 	      </md-card>
 		</div>

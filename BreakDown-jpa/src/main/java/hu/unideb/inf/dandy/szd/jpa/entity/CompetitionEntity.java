@@ -20,7 +20,7 @@ public class CompetitionEntity extends AbstractEventEntity {
 	@ElementCollection
 	private List<String> diskJockeys;
 	
-	private String organizer;
+	private Long organizerId;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="competition")
 	private List<BreakEventEntity> breakEvents;

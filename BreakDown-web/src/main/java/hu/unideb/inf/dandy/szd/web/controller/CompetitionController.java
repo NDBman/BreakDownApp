@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class CompetitionController {
 
 	@Autowired
 	private CompetitionServices competitionServices;
-	
+
 	@RequestMapping(value = "newcomp/newevent", method = RequestMethod.POST)
 	public Event createNewEvent(@RequestParam(required = true) String eventname,
 			@RequestParam(required = true) Integer startTimeHour,
@@ -37,46 +38,59 @@ public class CompetitionController {
 				endTimeMinute, description, isbreakevent)) {
 			throw new TimeIntervalIsNegativeException();
 		}
-		return competitionServices.createEvent(eventname, startTimeHour, startTimeMinute, endTimeHour,
-				endTimeMinute, description, isbreakevent);
+		return competitionServices.createEvent(eventname, startTimeHour, startTimeMinute, endTimeHour, endTimeMinute,
+				description, isbreakevent);
 	}
 
-	@RequestMapping(value= "newcomp/createcomp", method = RequestMethod.POST)
-	public Competition createCompetition(@RequestParam(required = true) String name,
-			@RequestParam(required = true) String compdate, @RequestParam(required = true) Integer postalcode,
-			@RequestParam(required = true) String city, @RequestParam(required = true) String street,
-			@RequestParam(required = true) String housenumber, @RequestParam String description,
-			@RequestParam List<String> diskjockeys, @RequestParam(required=true) String events) throws IOException, ParseException {
-		Competition competition = competitionServices.createCompetition(name, compdate, postalcode, city, street, housenumber, description, diskjockeys, events);
-		if(competition == null){
+	@RequestMapping(value = "newcomp/createcomp", method = RequestMethod.POST)
+	public Competition createCompetition(@RequestParam(required = true) Long orgId,
+			@RequestParam(required = true) String name, @RequestParam(required = true) String compdate,
+			@RequestParam(required = true) Integer postalcode, @RequestParam(required = true) String city,
+			@RequestParam(required = true) String street, @RequestParam(required = true) String housenumber,
+			@RequestParam String description, @RequestParam List<String> diskjockeys,
+			@RequestParam(required = true) String events) throws IOException, ParseException {
+		Competition competition = competitionServices.createCompetition(name, compdate, postalcode, city, street,
+				housenumber, description, diskjockeys, events, orgId);
+		if (competition == null) {
 			throw new TooEarlyDateExcpetion();
 		}
-		
+
 		return competition;
 	}
-	
-	@GetMapping(value="comps")
-	public List<Competition> getAllCompetitions(){
+
+	@GetMapping(value = "comps")
+	public List<Competition> getAllCompetitions() {
 		return competitionServices.getAllCompetitions();
 	}
-	
-	@GetMapping(value="comp/{id}")
-	public Competition getComp(@PathVariable("id") Long id){
+
+	@GetMapping(value = "comp/{id}")
+	public Competition getComp(@PathVariable("id") Long id) {
 		return competitionServices.getCompetitionById(id);
 	}
-	
+
 	@GetMapping("comp/{id}/events")
-	public List<Event> getCompEvents(@PathVariable("id") Long id){
+	public List<Event> getCompEvents(@PathVariable("id") Long id) {
 		return competitionServices.getAllEvents(id);
 	}
-	
+
 	@PostMapping("comp/{id}/signup")
-	public Breaker signUpOrDownUserForCompetition(@PathVariable("id") Long id, @RequestParam(required = true) String email){
+	public Breaker signUpOrDownUserForCompetition(@PathVariable("id") Long id,
+			@RequestParam(required = true) String email) {
 		return competitionServices.signUpOrDownUserForCompetition(id, email);
 	}
-	
+
 	@GetMapping("comps/{city}")
-	public List<Competition> getCompetitionsInCity(@PathVariable("city") String city){
+	public List<Competition> getCompetitionsInCity(@PathVariable("city") String city) {
 		return competitionServices.getAllCompetitionsInCity(city);
+	}
+	
+	@DeleteMapping("comp/{id}/delete")
+	public void deleteComp(@PathVariable("id") Long id){
+		competitionServices.deleteComp(id);
+	}
+	
+	@GetMapping("comp/{id}/competitors")
+	public List<String> getCompetitors(@PathVariable("id") Long id){
+		return competitionServices.getAllCompetitorNames(id);
 	}
 }

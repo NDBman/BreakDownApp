@@ -20,4 +20,6 @@ public interface BreakerServices {
 	public BreakerEntity findOne(Long id);
 	
 	public Breaker modifyData(Long id, String name, String username, String password, List<String> cities);
+	
+	public String getBreakerUsername(Long id);
 }

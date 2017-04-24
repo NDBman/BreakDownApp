@@ -14,7 +14,7 @@ public interface CompetitionServices {
 			Integer endTimeMinute, String description, boolean isbreakevent);
 
 	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
-			String houseNumber, String description, List<String> diskjockeys, String events) throws IOException, ParseException;
+			String houseNumber, String description, List<String> diskjockeys, String events, Long oranizerId) throws IOException, ParseException;
 	
 	public List<Competition> getAllCompetitions();
 	
@@ -25,4 +25,7 @@ public interface CompetitionServices {
 	
 	public List<Competition> getAllCompetitionsInCity(String city);
 	
+	public void deleteComp(Long id);
+	
+	public List<String> getAllCompetitorNames(Long id);
 }

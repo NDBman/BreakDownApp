@@ -1,4 +1,4 @@
-breakDownApp.controller("newCompController", function($scope, $http, $location){
+breakDownApp.controller("newCompController", function($scope, $http, $location, $rootScope){
 	djNames = [];
 	$scope.diskjockeys = angular.copy(djNames);
 	$scope.events = [];
@@ -50,6 +50,7 @@ breakDownApp.controller("newCompController", function($scope, $http, $location){
 			method: "POST",
 			url:"newcomp/createcomp",
 			params: {
+				orgId : $rootScope.user.id,
 				name : comp.name.$modelValue,
 				compdate : moment(comp.compdate.$modelValue).format('L'),
 				postalcode : comp.postalcode.$modelValue,
