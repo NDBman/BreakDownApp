@@ -3,6 +3,7 @@
 	<md-button class="md-accent" type="submit" href="#newcomp" data-ng-hide="user.role=='USER' || user==null">
 		Új verseny létrehozása +
 	</md-button>
+	<div data-ng-if="cards.length==0">Még nincs meghírdetve egy verseny sem.</div>
 	<md-content layout="row" layout-wrap>
 		<div ng-repeat="comp in cards" flex-gt-md=25 flex-md=30 flex-sm=50>
 			<md-card md-theme="default" md-theme-watch>
