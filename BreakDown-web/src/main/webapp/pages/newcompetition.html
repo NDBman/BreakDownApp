@@ -64,7 +64,7 @@
 			</form>
 			<div layout="column" flex-gt-sm="30">
 				<h2>Események hozzáadása</h2>
-				<form name="eventForm" layout="column" data-ng-submit="submit(eventForm)">
+				<form name="eventForm" ng-data-model="eventForm" layout="column" data-ng-submit="submit(eventForm)">
 					<md-input-container class="md-block">
 						<label>Esemény név</label>
 						<input type="text" required name="eventname" data-ng-model="eventname">
@@ -86,7 +86,7 @@
 							<h4>:</h4>
 							<md-input-container flex="33">
 								<label>Perc</label>
-								<input type="number" max="59" min="0" name="startTimeMinute" data-ng-model="startTimeMinute">
+								<input type="number" max="59" min="0" name="startTimeMinute" data-ng-model="startTimeMinute" required>
 								<div data-ng-messages="eventForm.startTimeMinute.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-59!</div>
@@ -97,7 +97,7 @@
 							<h4 flex="33">Befejezés:</h4>
 							<md-input-container flex="33">
 								<label>Óra</label>
-								<input type="number" max="23" min="0" name="endTimeHour" data-ng-model="endTimeHour">
+								<input type="number" max="23" min="0" name="endTimeHour" data-ng-model="endTimeHour" required>
 								<div data-ng-messages="eventForm.endTimeHour.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-23!</div>
@@ -106,7 +106,7 @@
 							<h4>:</h4>
 							<md-input-container flex=33>
 								<label>Perc</label>
-								<input type="number" max="59" min="0" name="endTimeMinute" data-ng-model="endTimeMinute">
+								<input type="number" max="59" min="0" name="endTimeMinute" data-ng-model="endTimeMinute" required>
 								<div data-ng-messages="eventForm.endTimeMinute.$error">
 									<div data-ng-message="required">Kötelező megadni!</div>
 									<div data-ng-message="min max">0-59!</div>
