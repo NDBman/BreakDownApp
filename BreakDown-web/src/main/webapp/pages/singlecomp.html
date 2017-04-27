@@ -1,5 +1,5 @@
-<div data-ng-controller="singleCompController" layout="row" id="singlecomp" >
-	<div layout="column" layout-padding flex=50>
+<div data-ng-controller="singleCompController" layout-gt-xs="row" layout-xs="column" id="singlecomp" >
+	<div layout="column" layout-padding flex-gt-xs=50>
 		<h1>
 			{{comp.name | uppercase}}
 			<md-button class="md-accent" data-ng-if="user != null" data-ng-click="signUpDown()">{{signUpToggle}}</md-button>
@@ -31,14 +31,9 @@
 			<h3>Verseny Leírás</h3>
 			<span>{{comp.description}}</span>
 		</div>
-		<div data-ng-if="comp.organizerId == user.id || user.role=='ADMIN'" layout="column">
-			<h2>Szervezői lehetőségek</h2>
-			<md-button class="md-primare md-raised" data-ng-click="getCompetitors($event)">Jelentkezők listázása</md-button>
-			<md-button class="md-warn md-raised" data-ng-click="showConfirm($event)">Esemény törlése</md-button>
-		</div>
 		
 	</div>
-	<div layout="column" layout-padding flex=50>
+	<div layout="column" layout-padding flex-gt-xs=50>
 		<md-list layout-align="start stretch">
 			<md-toolbar class="md-accent">
 				<div class="md-toolbar-tools">
@@ -55,5 +50,10 @@
 			</md-list-item>
 			<p data-ng-show="events.length == 0">Nincs esemény hozzáadva</p>
 		</md-list>
+		<div data-ng-if="comp.organizerId == user.id || user.role=='ADMIN'" layout="column">
+			<h2>Szervezői lehetőségek</h2>
+			<md-button class="md-primare md-raised" data-ng-click="getCompetitors($event)">Jelentkezők listázása</md-button>
+			<md-button class="md-warn md-raised" data-ng-click="showConfirm($event)">Esemény törlése</md-button>
+		</div>
 	</div>
 </div>
