@@ -2,16 +2,28 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http, 
 	if($rootScope.user == null){
 		$location.path("/");
 	}
+		$http({
+			method : 'GET',
+			url : 'breaker/' + $rootScope.user.id + "/comps"
+		}).success(function(response){
+			$scope.comps = response;
+		})
+		console.log($scope.comps);
 	cityNames = [];
 	cityNames = $rootScope.user.interestedCities; 
 	$scope.users;
+	
 		$http({
 			method : 'GET',
 			url : 'getallusers'
 		}).success(function(response){
 			$scope.users = response;
-		})
+		});
 	
+		$scope.seeComp = function(compId){
+			$location.path('comp/' + compId);
+		}
+		
 	$scope.openSettings = function(){
 		$scope.modify = true;
 		$scope.name = $rootScope.user.name;

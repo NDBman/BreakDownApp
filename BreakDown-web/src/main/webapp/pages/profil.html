@@ -8,13 +8,17 @@
 	            <span class="md-subhead">Email-cím: {{user.email}}</span>
 	            <span class="md-subhead">Születési év: {{user.birthday | date : 'yyyy.MM.dd'}}</span>
 	            <span class="md-subhead">Érdekelt városok (max. 5): <span data-ng-repeat="city in user.interestedCities">{{city}}, </span></span>
+	            <div flex=50 data-ng-if="comps.length!=0">
+	            	<span>Szervezett versenyek:</span><br>
+	            	<md-button data-ng-if="user.role != 'USER'" data-ng-repeat="comp in comps" data-ng-click="seeComp(comp.id)">{{comp.name}}</md-button>
+	            </div>
 	          </md-card-title-text>
 	        </md-card-title>
 	        <md-card-actions layout="row" layout-align="end center">
 	          <md-button data-ng-click="openSettings()">Adatok Módosítása</md-button>
 	        </md-card-actions>
 	</md-card>
-	<div ng-show="modify" flex-gt-xs = 50>
+	<div ng-if="modify" flex-gt-xs = 50>
 		<form name="modifyData" id="modifyData" layout="column">
 			<md-input-container>
 				<label>Név:</label>

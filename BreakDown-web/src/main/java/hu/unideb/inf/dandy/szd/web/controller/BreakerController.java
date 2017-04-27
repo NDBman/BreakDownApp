@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
+import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.DummyBreaker;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
 
@@ -37,5 +38,10 @@ public class BreakerController {
 	public DummyBreaker setBreakerRole(@PathVariable("id") Long id, @RequestParam(required = true) boolean org,
 			@RequestParam(required = true) String password, @RequestParam(required = true) String email) {
 		return breakerServices.setRoleForBreaker(id, !org, email, password);
+	}
+	
+	@GetMapping("breaker/{id}/comps")
+	public List<Competition> getAllCompsOrganizedByUser(@PathVariable("id") Long id){
+		return breakerServices.getAllCompsOrganizedByUser(id);
 	}
 }

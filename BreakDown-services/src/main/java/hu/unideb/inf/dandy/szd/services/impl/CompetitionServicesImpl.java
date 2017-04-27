@@ -146,8 +146,12 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			}
 		}
 		newCompetition.setEndTime(new Timestamp(realEndTime));
+		newCompetition = competitionRepository.save(newCompetition);
+		BreakerEntity breakerEntity = breakerServices.findOne(organizerId);
+		breakerEntity.getPlannedComps().add(newCompetition.getId());
+		breakerServices.save(breakerEntity);
 
-		return modelMapper.map(competitionRepository.save(newCompetition), Competition.class);
+		return modelMapper.map(newCompetition, Competition.class);
 	}
 
 	@Override
@@ -219,6 +223,9 @@ public class CompetitionServicesImpl implements CompetitionServices {
 		for(Long cId : breakerIds){
 			breakerServices.findOne(cId).getCompetitions().remove(competitionRepository.findOne(id));
 		}
+		BreakerEntity breakerEntity = breakerServices.findOne(competitionRepository.findOne(id).getOrganizerId());
+		breakerEntity.getPlannedComps().remove(id);
+		breakerServices.save(breakerEntity);
 		competitionRepository.delete(id);
 	}
 

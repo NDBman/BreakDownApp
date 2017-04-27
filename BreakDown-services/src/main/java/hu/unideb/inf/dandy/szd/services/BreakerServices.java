@@ -4,6 +4,7 @@ import java.util.List;
 
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
+import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.DummyBreaker;
 
 public interface BreakerServices {
@@ -27,4 +28,6 @@ public interface BreakerServices {
 	public List<DummyBreaker> getAllDummyBreakers();
 	
 	public DummyBreaker setRoleForBreaker(Long breakerId, boolean organizer, String email, String password);
+	
+	List<Competition> getAllCompsOrganizedByUser(Long id);
 }

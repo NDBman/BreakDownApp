@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.jpa.repo.BreakerRepository;
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
+import hu.unideb.inf.dandy.szd.service.dto.Competition;
 import hu.unideb.inf.dandy.szd.service.dto.DummyBreaker;
 import hu.unideb.inf.dandy.szd.services.BreakerServices;
+import hu.unideb.inf.dandy.szd.services.CompetitionServices;
 
 @Service
 @Transactional
@@ -23,6 +25,8 @@ public class BreakerServicesImpl implements BreakerServices{
 	@Autowired
 	private BreakerRepository breakerRepository;
 	
+	@Autowired
+	private CompetitionServices competitionServices;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -109,6 +113,16 @@ public class BreakerServicesImpl implements BreakerServices{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Competition> getAllCompsOrganizedByUser(Long id) {
+		List<Competition> userComps = new ArrayList<>();
+		BreakerEntity breakerEntity = breakerRepository.findOne(id);
+		for(Long compId : breakerEntity.getPlannedComps()){
+			userComps.add(competitionServices.getCompetitionById(compId));
+		}
+		return userComps;
 	}
 
 }

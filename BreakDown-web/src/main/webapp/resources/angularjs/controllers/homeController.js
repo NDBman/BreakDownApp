@@ -12,7 +12,6 @@ breakDownApp.controller('homeController',function($scope, $rootScope, $http, $lo
 					comp : response
 				});
 			}
-			console.log($scope.compsInCities);
 		})
 	}
 	$scope.seeComp = function(compId){

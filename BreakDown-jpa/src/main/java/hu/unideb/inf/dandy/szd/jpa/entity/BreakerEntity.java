@@ -37,6 +37,8 @@ public class BreakerEntity extends BaseId {
 	private Long gender;
 	private Date birthday;
 	@ElementCollection
+	private List<Long> plannedComps;
+	@ElementCollection
 	private List<String> interestedCities;
 	
 }
