@@ -15,19 +15,21 @@
 			Kijelentkezés
 		</md-nav-item>
 	</md-nav-bar>
-	<div id="header" hide-gt-xs data-ng-controller="sideNavController">
-		<md-button class="md-icon-button" aria-label="Settings" data-ng-click="toggleNav()">
-          <md-icon md-svg-icon="resources/svg/menu.svg"></md-icon>
-        </md-button>	
+	<div data-ng-controller="sideNavController">
+		<div id="header" hide-gt-xs>
+			<md-button class="md-icon-button" aria-label="Settings" data-ng-click="toggleNav()">
+	          <md-icon md-svg-icon="resources/svg/menu.svg"></md-icon>
+	        </md-button>	
+		</div>
+		<md-sidenav class="md-sidenav-lefft" md-component-id="left" md-whiteframe="4">
+					<md-menu-item layout="column">
+						<md-button data-ng-href="#/" data-ng-click="close()">BreakDown</md-button>
+						<md-button data-ng-href="#profil" data-ng-if="user!=null" data-ng-click="close()">Profil</md-button>
+						<md-button data-ng-href="#reg" data-ng-if="user==null" data-ng-click="close()">Regsiztráció</md-button>
+						<md-button data-ng-href="#login" data-ng-if="user==null" data-ng-click="close()">Bejelentkezés</md-button>
+						<md-button data-ng-href="#comps" data-ng-click="close()">Versenyek</md-button>
+						<md-button data-ng-href="#logout" data-ng-if="user!=null" data-ng-click="close()">Kijelentkezés</md-button>
+					</md-menu-item>
+		</md-sidenav>
 	</div>
-	<md-sidenav class="md-sidenav-lefft" md-component-id="left" md-whiteframe="4">
-				<md-menu-item layout="column">
-					<md-button data-ng-href="#/">BreakDown</md-button>
-					<md-button data-ng-href="#profil" data-ng-if="user!=null">Profil</md-button>
-					<md-button data-ng-href="#reg" data-ng-if="user==null">Regsiztráció</md-button>
-					<md-button data-ng-href="#login" data-ng-if="user==null">Bejelentkezés</md-button>
-					<md-button data-ng-href="#comps">Versenyek</md-button>
-					<md-button data-ng-href="#logout" data-ng-if="user!=null">Kijelentkezés</md-button>
-				</md-menu-item>
-	</md-sidenav>
 </header>
