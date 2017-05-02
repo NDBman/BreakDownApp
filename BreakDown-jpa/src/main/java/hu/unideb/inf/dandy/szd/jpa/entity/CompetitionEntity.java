@@ -31,8 +31,13 @@ public class CompetitionEntity extends AbstractEventEntity {
 	@ElementCollection
 	private List<Long> competitorIds;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<WinnerEntity> winners;
+	
 	private String description;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	private LocationEntity location;
+	
+	private boolean finished;
 }

@@ -19,7 +19,7 @@ breakDownApp.controller('singleCompController', function($scope, $location, $htt
 	
 	$http({
 		method : 'GET',
-		url : url.substr(1,url.length)
+		url : url.substr(1)
 	}).success(function(response){
 		
 		$scope.comp = response;
@@ -96,5 +96,15 @@ breakDownApp.controller('singleCompController', function($scope, $location, $htt
 		})
 		
 	}
-	
+	$scope.finishComp = function(comp){
+		$location.path("comp/" + comp.id + "/winners");
+	}
+	$scope.getUserName = function(winnerId){
+		$http({
+			method : 'GET',
+			url: 'breaker/' + winnerId
+		}).succes(function(response){
+			return response;
+		})
+	} 
 });

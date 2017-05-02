@@ -61,6 +61,21 @@
 		</form>
 	</div>
 </div>
+<md-list layout-align="start stretch" layout-padding>
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					Versenyeken elért dobogós helyezések
+				</div>
+			</md-toolbar>
+			<md-list-item class="md-3-line" data-ng-repeat="win in user.wins">
+				<div class="md-list-item-text" layout="column">
+	            	<h3>{{win.winnedCompetitionName}}</h3>
+	            	<h4>{{win.description}}</h4>
+	         	</div>
+	         	<md-divider data-ng-if="!$last"></md-divider>
+			</md-list-item>
+			<p data-ng-show="user.wins.length == 0">Még nem nyert versenyt.</p>
+		</md-list>
 <div layout-padding data-ng-if="user.role=='ADMIN'">
 	<h1>Admin</h1>
 	<div data-ng-repeat="breaker in users">

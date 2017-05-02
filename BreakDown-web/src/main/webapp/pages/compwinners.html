@@ -1,0 +1,29 @@
+<div data-ng-controller="compWinnersController" layout="column" layout-align="start stretch" layout-padding>
+	<h1>Nyertesek kihírdetése</h1>
+	<md-input-container>
+		<label>Keresés Bboy/gril névre</label>
+		<input type="text" data-ng-model="searchName">
+	</md-input-container>
+	
+	<md-list layout-align="start stretch">
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					Események
+				</div>
+			</md-toolbar>
+			<md-list-item class="md-3-line" data-ng-repeat="breaker in breakers | orderBy : 'username' | filter : searchName">
+				<div class="md-list-item-text" layout="column">
+	            	<h3>{{breaker.username}}</h3>
+	            	<h4>{{breaker.name}}</h4>
+	         	</div>
+	         	<md-button ng-if="winnerId.indexOf(breaker.id) === -1" class="md-secondary md-accent" ng-click="showPromt($event,breaker.id)">Hozzáadás nyertesekhez</md-button>
+	         	<md-button ng-if="winnerId.indexOf(breaker.id) !== -1" class="md-secondary md-warn" ng-click="deleteFromWinners(breaker.id)">Törlés a nyertesek közül</md-button>
+	         	<md-divider data-ng-if="!$last"></md-divider>
+			</md-list-item>
+			<p data-ng-show="breakers.length == 0">A versenynek nincsenek jelentkezői</p>
+		</md-list>
+	<div md-colors="{color: 'warn'}" data-ng-show="noWinners">
+		Muszáj nyertest kihírdetni mielőtt lezárná a versenyt!
+	</div>
+	<md-button class="md-primary" ng-click="finishComp(winnerId,winnerDesc)">Verseny lezárása</md-button>
+</div>

@@ -10,22 +10,24 @@ import hu.unideb.inf.dandy.szd.service.dto.Event;
 
 public interface CompetitionServices {
 
-	public Event createEvent(String eventname, Integer startTimeHour, Integer startTimeMinute, Integer endTimeHour,
+	Event createEvent(String eventname, Integer startTimeHour, Integer startTimeMinute, Integer endTimeHour,
 			Integer endTimeMinute, String description, boolean isbreakevent);
 
-	public Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
+	Competition createCompetition(String name, String compdate, Integer postalcode, String city, String street,
 			String houseNumber, String description, List<String> diskjockeys, String events, Long oranizerId) throws IOException, ParseException;
 	
-	public List<Competition> getAllCompetitions();
+	List<Competition> getAllCompetitions();
 	
-	public Competition getCompetitionById(Long id);
-	public List<Event> getAllEvents(Long competitionId);
+	Competition getCompetitionById(Long id);
+	List<Event> getAllEvents(Long competitionId);
 	
-	public Breaker signUpOrDownUserForCompetition(Long compId, String email);
+	Breaker signUpOrDownUserForCompetition(Long compId, String email);
 	
-	public List<Competition> getAllCompetitionsInCity(String city);
+	List<Competition> getAllCompetitionsInCity(String city);
 	
-	public void deleteComp(Long id);
+	void deleteComp(Long id);
 	
-	public List<String> getAllCompetitorNames(Long id);
+	List<String> getAllCompetitorNames(Long id);
+	
+	Competition finishCompetition(Long compId, List<Long> winnerIds, List<String> winnerDescriptions);
 }

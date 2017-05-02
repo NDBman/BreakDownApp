@@ -23,4 +23,6 @@ public class Competition extends AbstractEvent{
 	private List<Long> competitorIds;
 	private String description;
 	private Location location;
+	private boolean finished;
+	private List<Winner> winners;
 }

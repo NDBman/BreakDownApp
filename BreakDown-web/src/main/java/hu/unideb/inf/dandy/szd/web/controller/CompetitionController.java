@@ -101,4 +101,9 @@ public class CompetitionController {
 	public List<String> getCompetitors(@PathVariable("id") Long id){
 		return competitionServices.getAllCompetitorNames(id);
 	}
+
+	@PostMapping("comp/{compId}/finish")
+	public Competition finishCompetition(@PathVariable("compId") Long compId, @RequestParam List<Long> winnerIds,@RequestParam List<String> winnerDescriptions) {
+		return competitionServices.finishCompetition(compId, winnerIds, winnerDescriptions);
+	}
 }

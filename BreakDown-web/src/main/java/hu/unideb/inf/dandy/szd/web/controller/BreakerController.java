@@ -44,4 +44,9 @@ public class BreakerController {
 	public List<Competition> getAllCompsOrganizedByUser(@PathVariable("id") Long id){
 		return breakerServices.getAllCompsOrganizedByUser(id);
 	}
+	
+	@GetMapping("breaker/allfrom/comp/{compId}")
+	public List<DummyBreaker> gettAllBreakerSignedUpToComp(@PathVariable("compId") Long compId){
+		return breakerServices.getAllBreakerSignedToComp(compId);
+	}
 }

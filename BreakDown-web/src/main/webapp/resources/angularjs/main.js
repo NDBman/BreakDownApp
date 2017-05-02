@@ -36,6 +36,11 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		}).when('/logout',{
 			templateUrl : 'pages/logout.html',
 			controller : 'logoutController'
+		}).when('/error',{
+			templateUrl : 'pages/error.html'
+		}).when("/comp/:id/winners",{
+			templateUrl : "pages/compwinners.html",
+			controller: 'compWinnersController'
 		});
 	
 	$mdThemingProvider.theme("default")

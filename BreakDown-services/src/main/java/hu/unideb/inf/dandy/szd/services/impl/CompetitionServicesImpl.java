@@ -24,7 +24,10 @@ import hu.unideb.inf.dandy.szd.jpa.entity.BreakerEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.CompetitionEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.LocationEntity;
 import hu.unideb.inf.dandy.szd.jpa.entity.SimpleEventEntity;
+import hu.unideb.inf.dandy.szd.jpa.entity.WinnerEntity;
+import hu.unideb.inf.dandy.szd.jpa.repo.BreakerRepository;
 import hu.unideb.inf.dandy.szd.jpa.repo.CompetitionRepository;
+import hu.unideb.inf.dandy.szd.jpa.repo.WinnerRepository;
 import hu.unideb.inf.dandy.szd.service.dto.BreakEvent;
 import hu.unideb.inf.dandy.szd.service.dto.Breaker;
 import hu.unideb.inf.dandy.szd.service.dto.Competition;
@@ -59,7 +62,13 @@ public class CompetitionServicesImpl implements CompetitionServices {
 
 	@Autowired
 	private BreakerServices breakerServices;
-
+	
+	@Autowired
+	private BreakerRepository breakerRepository;
+	
+	@Autowired
+	private WinnerRepository winnerRepository;
+	
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
 
 	@Override
@@ -100,6 +109,7 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			eventList.add(modelMapper.map(eventNode, Event.class));
 		}
 		CompetitionEntity newCompetition = new CompetitionEntity();
+		newCompetition.setFinished(false);
 		List<BreakEventEntity> breakEvents = new ArrayList<>();
 		List<SimpleEventEntity> simpleEvents = new ArrayList<>();
 		for (Event event : eventList) {
@@ -225,6 +235,13 @@ public class CompetitionServicesImpl implements CompetitionServices {
 		}
 		BreakerEntity breakerEntity = breakerServices.findOne(competitionRepository.findOne(id).getOrganizerId());
 		breakerEntity.getPlannedComps().remove(id);
+		List<WinnerEntity> winnerEntites = competitionRepository.findOne(id).getWinners();
+		for(WinnerEntity winnerEntity : winnerEntites){
+			BreakerEntity winner = breakerRepository.findOne(winnerEntity.getWinnerId());
+			winner.getWins().remove(winnerEntity);
+			breakerRepository.save(winner);
+			winnerRepository.delete(winnerEntity.getId());
+		}
 		breakerServices.save(breakerEntity);
 		competitionRepository.delete(id);
 	}
@@ -237,6 +254,31 @@ public class CompetitionServicesImpl implements CompetitionServices {
 			breakerNames.add(breakerServices.findOne(beId).getUsername());
 		}
 		return breakerNames;
+	}
+
+	@Override
+	public Competition finishCompetition(Long compId, List<Long> winnerIds, List<String> winnerDescriptions) {
+		List<WinnerEntity> winners = new ArrayList<>();
+		CompetitionEntity competitionEntity = competitionRepository.findOne(compId);
+		for(int i = 0;i < winnerIds.size();i++){
+			WinnerEntity winnerEntity = new WinnerEntity();
+			winnerEntity.setWinnedCompetitionId(compId);
+			winnerEntity.setDescription(winnerDescriptions.get(i));
+			BreakerEntity breakerEntity = breakerRepository.findOne(winnerIds.get(i));
+			winnerEntity.setWinnerUsername(breakerEntity.getUsername());
+			winnerEntity.setWinnerId(breakerEntity.getId());
+			winnerEntity.setWinnedCompetitionName(competitionEntity.getName());
+			winnerEntity = winnerRepository.save(winnerEntity);
+			System.out.println(winnerEntity.getWinnerId() + " " + winnerEntity.getWinnedCompetitionName());
+			breakerEntity.getWins().add(winnerEntity);
+			breakerRepository.save(breakerEntity);
+			
+			winners.add(winnerEntity);
+		}
+		competitionEntity.setWinners(winners);
+		competitionEntity.setFinished(true);
+		competitionRepository.save(competitionEntity);
+		return modelMapper.map(competitionEntity, Competition.class);
 	}
 
 }

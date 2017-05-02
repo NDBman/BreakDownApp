@@ -125,4 +125,15 @@ public class BreakerServicesImpl implements BreakerServices{
 		return userComps;
 	}
 
+	@Override
+	public List<DummyBreaker> getAllBreakerSignedToComp(Long compId) {
+		List<DummyBreaker> dummyBreakers = new ArrayList<>();
+		Competition competition = competitionServices.getCompetitionById(compId);
+		for(Long breakerId : competition.getCompetitorIds()){
+			BreakerEntity breakerEntity = breakerRepository.findOne(breakerId);
+			dummyBreakers.add(modelMapper.map(breakerEntity, DummyBreaker.class));
+		}
+		return dummyBreakers;
+	}
+
 }
