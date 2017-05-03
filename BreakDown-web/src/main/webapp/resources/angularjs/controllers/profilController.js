@@ -8,7 +8,6 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http, 
 		}).success(function(response){
 			$scope.comps = response;
 		})
-		console.log($scope.comps);
 	cityNames = [];
 	cityNames = $rootScope.user.interestedCities; 
 	$scope.users;
@@ -18,6 +17,16 @@ breakDownApp.controller('profilController', function($scope, $rootScope, $http, 
 			url : 'getallusers'
 		}).success(function(response){
 			$scope.users = response;
+			for(var i = 0;i < $scope.users.length;i++){
+				var organizer = false;
+				if($scope.users[i].role == 'ORGANIZER'){
+					organizer = true;
+				}
+				$scope.users[i].organizer = organizer;
+				console.log($scope.users[i])
+				console.log(organizer);
+			}
+			
 		});
 	
 		$scope.seeComp = function(compId){

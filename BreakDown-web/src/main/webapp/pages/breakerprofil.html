@@ -1,0 +1,33 @@
+<div data-ng-controller="breakerProfilController" layout-padding>
+<md-card md-theme="default" md-theme-watch flex-gt-xs=50>
+	        <md-card-title>
+	          <md-card-title-text>
+	            <span class="md-headline">{{userprofil.name}} ({{userprofil.username}})</span>
+	            <span class="md-subhead">Email-cím: {{userprofil.email}}</span>
+	            <span class="md-subhead">Születési év: {{userprofil.birthday | date : 'yyyy.MM.dd'}}</span>
+	            <span class="md-subhead">Nem: {{userprofil.gender | gender}}</span>
+	            <span class="md-subhead">Rang: {{userprofil.role | role}}</span>
+	            <span class="md-subhead">Érdekelt városok (max. 5): <span data-ng-repeat="city in userprofil.interestedCities">{{city}}, </span></span>
+	            <div flex=50 data-ng-if="comps.length!=0">
+	            	<span>Szervezett versenyek:</span><br>
+	            	<md-button data-ng-repeat="comp in comps" data-ng-click="seeComp(comp.id)">{{comp.name}}</md-button>
+	            </div>
+	          </md-card-title-text>
+	        </md-card-title>
+	</md-card>
+	<md-list layout-align="start stretch" layout-padding>
+			<md-toolbar class="md-accent">
+				<div class="md-toolbar-tools">
+					Versenyeken elért dobogós helyezések
+				</div>
+			</md-toolbar>
+			<md-list-item class="md-3-line" data-ng-repeat="win in userprofil.wins">
+				<div class="md-list-item-text" layout="column">
+	            	<h3>{{win.winnedCompetitionName}}</h3>
+	            	<h4>{{win.description}}</h4>
+	         	</div>
+	         	<md-divider data-ng-if="!$last"></md-divider>
+			</md-list-item>
+			<p data-ng-show="userprofil.wins.length == 0">Még nem nyert versenyt.</p>
+		</md-list>
+</div>

@@ -41,6 +41,12 @@ breakDownApp.config(function($routeProvider, $mdThemingProvider){
 		}).when("/comp/:id/winners",{
 			templateUrl : "pages/compwinners.html",
 			controller: 'compWinnersController'
+		}).when('/search/all',{
+			templateUrl : 'pages/searchforbreakers.html',
+			controller: 'searchBreakersController'
+		}).when('/profil/:id',{
+			templateUrl: 'pages/breakerprofil.html',
+			controller : 'breakerProfilController'
 		});
 	
 	$mdThemingProvider.theme("default")

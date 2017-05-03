@@ -1,0 +1,24 @@
+
+<div data-ng-controller="searchBreakersController" layout-padding>
+	<h1>Breakes keresése</h1>
+	<md-input-container>
+		<label>Bármilyen kulcsszó</label>
+		<input type="text" data-ng-model="searchKey">
+	</md-input-container>
+	<md-list layout-align="start stretch">
+		<md-toolbar class="md-accent">
+			<div class="md-toolbar-tools">
+				Breakesek
+			</div>
+		</md-toolbar>
+		<md-list-item class="md-3-line" data-ng-repeat="breaker in breakers | filter : searchKey">
+			<div class="md-list-item-text" layout="column">
+				<h3>{{breaker.username}}</h3>
+				<h4>{{breaker.name}}</h4>
+	        </div>
+	        <md-button class="md-secondary md-primary" data-ng-click="seeProfile(breaker.id)">Adatok megtekintése</md-button>
+	        <md-divider data-ng-if="!$last"></md-divider>
+			</md-list-item>
+			<p data-ng-show="breakers.length == 0">Nem található egy breakes sem.</p>
+		</md-list>
+</div>

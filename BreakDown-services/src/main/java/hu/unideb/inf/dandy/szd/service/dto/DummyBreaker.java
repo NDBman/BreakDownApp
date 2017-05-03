@@ -1,6 +1,6 @@
 package hu.unideb.inf.dandy.szd.service.dto;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -15,12 +15,13 @@ public class DummyBreaker {
 	private String username;
 	private Role role;
 	private String email;
-	private boolean isOrganizer;
-
-	private List<Winner> wins = new ArrayList<>();
+	private List<Competition> competitions;
+	private Gender gender;
+	private Date birthday;
+	private List<Long> plannedComps;
+	private List<String> interestedCities;
 	
-	public DummyBreaker() {
-		wins = new ArrayList<Winner>();
-	}
+	private List<Winner> wins;
+	
 	
 }

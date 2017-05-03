@@ -136,4 +136,20 @@ public class BreakerServicesImpl implements BreakerServices{
 		return dummyBreakers;
 	}
 
+	@Override
+	public List<DummyBreaker> getAllBreakers() {
+		List<DummyBreaker> dummies = new ArrayList<>();
+		List<BreakerEntity> breakerEntities = breakerRepository.findAll();
+		for(BreakerEntity be : breakerEntities){
+			dummies.add(modelMapper.map(be, DummyBreaker.class));
+		}
+		return dummies;
+	}
+
+	@Override
+	public DummyBreaker getUserProfil(Long id) {
+		BreakerEntity breakerEntity = breakerRepository.findOne(id);
+		return modelMapper.map(breakerEntity, DummyBreaker.class);
+	}
+
 }

@@ -11,6 +11,9 @@
 		<md-nav-item md-nav-href="#comps">
 			Versenyek
 		</md-nav-item>
+		<md-nav-item md-nav-href="#search/all">
+			Breakesek keresése
+		</md-nav-item>
 		<md-nav-item md-nav-href="#logout" data-ng-if="user!=null">
 			Kijelentkezés
 		</md-nav-item>
@@ -28,6 +31,7 @@
 						<md-button data-ng-href="#reg" data-ng-if="user==null" data-ng-click="close()">Regsiztráció</md-button>
 						<md-button data-ng-href="#login" data-ng-if="user==null" data-ng-click="close()">Bejelentkezés</md-button>
 						<md-button data-ng-href="#comps" data-ng-click="close()">Versenyek</md-button>
+						<md-button data-ng-href="#search/all" data-ng-click="close()"> Breakesek keresése</md-button>
 						<md-button data-ng-href="#logout" data-ng-if="user!=null" data-ng-click="close()">Kijelentkezés</md-button>
 					</md-menu-item>
 		</md-sidenav>

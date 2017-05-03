@@ -32,4 +32,8 @@ public interface BreakerServices {
 	List<Competition> getAllCompsOrganizedByUser(Long id);
 	
 	List<DummyBreaker> getAllBreakerSignedToComp(Long compId);
+	
+	List<DummyBreaker> getAllBreakers();
+	
+	DummyBreaker getUserProfil(Long id);
 }

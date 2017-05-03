@@ -28,6 +28,16 @@ public class BreakerController {
 		dummy.setUsername(breakerServices.getBreakerUsername(id));
 		return dummy;
 	}
+	
+	@GetMapping("profil/{id}")
+	public DummyBreaker getUserProfil(@PathVariable("id") Long id){
+		return breakerServices.getUserProfil(id);
+	}
+	
+	@GetMapping("breakers/all")
+	public List<DummyBreaker> getAllBreakers(){
+		return breakerServices.getAllBreakers();
+	}
 
 	@GetMapping("getallusers")
 	public List<DummyBreaker> getAllDummyBreakers() {
