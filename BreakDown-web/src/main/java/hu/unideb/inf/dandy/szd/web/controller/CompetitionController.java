@@ -71,7 +71,7 @@ public class CompetitionController {
 		return competitionServices.getAllCompetitions();
 	}
 
-	@GetMapping(value = "comp/{id}")
+	@GetMapping("comp/{id}")
 	public Competition getComp(@PathVariable("id") Long id) {
 		return competitionServices.getCompetitionById(id);
 	}
@@ -103,7 +103,8 @@ public class CompetitionController {
 	}
 
 	@PostMapping("comp/{compId}/finish")
-	public Competition finishCompetition(@PathVariable("compId") Long compId, @RequestParam List<Long> winnerIds,@RequestParam List<String> winnerDescriptions) {
+	public Competition finishCompetition(@PathVariable("compId") Long compId, @RequestParam List<Long> winnerIds,
+			@RequestParam List<String> winnerDescriptions) {
 		return competitionServices.finishCompetition(compId, winnerIds, winnerDescriptions);
 	}
 }

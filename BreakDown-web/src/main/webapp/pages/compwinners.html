@@ -1,5 +1,5 @@
 <div data-ng-controller="compWinnersController" layout="column" layout-align="start stretch" layout-padding>
-	<h1>Nyertesek kihírdetése</h1>
+	<h1>Nyertesek kihirdetése</h1>
 	<md-input-container>
 		<label>Keresés Bboy/gril névre</label>
 		<input type="text" data-ng-model="searchName">
@@ -8,7 +8,7 @@
 	<md-list layout-align="start stretch">
 			<md-toolbar class="md-accent">
 				<div class="md-toolbar-tools">
-					Események
+					Versenyzők
 				</div>
 			</md-toolbar>
 			<md-list-item class="md-3-line" data-ng-repeat="breaker in breakers | orderBy : 'username' | filter : searchName">

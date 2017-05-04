@@ -7,6 +7,7 @@
 	            <span class="md-headline">{{user.name}} ({{user.username}})</span>
 	            <span class="md-subhead">Email-cím: {{user.email}}</span>
 	            <span class="md-subhead">Születési év: {{user.birthday | date : 'yyyy.MM.dd'}}</span>
+	            <span class="md-subhead">Rang: {{user.role | role}}</span>
 	            <span class="md-subhead">Érdekelt városok (max. 5): <span data-ng-repeat="city in user.interestedCities">{{city}}, </span></span>
 	            <div flex=50 data-ng-if="comps.length!=0">
 	            	<span>Szervezett versenyek:</span><br>
